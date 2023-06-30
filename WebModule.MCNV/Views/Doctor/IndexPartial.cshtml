@@ -1,0 +1,79 @@
+﻿@model Doctor.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   if (WindowWidthType >= WebApp.Constant.WindowWidth.WidthType.Small && WindowWidthType <= WebApp.Constant.WindowWidth.WidthType.Medium)
+   {
+      st.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+      st.Settings.ColumnMinWidth = 150;
+   }
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Code";
+      col.Caption = T("Mã định danh");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Họ và tên");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Gender.Name";
+      col.Caption = T("Giới tính");
+      col.Width = 80;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DateBirth";
+      col.Caption = T("Ngày sinh");
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+      col.Width = WidthDate;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Phone";
+      col.Caption = T("Điện thoại");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Email";
+      col.Caption = T("Email");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Facility.Name";
+      col.Caption = T("Đơn vị công tác");
+      col.Width = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Title.Name";
+      col.Caption = T("Chức danh");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Qualification.Name";
+      col.Caption = T("Trình độ");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Specialize.Name";
+      col.Caption = T("Lĩnh vực chuyên môn");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Note";
+      col.Caption = T("Ghi chú");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "DateCreate desc";
+   e.KeyExpression = "Oid";
+}).GetHtml()

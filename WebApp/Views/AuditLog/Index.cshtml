@@ -1,0 +1,66 @@
+﻿@model AuditLog
+<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="col_xs-12 grid-middle" style="max-width: 300px;">
+         <div class="mr img data_transfer"></div>
+         <div class="title">
+            @H("Nhật ký dữ liệu")
+         </div>
+      </div>
+      <div class="col_xs-12 grid-noBottom">
+         <div class="col_xs-12" style="max-width: 200px;">
+            @Html.DevExpress().DateEditFor(m => m.TuNgay, st =>
+       {
+          st.Width = Unit.Percentage(100);
+          st.Properties.Caption = T("Từ ngày");
+          st.Properties.AllowNull = false;
+          st.Properties.MaxDate = DateTime.Today;
+          st.Properties.ClientSideEvents.ValueChanged = "function(s,e) {grdSheet.PerformCallback();}";
+       }).GetHtml()
+         </div>
+         <div class="col_xs-12" style="max-width: 200px;">
+            @Html.DevExpress().DateEditFor(m => m.DenNgay, st =>
+       {
+          st.Width = Unit.Percentage(100);
+          st.Properties.Caption = T("Đến ngày");
+          st.Properties.AllowNull = false;
+          st.Properties.MaxDate = DateTime.Today;
+          st.Properties.DateRangeSettings.StartDateEditID = "TuNgay";
+          st.Properties.ClientSideEvents.ValueChanged = "function(s,e) {grdSheet.PerformCallback();}";
+       }).GetHtml()
+         </div>
+      </div>
+
+   </div>
+   <div class="page-content">
+      <form>
+         @Html.Partial("IndexPartial")
+      </form>
+   </div>
+</div>
+
+<script type="text/javascript">
+   WebApp.function = {
+      title: '@H("Nhật ký dữ liệu")',
+      filter: function () {
+         grdSheet._showFilter = !(grdSheet._showFilter || false);
+         grdSheet.PerformCallback();
+      },
+      hotkey: {
+         f5: function () { grdSheet.PerformCallback(); },
+         esc: function () { WebApp.function.close(); },
+      },
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height());
+         grdSheet.SetHeight($('.page-content').innerHeight());
+      },
+      close: WebApp.closeFunction.bind(WebApp),
+      toolClick: function (s, e) {
+         e.item.name && WebApp.function[e.item.name] && WebApp.function[e.item.name]();
+      },
+      filter: function () {
+         grdSheet._showFilter = !(grdSheet._showFilter || false);
+         grdSheet.PerformCallback();
+      },
+   };
+</script>

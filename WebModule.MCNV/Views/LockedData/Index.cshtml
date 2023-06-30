@@ -1,0 +1,112 @@
+﻿@model LockedData
+
+<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr img keys"></div>
+      <div class="title">
+         @H("Khóa dữ liệu")
+      </div>
+   </div>
+   <div class="page-content">
+      <form id="frmLockedData" action="@Url.Action("Index")">
+         <input type="hidden" id="LockedOption" name="Option" value="@Model.Option" />
+         <div class="box">
+            <div class="mb">
+               @Html.DevExpress().RadioButton(st =>
+          {
+             st.Name = "radLockNone";
+             st.GroupName = "LockedOption";
+             st.Text = T("Không sử dụng tính năng khóa dữ liệu");
+             st.Checked = Model.Option == LockedOption.None;
+             st.Properties.ClientSideEvents.CheckedChanged = "function() {$('#LockedOption').val(" + (int)LockedOption.None + ");}";
+          }).GetHtml()
+            </div>
+            <div class="mb grid-middle-noGutter-noBottom">
+               <div class="col-auto">
+                  @Html.DevExpress().RadioButton(st =>
+             {
+                st.Name = "radLockDate";
+                st.GroupName = "LockedOption";
+                st.Text = T("Khóa dữ liệu được tạo từ ngày này");
+                st.Checked = Model.Option == LockedOption.ToDate;
+                st.Properties.ClientSideEvents.CheckedChanged = "function() {$('#LockedOption').val(" + (int)LockedOption.ToDate + ");}";
+             }).GetHtml()
+               </div>
+               <div class="col-auto ml">
+                  @Html.DevExpress().DateEditFor(m => m.OptionDate, st =>
+             {
+                st.Width = 120;
+                st.Properties.MinDate = DateTime.Today.AddDays(-30);
+                st.Properties.MaxDate = DateTime.Today;
+                st.ShowModelErrors = true;
+                st.Properties.ValidationSettings.Display = Display.Dynamic;
+                st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+                st.Properties.ShowOutOfRangeWarning = false;
+             }).GetHtml()
+               </div>
+               <div class="col-auto ml">
+                  @Html.DevExpress().Label(st => st.Text = T("trở về trước")).GetHtml()
+               </div>
+            </div>
+            <div class="mb grid-middle-noGutter-noBottom">
+               <div class="col-auto">
+                  @Html.DevExpress().RadioButton(st =>
+             {
+                st.Name = "radLockSpan";
+                st.GroupName = "LockedOption";
+                st.Text = T("Dữ liệu tự động khóa sau khi tạo");
+                st.Checked = Model.Option == LockedOption.DaySpan;
+                st.Properties.ClientSideEvents.CheckedChanged = "function() {$('#LockedOption').val(" + (int)LockedOption.DaySpan + ");}";
+             }).GetHtml()
+               </div>
+               <div class="col-auto ml">
+                  @Html.DevExpress().SpinEditFor(m => m.OptionSpan, st =>
+             {
+                st.Width = 60;
+                st.Properties.MinValue = 1;
+                st.Properties.MaxValue = 30;
+                st.ShowModelErrors = true;
+                st.Properties.ValidationSettings.Display = Display.Dynamic;
+                st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+                st.Properties.ShowOutOfRangeWarning = false;
+             }).GetHtml()
+               </div>
+               <div class="col-auto ml">
+                  @Html.DevExpress().Label(st => st.Text = T("ngày")).GetHtml()
+               </div>
+            </div>
+            <div class="" style="margin-top: 40px;">
+               @Html.DevExpress().Button(st =>
+          {
+             st.Name = "btnSaveLockedData";
+             st.Text = T("Lưu thay đổi");
+             st.Images.Image.IconID = IconID.SaveSave16x16;
+             st.ClientSideEvents.Click = "function() {onSaveLockedData();}";
+          }).GetHtml()
+            </div>
+         </div>
+      </form>
+   </div>
+</div>
+
+
+<script>
+   $(function () {
+      WebApp.validateForm('#frmLockedData');
+   });
+   function CheckOptionDate() {
+      return +$('#LockedOption').val() == @((int)LockedOption.ToDate);
+   }
+   function CheckOptionSpan() {
+      return +$('#LockedOption').val() == @((int)LockedOption.DaySpan);
+   }
+   function onSaveLockedData() {
+      if (!WebApp.validForm('#frmLockedData')) return;
+      WebApp.submit('#frmLockedData').done(function () {
+         WebApp.notify('@H("Đã cập nhật thành công")');
+      });
+   }
+   WebApp.function = {
+      title: '@H("Khóa dữ liệu")',
+   };
+</script>

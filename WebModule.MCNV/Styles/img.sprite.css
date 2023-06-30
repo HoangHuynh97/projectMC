@@ -1,0 +1,423 @@
+/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.img {
+	background-image: url('img.sprite.png');
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+.img.en24 {
+	width: 24px;
+	height: 24px;
+	background-position: -10px -10px;
+}
+.img.vi24 {
+	width: 24px;
+	height: 24px;
+	background-position: -10px -44px;
+}
+.img.alert {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -78px;
+}
+.img.blockdevice {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -120px;
+}
+.img.building {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -162px;
+}
+.img.company {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -204px;
+}
+.img.contacts {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -246px;
+}
+.img.contact {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -288px;
+}
+.img.customer {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -330px;
+}
+.img.data_transfer {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -372px;
+}
+.img.database {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -414px;
+}
+.img.folder_blue {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -456px;
+}
+.img.groups {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -498px;
+}
+.img.house {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -540px;
+}
+.img.info_blue {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -582px;
+}
+.img.infomation {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -624px;
+}
+.img.keys {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -666px;
+}
+.img.location {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -708px;
+}
+.img.package {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -750px;
+}
+.img.preview {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -792px;
+}
+.img.print {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -834px;
+}
+.img.roles {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -876px;
+}
+.img.transfer {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -918px;
+}
+.img.unknown {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -960px;
+}
+.img.users {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -1002px;
+}
+.img.en {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -1044px;
+}
+.img.vi {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -1086px;
+}
+.img.exit {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -1128px;
+}
+.img.skin_aqua {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1170px;
+}
+.img.skin_blackglass {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1204px;
+}
+.img.skin_default {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1238px;
+}
+.img.skin_devex {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1272px;
+}
+.img.skin_glass {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1306px;
+}
+.img.skin_ios {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1340px;
+}
+.img.skin_metropolis {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1374px;
+}
+.img.skin_metropolisblue {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1408px;
+}
+.img.skin_moderno {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1442px;
+}
+.img.skin_mulberry {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1476px;
+}
+.img.skin_office2003blue {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1510px;
+}
+.img.skin_office2003olive {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1544px;
+}
+.img.skin_office2003silver {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1578px;
+}
+.img.skin_office2010black {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1612px;
+}
+.img.skin_office2010blue {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1646px;
+}
+.img.skin_office2010silver {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1680px;
+}
+.img.skin_plasticblue {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1714px;
+}
+.img.skin_redwine {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1748px;
+}
+.img.skin_softorange {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1782px;
+}
+.img.skin_youthful {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1816px;
+}
+.img.skin_materialcompact_0091ea {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1850px;
+}
+.img.skin_materialcompact_00bfa5 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1884px;
+}
+.img.skin_materialcompact_43a047 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1918px;
+}
+.img.skin_materialcompact_e65100 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1952px;
+}
+.img.skin_materialcompact_6a1b9a {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -1986px;
+}
+.img.skin_materialcompact_424242 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2020px;
+}
+.img.skin_office365_0091ea {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2054px;
+}
+.img.skin_office365_00bfa5 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2088px;
+}
+.img.skin_office365_43a047 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2122px;
+}
+.img.skin_office365_e65100 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2156px;
+}
+.img.skin_office365_6a1b9a {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2190px;
+}
+.img.skin_office365_424242 {
+	width: 72px;
+	height: 24px;
+	background-position: -10px -2224px;
+}
+.img.facebook {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2258px;
+}
+.img.microsoft {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2300px;
+}
+.img.google {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2342px;
+}
+.img.web {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2384px;
+}
+.img.cash {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2426px;
+}
+.img.invoice {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2468px;
+}
+.img.table {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2510px;
+}
+.img.datauser {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2552px;
+}
+.img.factory {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2594px;
+}
+.img.lorry {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2636px;
+}
+.img.documents {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2678px;
+}
+.img.documents2 {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2720px;
+}
+.img.documents3 {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2762px;
+}
+.img.cabinet {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2804px;
+}
+.img.checklist {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2846px;
+}
+.img.shopping_bag {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2888px;
+}
+.img.money {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2930px;
+}
+.img.conference {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -2972px;
+}
+.img.payment {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -3014px;
+}
+.img.shop {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -3056px;
+}
+.img.diagnostic {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -3098px;
+}
+.img.hospital {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -3140px;
+}
+.img.doctor {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -3182px;
+}

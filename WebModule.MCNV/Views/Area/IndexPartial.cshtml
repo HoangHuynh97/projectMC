@@ -1,0 +1,29 @@
+﻿@model Area.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Code";
+      col.Caption = T("Mã vùng");
+      col.Width = WidthNumber;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên vùng");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Note";
+      col.Caption = T("Ghi chú");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Code, Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

@@ -1,0 +1,54 @@
+﻿@model Report
+@Html.HiddenFor(m => m.Id)
+<div class="mb">
+   @Html.EditorFor(m => m.Name)
+</div>
+<div class="mb">
+   @Html.DevExpress().ComboBoxFor(m => m.Category, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = "Nhóm báo cáo";
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.ShowModelErrors = true;
+   st.Properties.ValidationSettings.Display = Display.Dynamic;
+   st.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+   st.Properties.IncrementalFilteringDelay = 200;
+   st.Properties.DropDownStyle = DropDownStyle.DropDown;
+   st.Properties.AllowNull = true;
+}).BindList(Report.GetCategories()).GetHtml()
+</div>
+<div class="mb">
+   @Html.DevExpress().TokenBoxFor(m => m.Parameters, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = T("Tham số");
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.Properties.AllowCustomTokens = false;
+   st.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+   st.Properties.IncrementalFilteringDelay = 200;
+   st.Properties.ValueField = "Key";
+   st.Properties.TextField = "Value";
+}).BindList(Report.GetParameters()).GetHtml()
+</div>
+<div class="mb">
+   @Html.DevExpress().ComboBoxFor(m => m.Company, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = "Áp dụng cho công ty";
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+   st.Properties.IncrementalFilteringDelay = 200;
+   st.Properties.DropDownStyle = DropDownStyle.DropDown;
+   st.Properties.AllowNull = true;
+   st.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.TextField = "Name";
+}).BindList(Report.GetCompanies()).GetHtml()
+</div>
+<div class="mb">
+   @Html.EditorFor(m => m.Active)
+</div>
+<div class="">
+   @Html.EditorFor(m => m.Note)
+</div>

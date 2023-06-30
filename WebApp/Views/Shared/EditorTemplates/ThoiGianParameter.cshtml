@@ -1,0 +1,172 @@
+﻿@model ThoiGianParameter
+@helper Options()
+{
+   <div class="grid-noGutter mb pt" style="border-top: solid 1px #a3a3a3;">
+      <div class="col-6_xs-12">
+         <div tg-option="1">@T("Hôm nay")</div>
+         <div tg-option="2">@T("Hôm qua")</div>
+         <div tg-option="3">@T("Ngày mai")</div>
+      </div>
+      <div class="col-6_xs-12">
+         <div tg-option="4">@T("Tuần hiện tại")</div>
+         <div tg-option="5">@T("Tuần trước")</div>
+         <div tg-option="6">@T("Tuần tới")</div>
+      </div>
+   </div>
+   <div class="grid-noGutter mb">
+      <div class="col-6_xs-12">
+         <div tg-option="7">@T("Tháng hiện tại")</div>
+         <div tg-option="8">@T("Tháng trước")</div>
+         <div tg-option="9">@T("Tháng tới")</div>
+      </div>
+      <div class="col-6_xs-12">
+         <div tg-option="10">@T("Năm nay")</div>
+         <div tg-option="11">@T("Năm qua")</div>
+         <div tg-option="12">@T("Năm tới")</div>
+      </div>
+   </div>
+}
+<style>
+   div[tg-option] {
+      padding: 2px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+   }
+
+      div[tg-option]:hover {
+         background-color: #c0c0c0;
+      }
+</style>
+@Html.DevExpress().DropDownEditFor(m => m.ThoiGian, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.ShowModelErrors = true;
+   st.Properties.ValidationSettings.Display = Display.Dynamic;
+   st.ReadOnly = true;
+   st.SetDropDownWindowTemplateContent(c =>
+   {
+      ViewContext.Writer.WriteLine("<div class='mt ml mr'>");
+      Html.DevExpress().DateEditFor(m => m.TuNgay, s =>
+      {
+         s.Width = Unit.Percentage(100);
+         s.ShowModelErrors = true;
+         s.Properties.ValidationSettings.Display = Display.Dynamic;
+         s.Properties.Caption = T("Từ ngày");
+         s.Properties.AllowNull = false;
+         s.Properties.CaptionCellStyle.Width = 80;
+         s.Properties.ClientSideEvents.ValueChanged = "function(s,e) {TuNgay_Changed();}";
+      }).Render();
+      ViewContext.Writer.WriteLine("</div><div class='mt ml mr mb'>");
+      Html.DevExpress().DateEditFor(m => m.DenNgay, s =>
+      {
+         s.Width = Unit.Percentage(100);
+         s.ShowModelErrors = true;
+         s.Properties.ValidationSettings.Display = Display.Dynamic;
+         s.Properties.Caption = T("Đến ngày");
+         s.Properties.AllowNull = false;
+         s.Properties.DateRangeSettings.StartDateEditID = "TuNgay";
+         s.Properties.CaptionCellStyle.Width = 80;
+         s.Properties.ClientSideEvents.ValueChanged = "function(s,e) {ThoiGian.SetValue(TinhThoiGian());}";
+      }).Render();
+      ViewContext.Writer.WriteLine("</div>");
+      ViewContext.Writer.WriteLine(Options());
+   });
+   st.Properties.DropDownWindowStyle.Paddings.Padding = 10;
+   st.Properties.ClientSideEvents.GotFocus = "function(s,e) {s.ShowDropDown();}";
+}).GetHtml()
+
+<script type="text/javascript" id="dxss_thoigianparameter">
+   function TinhThoiGian() {
+      var f = TuNgay.GetValue();
+      var t = DenNgay.GetValue();
+      if (f.getTime() == t.getTime())
+         return '@H("Ngày {0}")'.format(TuNgay.GetText());
+      var l = new Date(t.getFullYear(), t.getMonth() + 1, 0);
+      if (f.getDate() == 1 && t.getDate() == l.getDate()) {
+         if (f.getMonth() == t.getMonth() && f.getFullYear() == t.getFullYear())
+            return '@H("Tháng {0}")'.format((f.getMonth() + 1) + '/' + f.getFullYear());
+         if (f.getMonth() == 0 && t.getMonth() == 11 && f.getFullYear() == t.getFullYear())
+            return '@H("Năm {0}")'.format(t.getFullYear());
+         return '@H("Từ tháng {0} đến tháng {1}")'.format((f.getMonth() + 1) + '/' + f.getFullYear(), (t.getMonth() + 1) + '/' + t.getFullYear());
+      }
+      return '@H("Từ ngày {0} đến ngày {1}")'.format(TuNgay.GetText(), DenNgay.GetText());
+   }
+
+   function TuNgay_Changed() {
+      var t = TuNgay.GetValue();
+      if (t.getDate() == 1) {
+         var l = new Date(t.getFullYear(), t.getMonth() + 1, 0);
+         DenNgay.SetValue(l);
+      }
+      ThoiGian.SetValue(TinhThoiGian());
+   }
+
+   $('div[tg-option]').click(function () {
+      var v = parseInt($(this).attr('tg-option')) || 0;
+      if (!v) return;
+      var d = new Date();
+      d = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      var day = d.getDay(),
+         diff = d.getDate() - day + (day == 0 ? -6 : 1);
+      var w = new Date(d.getFullYear(), d.getMonth(), diff);
+      var f, t;
+
+      switch (v) {
+         case 1:
+            f = new Date(d);
+            t = new Date(f);
+            break;
+         case 2:
+            f = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 1);
+            t = new Date(f);
+            break;
+         case 3:
+            f = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+            t = new Date(f);
+            break;
+         case 4:
+            f = new Date(w);
+            t = new Date(f.getFullYear(), f.getMonth(), f.getDate() + 6);
+            break;
+         case 5:
+            f = new Date(w.getFullYear(), w.getMonth(), w.getDate() - 7);
+            t = new Date(f.getFullYear(), f.getMonth(), f.getDate() + 6);
+            break;
+         case 6:
+            f = new Date(w.getFullYear(), w.getMonth(), w.getDate() + 7);
+            t = new Date(f.getFullYear(), f.getMonth(), f.getDate() + 6);
+            break;
+         case 7:
+            f = new Date(d.getFullYear(), d.getMonth(), 1);
+            t = new Date(f.getFullYear(), f.getMonth() + 1, 0);
+            break;
+         case 8:
+            f = new Date(d.getFullYear(), d.getMonth()- 1, 1);
+            t = new Date(f.getFullYear(), f.getMonth() + 1, 0);
+            break;
+         case 9:
+            f = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+            t = new Date(f.getFullYear(), f.getMonth() + 1, 0);
+            break;
+         case 10:
+            f = new Date(d.getFullYear(), 0, 1);
+            t = new Date(d.getFullYear(), 11, 31);
+            break;
+         case 11:
+            f = new Date(d.getFullYear() - 1, 0, 1);
+            t = new Date(d.getFullYear() - 1, 11, 31);
+            break;
+         case 12:
+            f = new Date(d.getFullYear() + 1, 0, 1);
+            t = new Date(d.getFullYear() + 1, 11, 31);
+            break;
+      }
+      TuNgay.SetValue(f);
+      DenNgay.SetValue(t);
+      ThoiGian.SetValue(TinhThoiGian());
+      ThoiGian.HideDropDown();
+   });
+   setTimeout(function () {
+      ThoiGian.SetValue(TinhThoiGian());
+   });
+</script>

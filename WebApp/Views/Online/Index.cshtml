@@ -1,0 +1,46 @@
+﻿<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr img web"></div>
+      <div class="title">
+         @H("Người dùng trực tuyến")
+      </div>
+   </div>
+   <div class="notify-form" style="padding-bottom: 20px;">
+      @Html.DevExpress().ButtonEdit(st =>
+ {
+    st.Name = "txtNotify";
+    st.Width = Unit.Percentage(100);
+    st.Properties.Caption = T("Gửi thông báo đến tất cả người dùng");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.Properties.Buttons.Add(T("Gửi"));
+    st.Properties.ClientSideEvents.ButtonClick = "function(s,e) {WebApp.function.doNotify();}";
+    st.Properties.ClientSideEvents.KeyUp = "function(s,e) {if (e.htmlEvent.which===13) WebApp.function.doNotify();}";
+ }).GetHtml()
+   </div>
+   <div class="page-content">
+      @Html.Partial("IndexPartial")
+   </div>
+</div>
+
+<script type="text/javascript">
+   WebApp.function = {
+      title: '@H("Người dùng trực tuyến")',
+      hotkey: {
+         f5: function () { grdSheet.PerformCallback(); },
+         esc: function () { WebApp.function.close(); },
+      },
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height() - $('.notify-form').outerHeight());
+         grdSheet.SetHeight($('.page-content').innerHeight());
+      },
+      close: WebApp.closeFunction.bind(WebApp),
+      doNotify: function () {
+         var s = txtNotify.GetValue();
+         if (!s)
+            return;
+         WebApp.showConfirm('@H("Thông báo")', '@H("Thông báo sẽ gửi đến tất cả người dùng.<br/>Bạn có muốn tiếp tục?")').done(function () {
+            WebApp.ajax('@Url.Action("Notify")', { message: s });
+         });
+      }
+   };
+</script>

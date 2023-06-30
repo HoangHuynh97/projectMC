@@ -1,0 +1,177 @@
+﻿@model ProgramResult
+<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr">
+         @Html.Icon("actions_newitem_32x32devav")
+      </div>
+      <div class="title">
+         @H("Kết quả đào tạo")
+      </div>
+      <div style="margin-left: 20px; max-width: 400px; flex: 1;">
+         @Html.DevExpress().ComboBox(st =>
+    {
+       st.Name = "cmbProgram";
+       st.Width = Unit.Percentage(100);
+       st.Properties.NullText = T("Chọn khóa đào tạo");
+       st.Properties.ValueField = "Oid";
+       st.Properties.ValueType = typeof(int);
+       st.Properties.TextField = "Name";
+       st.Properties.ClientSideEvents.ValueChanged = "function() {WebApp.function.reload();}";
+       if (ViewBag.ProgramId != null)
+       {
+          st.Properties.ClientSideEvents.Init = "function(s) {setTimeout(function() {s.SetValue(" + ViewBag.ProgramId + ");});s.RaiseValueChanged();}";
+       }
+    }).BindList(Program.ComboboxData()).Bind(ViewBag.ProgramId).GetHtml()
+      </div>
+      <div style="margin-left: 20px; width: 200px;">
+         @Html.DevExpress().Button(st =>
+    {
+       st.Name = "btnProgramResultSave";
+       st.Text = T("Lưu thay đổi");
+       st.Images.Image.IconID = IconID.SaveSave16x16;
+       st.EnableClientSideAPI = true;
+       st.ClientVisible = false;
+       st.ClientSideEvents.Click = "function() {WebApp.function.save();}";
+    }).GetHtml()
+      </div>
+   </div>
+   <div class="page-content">
+      @Html.Partial("IndexPartial")
+   </div>
+</div>
+
+
+<script>
+   WebApp.function = {
+      id: 0,
+      title: '@H("Kết quả đào tạo")',
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height());
+      },
+      errors: [],
+      hasChange: false,
+      reload: function () {
+         const old = this.id;
+         var id = cmbProgram.GetValue();
+         if (!id) return;
+         this.id = id;
+         if (this.hasChange) {
+            WebApp.showConfirm('@H("Lưu dữ liệu")', '@H("Bạn có muốn lưu các thay đổi của kết quả đào tạo đang xem không?")')
+               .done(function () {
+                  WebApp.function.hasChange = false;
+                  WebApp.function.save(old);
+               })
+               .fail(function () {
+                  panelProgramResult.PerformCallback();
+               });
+         }
+         else
+            panelProgramResult.PerformCallback();
+      },
+      afterReload: function () {
+         this.errors = [];
+         this.setChanged(false);
+         const fChange = function () {
+            const b = grdResult.GetBatchEditHelper().CanUpdate() ||
+               AttachmentListAttachments.GetBatchEditHelper().CanUpdate();
+            WebApp.function.setChanged(b);
+         };
+         AttachmentListAttachments.onDataChanged = function () {
+            fChange();
+         };
+         grdResult.BatchEditEndEditing.AddHandler(function (_, e) {
+            setTimeout(fChange);
+         });
+      },
+      hotkey: {
+         esc: function () { WebApp.function.close(); },
+      },
+      close: WebApp.closeFunction.bind(WebApp),
+      setChanged: function (b) {
+         this.hasChange = b;
+         btnProgramResultSave.SetVisible(b);
+      },
+      save: function (id) {
+         if (WebApp.function.errors.length) {
+            WebApp.showInfo('@H("Lỗi")', '@H("Dữ liệu không hợp lệ")');
+            return;
+         }
+         var data = {
+            Id: id || cmbProgram.GetValue(),
+            Attachments: { Items: AttachmentListAttachments.GetChanged(), },
+            Doctors: grdResult.GetChanged(),
+         }
+         if (!data.Attachments.Items.length && !data.Doctors.length) return;
+         //convert format decimal so text can parse to float in server-side
+         data.Doctors.forEach(function (d) {
+            const keys = Object.keys(d);
+            keys.forEach(function (k) {
+               if (k.startsWith('Score')) {
+                  d[k] = ASPx.NumberFormatter.Format('0.#', parseFloat(d[k]) || 0) || '0';
+               }
+            });
+         });
+
+         WebApp.ajax('@Url.Action("Save")', data).done(function () {
+            WebApp.function.hasChange = false;
+            WebApp.function.reload();
+         });
+      },
+      updatePercent: function (s, e) {
+         WebApp.function.resultEndEditing(s, e);
+         setTimeout(function () {
+            if (['Score1', 'Score2'].indexOf(e.focusedColumn.fieldName) == -1) return;
+            var a = parseFloat(s.batchEditApi.GetCellValue(e.visibleIndex, "Score1")) || 0;
+            var b = parseFloat(s.batchEditApi.GetCellValue(e.visibleIndex, "Score2")) || 0;
+            var c = 0;
+            if (a != 0)
+               c = Math.round(b * 100 / a);
+            s.batchEditApi.SetCellValue(e.visibleIndex, "Score3", c);
+         });
+      },
+      updateHours: function (s, e) {
+         WebApp.function.resultEndEditing(s, e);
+         setTimeout(function () {
+            const lst = ['Score1', 'Score2', 'Score3', 'Score4', 'Score5', 'Score6', 'Score7', 'Score8', 'Score9', 'Score10', 'Score11', 'Score12'];
+            if (lst.indexOf(e.focusedColumn.fieldName) == -1) return;
+            const all = (parseFloat(s.batchEditApi.GetCellValue(e.visibleIndex, 'HoursTotal')) || 0)
+               + (parseFloat(s.batchEditApi.GetCellValue(e.visibleIndex, 'HoursLeft')) || 0);
+            var total = 0;
+            lst.forEach(function (f) {
+               total += parseFloat(s.batchEditApi.GetCellValue(e.visibleIndex, f)) || 0;
+            });
+            s.batchEditApi.SetCellValue(e.visibleIndex, "HoursTotal", total);
+            s.batchEditApi.SetCellValue(e.visibleIndex, "HoursLeft", all - total);
+         });
+      },
+      resultStartEditing: function (s, e) {
+         if (e.focusedColumn.fieldName == 'ReasonCancel') {
+            var v = s.batchEditApi.GetCellValue(e.visibleIndex, 'Status');
+            e.cancel = v != 3;
+         }
+      },
+      resultEndEditing: function (s, e) {
+         if (e.focusedColumn.fieldName == 'Status' && !e.cancel) {
+            const v = e.rowValues[e.focusedColumn.index].value;
+            if (v != 3 && s.batchEditApi.GetCellValue(e.visibleIndex, 'ReasonCancel')) {
+               s.batchEditApi.SetCellValue(e.visibleIndex, 'ReasonCancel', '');
+            }
+         }
+      },
+      resultValidating: function (grid, e) {
+         var status = e.validationInfo[grid.GetColumnByField("Status").index];
+         var reason = e.validationInfo[grid.GetColumnByField("ReasonCancel").index];
+         if (status.value === 3 && !reason.value) {
+            //there are unknow issue layout that it goto mode Updated values, so ignore it for now
+            //reason.isValid = false;
+            //reason.errorText = '@H("Nhập lý do nghỉ học")';
+            WebApp.function.errors.push(e.key);
+         }
+         else
+            WebApp.function.errors = WebApp.function.errors.filter(function (id) { return id != e.key; });
+      },
+      export: function () {
+         window.open('@Url.Action("Export")' + '/?program=' + WebApp.function.id);
+      }
+   };
+</script>

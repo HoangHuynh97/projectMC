@@ -1,0 +1,96 @@
+﻿@model CompanyUser.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   var toolPW = new MVCxGridViewToolbarItem()
+   {
+      Name = "password",
+      Text = T("Đổi mật khẩu"),
+      ToolTip = T("Đặt lại mật khẩu mới"),
+      Command = GridViewToolbarCommand.Custom,
+      Visible = CheckPermission("Đổi mật khẩu"),
+   };
+   toolPW.Image.IconID = IconID.BusinessobjectsBouser16x16;
+
+   Html.DefaultGridSheet(st, Model.ShowFilter, true, new MVCxGridViewToolbarItem[] { toolPW });
+
+   if (CompanyUser.UserGroups != null)
+   {
+      st.Columns.Add(col =>
+      {
+         col.FieldName = "Group";
+         col.Caption = T("Nhóm");
+         col.GroupIndex = 0;
+         col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+      });
+      st.SetGroupRowContentTemplateContent(c =>
+      {
+         ViewContext.Writer.Write(DataBinder.Eval(c.DataItem, "Group"));
+      });
+   }
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "UserName";
+      col.Caption = T("Tên đăng nhập");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "FullName";
+      col.Caption = T("Họ và tên");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Address";
+      col.Caption = T("Địa chỉ");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Email";
+      col.Caption = T("Email");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Phone";
+      col.Caption = T("Điện thoại");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   if (User.IsInRole(WebApp.Constant.Role.Admin))
+   {
+      st.Columns.Add(col =>
+      {
+         col.FieldName = "Admin";
+         col.Caption = T("Toàn quyền");
+         col.Width = 80;
+         col.ColumnType = MVCxGridViewColumnType.CheckBox;
+      });
+   }
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Permission.Name";
+      col.Caption = T("Quyền sử dụng");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+      col.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList;
+   });
+   if (CompanyUser.UserDatas != null)
+   {
+      st.Columns.Add(col =>
+      {
+         col.FieldName = "Data";
+         col.Caption = T("Quyền dữ liệu");
+         col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+      });
+   }
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Active";
+      col.Caption = T("Sử dụng");
+      col.Width = 80;
+      col.ColumnType = MVCxGridViewColumnType.CheckBox;
+   });
+   st.PreviewFieldName = "Note";
+   st.Settings.ShowPreview = true;
+}).Bind(Model.GetData()).GetHtml()

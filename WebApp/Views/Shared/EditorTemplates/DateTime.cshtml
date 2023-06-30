@@ -1,0 +1,21 @@
+﻿@model object
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+@Html.DevExpress().DateEditFor(m => m, s =>
+{
+   s.Width = Unit.Percentage(100);
+   s.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   s.Properties.Caption = caption;
+   s.ShowModelErrors = true;
+   s.Properties.ValidationSettings.Display = Display.Dynamic;
+   s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+   s.Properties.CalendarProperties.ShowClearButton = ViewData.ModelMetadata.IsNullableValueType;
+   if (ViewData.ModelMetadata.IsRequired)
+      s.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   s.Properties.SettingsAdaptivity.Mode = DropDownEditAdaptivityMode.OnWindowInnerWidth;
+   s.Properties.MaxDate = DateTime.Today;
+   s.Properties.MinDate = new DateTime(1900, 1, 1);
+   s.Properties.ShowOutOfRangeWarning = false;// there are no way to custom warning div
+   s.Properties.EnableClientSideAPI = true;
+}).GetHtml()

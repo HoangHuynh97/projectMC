@@ -1,0 +1,11 @@
+﻿@model UserIdParameter
+@Html.DevExpress().ComboBoxFor(m=>m.UserId, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = T("Người sử dụng");
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.Properties.ValueField = "Key";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.TextField = "Value";
+   st.Properties.ClientSideEvents.Init = "function(s,e) {s.SetCustomFilter();}";
+}).BindList(Model.GetList()).GetHtml()

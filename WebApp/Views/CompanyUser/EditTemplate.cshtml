@@ -1,0 +1,98 @@
+﻿@model CompanyUser
+@Html.HiddenFor(m => m.Id)
+<script>
+   window.HasGroupId = function () { return @(Model.HasGroupId() ? "true" : "false"); }
+   window.HasDataId = function () { return @(CompanyUser.UserDatas != null ? "true" : "false") && !!Permission.GetValue() ; }
+</script>
+<div class="grid">
+   <div class="col-8_xs-12 grid">
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.UserName)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.FullName)
+      </div>
+      <div class="col-12">
+         @Html.EditorFor(m => m.Address)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.Phone)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.Email)
+      </div>
+      @if (Model.IsNew())
+      {
+         <div class="col-6_xs-12">
+            @Html.EditorFor(m => m.Password)
+         </div>
+         <div class="col-6_xs-12">
+            @Html.EditorFor(m => m.Verify)
+         </div>
+      }
+   </div>
+   <div class="col-4_xs-12" style="min-height: 200px;">
+      @Html.DevExpress().BinaryImageFor(m => m.Image, st =>
+      {
+         st.Width = Unit.Percentage(100);
+         st.Height = Unit.Percentage(100);
+         st.CallbackRouteValues = new { Action = "UpdateUserImage" };
+         st.Properties.ImageWidth = 300;
+         st.Properties.ImageHeight = 300;
+         st.Properties.ImageSizeMode = ImageSizeMode.FitProportional;
+         st.Properties.EditingSettings.Enabled = true;
+         st.Properties.EditingSettings.AllowDropOnPreview = true;
+         st.Properties.EditingSettings.UploadSettings.UploadValidationSettings.MaxFileSize = 1000000;
+      }).GetHtml()
+   </div>
+   <div class="col-12 grid">
+      @if (CompanyUser.UserGroupsView != null)
+      {
+         <div class="col-12">
+            @CompanyUser.UserGroupsView(Html)
+         </div>
+      }
+      <div class="col-6_xs-12">
+         @Html.DevExpress().ComboBoxFor(m => m.Permission, st =>
+    {
+       st.Width = Unit.Percentage(100);
+       st.Properties.Caption = T("Quyền sử dụng");
+       st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+       st.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+       st.Properties.IncrementalFilteringDelay = 1000;
+       st.Properties.DropDownStyle = DropDownStyle.DropDownList;
+       st.Properties.ValueField = "Key";
+       st.Properties.ValueType = typeof(int);
+       st.Properties.TextField = "Value";
+       st.ShowModelErrors = true;
+       st.Properties.ValidationSettings.Display = Display.Dynamic;
+       st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+       st.Properties.SettingsAdaptivity.Mode = DropDownEditAdaptivityMode.OnWindowInnerWidth;
+       st.Properties.SettingsAdaptivity.SwitchToModalAtWindowInnerWidth = WidthAdaptivity;
+       st.Properties.ClientSideEvents.ValueChanged = "function() {UpdateUIPermissionData();}";
+    }).BindList(Model.GetPermissions()).GetHtml()
+      </div>
+      @if (CompanyUser.UserDatasView != null)
+      {
+         <div class="col-6_xs-12 cmbPermissionData">
+            @CompanyUser.UserDatasView(Html)
+         </div>
+      }
+      <div class="col-6_xs-12" style="align-self: end;">
+         @Html.EditorFor(m => m.Active)
+      </div>
+
+   </div>
+   <div class="col-12">
+      @Html.EditorFor(m => m.Note)
+   </div>
+</div>
+<script id="dxss_updatepermissiondata">
+   function UpdateUIPermissionData() {
+      $('.cmbPermissionData').toggle(!!Permission.GetValue());
+   }
+   setTimeout(function () {
+      UpdateUIPermissionData();
+   });
+</script>

@@ -1,0 +1,61 @@
+﻿@model Company.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên công ty");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Address";
+      col.Caption = T("Địa chỉ");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Phone";
+      col.Caption = "Điện thoại";
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Director";
+      col.Caption = T("Người liên hệ");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DirectorPhone";
+      col.Caption = T("ĐT liên hệ");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "ExpireDate";
+      col.Caption = T("Ngày hết hạn");
+      col.Width = WidthDate;
+      col.PropertiesEdit.DisplayFormatString = "d";
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+      col.Settings.AutoFilterCondition = AutoFilterCondition.LessOrEqual;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Active";
+      col.Caption = "Sử dụng";
+      col.Width = 80;
+      col.ColumnType = MVCxGridViewColumnType.CheckBox;
+   });
+   st.PreviewFieldName = "Note";
+   st.Settings.ShowPreview = true;
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

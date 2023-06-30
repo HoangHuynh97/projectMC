@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language>
+  <Code>en</Code>
+  <Name>English</Name>
+  <Dictionary>
+    <Key>ĐĂNG NHẬP</Key>
+    <Value>LOGIN</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đăng nhập</Key>
+    <Value>User name</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu</Key>
+    <Value>Password</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ghi nhớ tài khoản</Key>
+    <Value>Remember me</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đăng nhập</Key>
+    <Value>Login</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đăng nhập không được để trống</Key>
+    <Value>User name is required</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu không được để trống</Key>
+    <Value>Password is required</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trang chủ</Key>
+    <Value>Home</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hệ thống</Key>
+    <Value>Hệ thống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quản lý</Key>
+    <Value>Quản lý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Công ty</Key>
+    <Value>Công ty</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Từ điển ngôn ngữ</Key>
+    <Value>Dictionary</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cấu hình</Key>
+    <Value>Cấu hình</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người dùng</Key>
+    <Value>Người dùng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin</Key>
+    <Value>Thông tin</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đổi mật khẩu</Key>
+    <Value>Đổi mật khẩu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Giao diện</Key>
+    <Value>Giao diện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn giản</Key>
+    <Value>Đơn giản</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 2010</Key>
+    <Value>Office 2010</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 2003</Key>
+    <Value>Office 2003</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Màu sắc</Key>
+    <Value>Màu sắc</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngôn ngữ</Key>
+    <Value>Ngôn ngữ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thoát</Key>
+    <Value>Exit</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lỗi</Key>
+    <Value>Lỗi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lỗi dữ liệu.</Key>
+    <Value>Lỗi dữ liệu.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.</Key>
+    <Value>Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đồng ý</Key>
+    <Value>Đồng ý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không</Key>
+    <Value>Không</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn không có được phân quyền để truy cập chức năng này.</Key>
+    <Value>Bạn không có được phân quyền để truy cập chức năng này.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng</Key>
+    <Value>Đóng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đang xử lý</Key>
+    <Value>Đang xử lý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quản lý trực tuyến</Key>
+    <Value>Quản lý trực tuyến</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu</Key>
+    <Value>Lưu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Keyword</Key>
+    <Value>Keyword</Value>
+  </Dictionary>
+</Language>

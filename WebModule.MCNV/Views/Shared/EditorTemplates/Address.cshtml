@@ -1,0 +1,31 @@
+﻿@model AddressBase
+
+<div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.Province)</div>
+<div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.District)</div>
+<div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.Ward)</div>
+<div class="col-3_md-12_xs-12">@Html.EditorFor(m => m.Address)</div>
+
+<script type="text/javascript">
+   $(function () {
+      Province.ValueChanged.AddHandler(function () {
+         District.SetValue(null);
+         Ward.SetValue(null);
+         District.PerformCallback();
+         Ward.PerformCallback();
+      });
+      District.BeginCallback.AddHandler(function (_, e) {
+         e.customArgs.province = Province.GetValue();
+      });
+      District.ValueChanged.AddHandler(function () {
+         Ward.SetValue(null);
+         Ward.PerformCallback();
+      });
+      Ward.BeginCallback.AddHandler(function (_, e) {
+         e.customArgs.district = District.GetValue();
+      });
+   });
+
+   function WardRequired() {
+      return !!Ward.listBox.GetItemCount();
+   }
+</script>

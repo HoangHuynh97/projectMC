@@ -1,0 +1,124 @@
+﻿@model EndProcess
+
+<script id="dxss_endprocess">
+   function onEndProcessSave() {
+      if (!WebApp.validForm('#frmEndProcess')) return;
+      if (!AttachmentListEndProcess.GetVisibleRowsOnPage()) {
+         WebApp.showInfo('@H("Lỗi")', '@H("Vui lòng cập nhật tài liệu, hình ảnh, video kèm theo!")');
+         return;
+      }
+      EndProcessSave.SetEnabled(false);
+      WebApp.ajax('@Url.Action("EndProcess", "Medical")', getEndData()).done(function (r) {
+         processModel.reload();
+      }).fail(function () { EndProcessSave.SetEnabled(true); });
+   }
+
+   function onEndProcessDelete() {
+      WebApp.showConfirm('@H("Xóa")', '@H("Bạn có muốn xóa dữ liệu và tài liệu kết thúc điều trị?")').done(function () {
+         WebApp.ajax('@Url.Action("DeleteEndProcess", "Medical")', { id: @Model.Id}).done(function () {
+            processModel.reload();
+         });
+      });
+   }
+
+   function getEndData() {
+      var d = CompletedDate.GetDate();
+      return {
+         Id: processModel.id,
+         CompletedDate: d && d.toISOString() || null,
+         EndSuccess: EndSuccess.GetValue(),
+         EndEvaluation: EndEvaluation.GetValue(),
+         EndEvaluationTool: EndEvaluationTool.GetValue(),
+         EndEvaluationPoint: EndEvaluationPoint.GetValue(),
+         Attachments: { Items: AttachmentListEndProcess.GetChanged(), },
+         Doctors: { Items: DoctorsEndDoctors.GetSelectedValues().map(function (id) { return { Id: id }; }), Facility: @(Model.Doctors.Facility) },
+      };
+   }
+
+   setTimeout(function () {
+      WebApp.validateForm('#frmEndProcess');
+      var oldData = JSON.stringify(getEndData());
+
+      [CompletedDate, EndSuccess, EndEvaluation, EndEvaluationTool, EndEvaluationPoint].forEach(function (it) {
+         it.ValueChanged.AddHandler(function () {
+            var d = JSON.stringify(getEndData());
+            EndProcessSave.SetVisible(d != oldData);
+         });
+      });
+      AttachmentListEndProcess.onDataChanged = function (data) {
+         var d = JSON.stringify(getEndData());
+         EndProcessSave.SetVisible(d != oldData);
+      };
+      DoctorsEndDoctors.SelectedIndexChanged.AddHandler(function () {
+         var d = JSON.stringify(getEndData());
+         EndProcessSave.SetVisible(d != oldData);
+      });
+   });
+</script>
+<form id="frmEndProcess">
+   <div class="grid">
+      <div class="col-3_md-4_xs-12">
+         @Html.DevExpress().DateEditFor(m => m.CompletedDate, st =>
+    {
+       st.Width = Unit.Percentage(100);
+       st.Properties.MinDate = Model.MinDate;
+       st.Properties.MaxDate = DateTime.Today;
+       st.Properties.AllowNull = false;
+       st.ShowModelErrors = true;
+       st.Properties.ValidationSettings.Display = Display.Dynamic;
+       st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+       st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+       st.Properties.Caption = T("Ngày dừng can thiệp");
+    }).GetHtml()
+      </div>
+      <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.EndEvaluationTool)</div>
+      <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.EndEvaluationPoint)</div>
+      <div class="col-12 grid-middle-noBottom">
+         <div class="col-auto_xs-12">@H("Kết quả về cải thiện chức năng sinh hoạt hàng ngày (ADL)")</div>
+         <div class="col-auto_xs-12">
+            @Html.DevExpress().RadioButtonListFor(m => m.EndSuccess, st =>
+       {
+          st.Properties.RepeatColumns = 2;
+          st.Properties.Items.Add(T("Có"), true);
+          st.Properties.Items.Add(T("Không"), false);
+          st.ControlStyle.Border.BorderWidth = 0;
+          st.Properties.EnableClientSideAPI = true;
+          st.Properties.ValueType = typeof(bool?);
+          st.ShowModelErrors = true;
+          st.Properties.ValidationSettings.Display = Display.Dynamic;
+          st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       }).GetHtml()
+         </div>
+      </div>
+      <div class="col-12">@Html.EditorFor(m => m.EndEvaluation)</div>
+      <div class="col-12">@Html.EditorFor(m => m.Doctors)</div>
+      <div class="col-12">@Html.EditorFor(m => m.Attachments)</div>
+   </div>
+   <div class="grid-noBottom-noGutter">
+      <div class="col-auto">
+         @Html.DevExpress().Button(btn =>
+    {
+       btn.Name = "EndProcessSave";
+       btn.Text = T("Lưu thay đổi");
+       btn.Images.Image.IconID = IconID.SaveSave16x16;
+       btn.Styles.Style.Paddings.Padding = 0;
+       btn.RenderMode = ButtonRenderMode.Outline;
+       btn.ClientVisible = false;
+       btn.ControlStyle.CssClass = "mr";
+       btn.ClientSideEvents.Click = "onEndProcessSave";
+    }).GetHtml()
+      </div>
+      <div class="col-auto">
+         @Html.DevExpress().Button(btn =>
+    {
+       btn.Name = "EndProcessDelete";
+       btn.Text = T("Xóa");
+       btn.Images.Image.IconID = IconID.EditDelete16x16;
+       btn.Styles.Style.Paddings.Padding = 0;
+       btn.RenderMode = ButtonRenderMode.Outline;
+       btn.ClientSideEvents.Click = "onEndProcessDelete";
+    }).GetHtml()
+      </div>
+   </div>
+</form>

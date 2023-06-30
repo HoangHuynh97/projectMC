@@ -1,0 +1,36 @@
+﻿@model Specification.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   st.SettingsPager.Mode = GridViewPagerMode.EndlessPaging;
+   st.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+   st.Settings.ShowColumnHeaders = true;
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Service";
+      col.Caption = "Hoạt động PHCN";
+      col.GroupIndex = 0;
+      col.Settings.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên kỹ thuật");
+   });
+   st.CustomColumnSort = (s, e) =>
+   {
+      if (e.Column != null && e.Column.FieldName == "Service")
+      {
+         var ind1 = Convert.ToInt32(e.GetRow1Value("ServiceIndex"));
+         var ind2 = Convert.ToInt32(e.GetRow2Value("ServiceIndex"));
+         var res = ind1 - ind2;
+         if (res == 0)
+         {
+            res = e.Value1.ToString().CompareTo(e.Value2.ToString());
+         }
+         e.Result = res;
+         e.Handled = true;
+      }
+   };
+}).Bind(Model.GetData()).GetHtml()

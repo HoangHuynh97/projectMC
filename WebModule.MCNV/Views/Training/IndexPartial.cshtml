@@ -1,0 +1,87 @@
+﻿@model Training.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter, false);
+   st.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Code";
+      col.Caption = T("Mã định danh");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Họ và tên");
+      col.Width = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Gender";
+      col.Caption = T("Giới tính");
+      col.Width = 100;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DateBirth";
+      col.Caption = T("Ngày sinh");
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+      col.Width = WidthDate;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Phone";
+      col.Caption = T("Điện thoại");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Email";
+      col.Caption = T("Email");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Facility";
+      col.Caption = T("Đơn vị công tác");
+      col.Width = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Position";
+      col.Caption = T("Vị trí công tác");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Qualification";
+      col.Caption = T("Trình độ chuyên môn");
+      col.Width = 170;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Specialize";
+      col.Caption = T("Lĩnh vực chuyên môn");
+      col.Width = 170;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Title";
+      col.Caption = T("Chức danh tham gia");
+      col.Width = 170;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Current";
+      col.Caption = T("Đang tham gia đào tạo");
+      col.Width = 400;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Completed";
+      col.Caption = T("Đã hoàn thành đào tạo");
+      col.Width = 400;
+   });
+
+}).Bind(Model.GetData()).GetHtml()

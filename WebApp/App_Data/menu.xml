@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data >
+   <Tab>
+      <Name>Hệ thống</Name>
+      <Group>
+         <Name>Quản lý</Name>
+         <Image>users</Image>
+         <Item>
+            <Image>company</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Công ty</Function>
+         </Item>
+         <Item>
+            <Image>users</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Quản lý tài khoản</Function>
+            <Name>Người sử dụng</Name>
+         </Item>
+         <Item>
+            <Image>roles</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Quản lý phân quyền</Function>
+            <Name>Phân quyền sử dụng</Name>
+         </Item>
+         <Item>
+            <Image>groups</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Người dùng trực tuyến</Function>
+         </Item>
+         <Item>
+            <Image>documents3</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Báo cáo</Function>
+         </Item>
+      </Group>
+      <Group>
+         <Name>Dữ liệu</Name>
+         <Image>database</Image>
+         <Item>
+            <Image>documents</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Mẫu báo cáo</Function>
+         </Item>
+         <Item>
+            <Image>web</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Từ điển ngôn ngữ</Function>
+         </Item>
+         <Item>
+            <Image>database</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Cập nhật dữ liệu</Function>
+         </Item>
+      </Group>
+   </Tab>
+   <Tab>
+      <Name>Cấu hình</Name>
+      <Group>
+         <Name>Quản lý</Name>
+         <Image>users</Image>
+         <Item>
+            <Image>building</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Thông tin doanh nghiệp</Function>
+         </Item>
+         <Item>
+            <Image>users</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Người sử dụng</Function>
+         </Item>
+         <Item>
+            <Image>roles</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Phân quyền sử dụng</Function>
+         </Item>
+         <Item>
+            <Image>data_transfer</Image>
+            <Module>WebApp.dll</Module>
+            <Function>Nhật ký dữ liệu</Function>
+         </Item>
+      </Group>
+   </Tab>
+</data>

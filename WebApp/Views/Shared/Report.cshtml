@@ -1,0 +1,117 @@
+﻿@model IEnumerable<KeyValuePair<string, List<KeyValuePair<int, string>>>>
+<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr img documents3"></div>
+      <div class="title">@H("Báo cáo")</div>
+      <div style="margin-left: 1rem; flex: 1; max-width: 600px; font-family: Arial,sans-serif;">
+         <select id="cmbReport" style="width: 100%;" data-placeholder="@H("Chọn báo cáo...")">
+            <option></option>
+            @foreach (var g in Model)
+            {
+               <optgroup label="@H(g.Key)">
+                  @foreach (var r in g.Value)
+                  {
+                     <option value="@r.Key">@H(r.Value)</option>
+                  }
+               </optgroup>
+            }
+         </select>
+      </div>
+   </div>
+   <div class="page-content">
+      @Html.Partial("Preview")
+   </div>
+</div>
+
+<script type="text/javascript">
+   WebApp.function = {
+      reportId: 0,
+      toolRefresh: null,
+      toolFilter: null,
+      viewer: null,
+      title: '@H("Báo cáo")',
+      hotkey: {
+         f5: function () { WebApp.function.refresh(); },
+         esc: function () { WebApp.function.close();}
+      },
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height());
+         this.viewer && this.viewer.SetHeight($('.page-content').innerHeight());
+      },
+      init: function () {
+         $.when(function () {
+            if (!$.fn.chosen) {
+               $('<link/>', {
+                  rel: 'stylesheet',
+                  type: 'text/css',
+                  href: 'https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.min.css'
+               }).appendTo('head');
+               return $.ajax({ url: 'https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.min.js', dataType: "script" });
+            }
+         }()).done(function () {
+            $('#cmbReport').chosen({
+               width: '100%',
+               no_results_text: '@H("Không tìm thấy: ")'
+            }).change(function () {
+               var id = parseInt($(this).val()) || 0;
+               if (!id) return;
+               WebApp.function.OpenReport(id);
+            });
+         });
+      },
+      viewerInit: function (viewer) {
+         this.viewer = viewer;
+         this.resize();
+         const tools = this.viewer.GetToolbar().enabledItems;
+         this.toolRefresh = tools.find(function (it) { return it.name == 'refresh' });
+         this.toolRefresh.SetVisible(false);
+         this.toolFilter = tools.find(function (it) { return it.name == 'filter' });
+         this.toolFilter.SetVisible(false);
+      },
+      refresh: function () {
+         if (!this.reportId) return;
+         this.OpenReport(this.reportId);
+      },
+      filter: function () {
+         if (!this.reportId) return;
+         this.ShowParameter(this.reportId);
+      },
+      close: WebApp.closeFunction.bind(WebApp),
+      designer: function () {
+         if (!this.reportId) return;
+         window.open('@Url.Action("Designer", "Report")/' + this.reportId, '_blank');
+      },
+      toolClick: function (s, e) {
+         e.item.name && WebApp.function[e.item.name] && WebApp.function[e.item.name]();
+      },
+      OpenReport: function (id) {
+         if (!id) return;
+         var self = this;
+         WebApp.ajax('@Url.Action("OpenReport")', { id: id }).done(function (r) {
+            self.toolRefresh.SetVisible(true);
+            self.toolFilter.SetVisible(false);
+            self.reportId = id;
+            self.viewer.Refresh();
+         }).fail(function () {
+            $('#cmbReport').val(self.reportId).trigger('chosen:updated');
+         });
+      },
+      ShowParameter: function (id) {
+         if (!id) return;
+         var self = this;
+         self.toolRefresh.SetVisible(false);
+         self.toolFilter.SetVisible(true);
+         WebApp.showDialog({
+            url: '@Url.Action("ShowParameter")',
+            data: { id: id },
+            icon: '@IconID.ReportsParameters32x32',
+            title: '@H("Điều kiện lập báo cáo")',
+            width: 400,
+         }).done(function () {
+            self.reportId = id;
+            self.viewer.Refresh();
+            $('#cmbReport').val(self.reportId).trigger('chosen:updated');
+         });
+      }
+   };
+</script>

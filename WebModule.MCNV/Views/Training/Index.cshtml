@@ -1,0 +1,38 @@
+﻿<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr img customer"></div>
+      <div class="title">
+         @H("Danh sách học viên")
+      </div>
+   </div>
+   <div class="page-content">
+      <form>
+         @Html.Partial("IndexPartial")
+      </form>
+   </div>
+</div>
+
+<script type="text/javascript">
+
+   WebApp.function = {
+      title: '@H("Danh sách học viên")',
+      export: function () {
+         grdSheet.ExportTo(ASPxClientGridViewExportFormat.Xlsx);
+      },
+      filter: function () {
+         grdSheet._showFilter = !(grdSheet._showFilter || false);
+         grdSheet.PerformCallback();
+      },
+      hotkey: {
+         f5: function () { grdSheet.PerformCallback(); },
+         esc: function () { WebApp.function.close(); },
+      },
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height());
+         grdSheet.SetHeight($('.page-content').innerHeight());
+      },
+      close: WebApp.closeFunction.bind(WebApp),
+      update: function() {
+      }
+   };
+</script>

@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language>
+  <Code>vi</Code>
+  <Name>Tiếng Việt</Name>
+  <Dictionary>
+    <Key>ĐĂNG NHẬP</Key>
+    <Value>ĐĂNG NHẬP</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đăng nhập</Key>
+    <Value>Tên đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu</Key>
+    <Value>Mật khẩu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ghi nhớ tài khoản</Key>
+    <Value>Ghi nhớ tài khoản</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đăng nhập</Key>
+    <Value>Đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đăng nhập không được để trống</Key>
+    <Value>Tên đăng nhập không được để trống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu không được để trống</Key>
+    <Value>Mật khẩu không được để trống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trang chủ</Key>
+    <Value>Trang chủ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hệ thống</Key>
+    <Value>Hệ thống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quản lý</Key>
+    <Value>Quản lý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Công ty</Key>
+    <Value>Công ty</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Từ điển ngôn ngữ</Key>
+    <Value>Từ điển ngôn ngữ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cấu hình</Key>
+    <Value>Cấu hình</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người dùng</Key>
+    <Value>Người dùng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin</Key>
+    <Value>Thông tin</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đổi mật khẩu</Key>
+    <Value>Đổi mật khẩu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Giao diện</Key>
+    <Value>Giao diện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn giản</Key>
+    <Value>Đơn giản</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 2010</Key>
+    <Value>Office 2010</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 2003</Key>
+    <Value>Office 2003</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Màu sắc</Key>
+    <Value>Màu sắc</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngôn ngữ</Key>
+    <Value>Ngôn ngữ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thoát</Key>
+    <Value>Thoát</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lỗi</Key>
+    <Value>Lỗi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lỗi dữ liệu.</Key>
+    <Value>Lỗi dữ liệu.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.</Key>
+    <Value>Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quản lý trực tuyến</Key>
+    <Value>Quản lý trực tuyến</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đồng ý</Key>
+    <Value>Đồng ý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không</Key>
+    <Value>Không</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn không có được phân quyền để truy cập chức năng này.</Key>
+    <Value>Bạn không có được phân quyền để truy cập chức năng này.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng</Key>
+    <Value>Đóng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đang xử lý</Key>
+    <Value>Đang xử lý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin cá nhân</Key>
+    <Value>Thông tin cá nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Họ và tên</Key>
+    <Value>Họ và tên</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Địa chỉ</Key>
+    <Value>Địa chỉ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Điện thoại</Key>
+    <Value>Điện thoại</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Email</Key>
+    <Value>Email</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Email không hợp lệ</Key>
+    <Value>Email không hợp lệ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu</Key>
+    <Value>Lưu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Click để thêm hoặc hủy đăng nhập từ các tài khoản</Key>
+    <Value>Click để thêm hoặc hủy đăng nhập từ các tài khoản</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hủy đăng nhập</Key>
+    <Value>Hủy đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn có muốn hủy bỏ đăng nhập từ {0} không?</Key>
+    <Value>Bạn có muốn hủy bỏ đăng nhập từ {0} không?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đã hủy bỏ đăng nhập {0}</Key>
+    <Value>Đã hủy bỏ đăng nhập {0}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đã cập nhật thông tin cá nhân</Key>
+    <Value>Đã cập nhật thông tin cá nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Keyword</Key>
+    <Value>Keyword</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu dữ liệu (F2)</Key>
+    <Value>Lưu dữ liệu (F2)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng chức năng</Key>
+    <Value>Đóng chức năng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới</Key>
+    <Value>Làm mới</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới lại dữ liệu (F5)</Key>
+    <Value>Làm mới lại dữ liệu (F5)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng chức năng này</Key>
+    <Value>Đóng chức năng này</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới dữ liệu (F5)</Key>
+    <Value>Làm mới dữ liệu (F5)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng chức năng này (ESC)</Key>
+    <Value>Đóng chức năng này (ESC)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tìm kiếm</Key>
+    <Value>Tìm kiếm</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu dữ liệu (F8)</Key>
+    <Value>Lưu dữ liệu (F8)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật dữ liệu thành công</Key>
+    <Value>Cập nhật dữ liệu thành công</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người sử dụng</Key>
+    <Value>Người sử dụng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Close</Key>
+    <Value>Close</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Resize</Key>
+    <Value>Resize</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xóa</Key>
+    <Value>Xóa</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn có muốn xóa dữ liệu này không?</Key>
+    <Value>Bạn có muốn xóa dữ liệu này không?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Loading&amp;hellip;</Key>
+    <Value>Loading&amp;hellip;</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No data to display</Key>
+    <Value>No data to display</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Rows per page:</Key>
+    <Value>Rows per page:</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>All</Key>
+    <Value>All</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Page {0} of {1}</Key>
+    <Value>Trang {0} / {1}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>All pages</Key>
+    <Value>All pages</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Pages: {0} - {1} ({2} items)</Key>
+    <Value>Pages: {0} - {1} ({2} items)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No data to paginate</Key>
+    <Value>No data to paginate</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Prev</Key>
+    <Value>Prev</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next</Key>
+    <Value>Next</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Last</Key>
+    <Value>Last</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>First</Key>
+    <Value>First</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Select Destination Folder</Key>
+    <Value>Select Destination Folder</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Collapse</Key>
+    <Value>Collapse</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Expand</Key>
+    <Value>Expand</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Loading</Key>
+    <Value>Loading</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Refresh</Key>
+    <Value>Refresh</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Delete (Del)</Key>
+    <Value>Delete (Del)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Rename (F2)</Key>
+    <Value>Rename (F2)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Move (F6)</Key>
+    <Value>Move (F6)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Create (F7)</Key>
+    <Value>Create (F7)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Download</Key>
+    <Value>Download</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Upload</Key>
+    <Value>Upload</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Copy</Key>
+    <Value>Copy</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Folder</Key>
+    <Value>Folder</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Locked for upload</Key>
+    <Value>Locked for upload</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>OK</Key>
+    <Value>OK</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cancel</Key>
+    <Value>Cancel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Add</Key>
+    <Value>Add</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Browse...</Key>
+    <Value>Browse...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Remove</Key>
+    <Value>Remove</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This content type isn't allowed</Key>
+    <Value>This content type isn't allowed</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This file extension isn't allowed</Key>
+    <Value>This file extension isn't allowed</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>File size exceeds the maximum allowed size, which is {0} bytes</Key>
+    <Value>File size exceeds the maximum allowed size, which is {0} bytes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>{0} file(s) have been removed from the selection because they exceed the limit of files to be uploaded at once (which is set to {1}).</Key>
+    <Value>{0} file(s) have been removed from the selection because they exceed the limit of files to be uploaded at once (which is set to {1}).</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Attention! 
+
+{0} files are invalid and will not be uploaded. Possible reasons are: they exceed the allowed file size ({1}), their extensions are not allowed, or their filenames contain invalid characters. These files have been removed from the selection: 
+
+{2}</Key>
+    <Value>Attention! 
+
+{0} files are invalid and will not be uploaded. Possible reasons are: they exceed the allowed file size ({1}), their extensions are not allowed, or their filenames contain invalid characters. These files have been removed from the selection: 
+
+{2}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>File upload failed due to an external error</Key>
+    <Value>File upload failed due to an external error</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drop file(s) here</Key>
+    <Value>Drop file(s) here</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter by:</Key>
+    <Value>Filter by:</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Path:</Key>
+    <Value>Path:</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear selection</Key>
+    <Value>Clear selection</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No user content</Key>
+    <Value>No user content</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Invalid value</Key>
+    <Value>Invalid value</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>*</Key>
+    <Value>*</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Regular expression validation failed</Key>
+    <Value>Regular expression validation failed</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hide</Key>
+    <Value>Hide</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Page {0} of {1} ({2} items)</Key>
+    <Value>Trang {0} / {1} ({2} mẫu tin)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Today</Key>
+    <Value>Today</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear</Key>
+    <Value>Clear</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Show another code</Key>
+    <Value>Show another code</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Decrement</Key>
+    <Value>Decrement</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Increment</Key>
+    <Value>Increment</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drag</Key>
+    <Value>Drag</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Begins with</Key>
+    <Value>Begins with</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Contains</Key>
+    <Value>Contains</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Doesn't contain</Key>
+    <Value>Doesn't contain</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ends with</Key>
+    <Value>Ends with</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Equals</Key>
+    <Value>Equals</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Doesn't equal</Key>
+    <Value>Doesn't equal</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is less than</Key>
+    <Value>Is less than</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is less than or equal to</Key>
+    <Value>Is less than or equal to</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is greater than</Key>
+    <Value>Is greater than</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is greater than or equal to</Key>
+    <Value>Is greater than or equal to</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Like ('%', '_')</Key>
+    <Value>Like ('%', '_')</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Two wildcard symbols are supported:
+ '%' substitutes zero or more characters;
+ '_' substitutes a single character.</Key>
+    <Value>Two wildcard symbols are supported:
+ '%' substitutes zero or more characters;
+ '_' substitutes a single character.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Page size:</Key>
+    <Value>Page size:</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Save changes</Key>
+    <Value>Save changes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cancel changes</Key>
+    <Value>Cancel changes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drag a column here...</Key>
+    <Value>Drag a column here...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm</Key>
+    <Value>Thêm</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm mới (F2)</Key>
+    <Value>Thêm mới (F2)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Sửa</Key>
+    <Value>Sửa</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Sửa dữ liệu (F3)</Key>
+    <Value>Sửa dữ liệu (F3)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xóa dữ liệu (F4)</Key>
+    <Value>Xóa dữ liệu (F4)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới (F5)</Key>
+    <Value>Làm mới (F5)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xuất sang Excel</Key>
+    <Value>Xuất sang Excel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lọc dữ liệu</Key>
+    <Value>Lọc dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên công ty</Key>
+    <Value>Tên công ty</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người liên hệ</Key>
+    <Value>Người liên hệ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>ĐT liên hệ</Key>
+    <Value>ĐT liên hệ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày hết hạn</Key>
+    <Value>Ngày hết hạn</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date range must be greater than or equal to {0} days</Key>
+    <Value>The date range must be greater than or equal to {0} days</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date range must be from {0} to {1} days</Key>
+    <Value>The date range must be from {0} to {1} days</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Checked</Key>
+    <Value>Checked</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Unchecked</Key>
+    <Value>Unchecked</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>?</Key>
+    <Value>?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Expand All</Key>
+    <Value>Expand All</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Collapse All</Key>
+    <Value>Collapse All</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear Sorting</Key>
+    <Value>Clear Sorting</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear Filter</Key>
+    <Value>Clear Filter</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Builder...</Key>
+    <Value>Filter Builder...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Row</Key>
+    <Value>Filter Row</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Row Menu</Key>
+    <Value>Filter Row Menu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear Grouping</Key>
+    <Value>Clear Grouping</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Group Panel</Key>
+    <Value>Group Panel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Search Panel</Key>
+    <Value>Search Panel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Column Chooser</Key>
+    <Value>Column Chooser</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Footer</Key>
+    <Value>Footer</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Show Customization Dialog</Key>
+    <Value>Show Customization Dialog</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>New</Key>
+    <Value>New</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Update</Key>
+    <Value>Update</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Edit</Key>
+    <Value>Edit</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Delete</Key>
+    <Value>Delete</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Expand Detail</Key>
+    <Value>Expand Detail</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Collapse Detail</Key>
+    <Value>Collapse Detail</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm công ty</Key>
+    <Value>Thêm công ty</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật công ty</Key>
+    <Value>Cập nhật công ty</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Are you sure you want to perform the action? All unsaved grid data will be lost.</Key>
+    <Value>Are you sure you want to perform the action? All unsaved grid data will be lost.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ascending</Key>
+    <Value>Ascending</Value>
+  </Dictionary>
+</Language>

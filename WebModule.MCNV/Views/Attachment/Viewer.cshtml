@@ -1,0 +1,117 @@
+﻿@model Attachment
+@{
+   Layout = "";
+   string url = Url.Action("Download", "Attachment", new { Id = Model.UniqueId, SaveAs = Model.SaveAs });
+}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>@Model.Name</title>
+</head>
+<body>
+   @if (Model.Type == AttachmentType.Image)
+   {
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.css" integrity="sha512-3NbO5DhK9LuM6wu+IZvV5AYXxqSmj/lfLLmHMV9t18ij+MfmhhxeYEunHllEu+TFJ4tJM5D0DhazM2EGGGvNmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.js" integrity="sha512-i5q29evO2Z4FHGCO+d5VLrwgre/l+vaud5qsVqQbPXvHmD9obORDrPIGFpP2+ep+HY+z41kAmVFRHqQAjSROmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script>
+         window.addEventListener('DOMContentLoaded', function () {
+            var image = new Image();
+
+            image.src = '@url';
+
+            var viewer = new Viewer(image, {
+               button: false,
+               navbar: false,
+               title: false,
+               toolbar: {
+                  zoomIn: true,
+                  zoomOut: true,
+                  oneToOne: true,
+                  reset: true,
+                  rotateLeft: true,
+                  rotateRight: true,
+                  flipHorizontal: true,
+                  flipVertical: true,
+               },
+               hidden: function () {
+                  viewer.destroy();
+               },
+            });
+
+            viewer.show();
+         });
+
+      </script>
+   }
+   else if (Model.Type == AttachmentType.PDF)
+   {
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js" integrity="sha512-MoP2OErV7Mtk4VL893VYBFq8yJHWQtqJxTyIAsCVKzILrvHyKQpAwJf9noILczN6psvXUxTr19T5h+ndywCoVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script>
+         window.addEventListener('DOMContentLoaded', function () {
+            PDFObject.embed("@url");
+         });
+      </script>
+   }
+   else if (Model.Type == AttachmentType.Video)
+   {
+      <style>
+         html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+         }
+
+         .video-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
+
+            .video-container video {
+               width: 100%;
+               max-width: 100%;
+               max-height: 100%;
+            }
+      </style>
+      <div class="video-container">
+         <video controls>
+            <source src="@url" type="@Model.ContentType" />
+            Your browser does not support the video tag.
+         </video>
+      </div>
+   }
+   else if (Model.Type == AttachmentType.Audio)
+   {
+      <style>
+         html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+         }
+
+         .audio-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
+
+            .audio-container audio {
+               width: 80%;
+               max-width: 800px;
+            }
+      </style>
+      <div class="audio-container">
+         <audio controls>
+            <source src="@url" type="@Model.ContentType" />
+            Your browser does not support the audio tag.
+         </audio>
+      </div>
+   }
+</body>
+</html>

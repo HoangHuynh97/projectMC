@@ -1,0 +1,108 @@
+﻿@model PermissionModel
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.PermissionStr)
+@Html.HiddenFor(m => m.ReportStr)
+<div class="grid">
+   @if (Model.Company == null)
+   {
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.Name)
+      </div>
+      <div class="col-6_xs-12-middle" style="padding-bottom: 0;">
+         @Html.EditorFor(m => m.System)
+      </div>
+   }
+   else
+   {
+      <div class="col-12">
+         @Html.EditorFor(m => m.Name)
+      </div>
+   }
+   <div class="col-12">
+      @Html.EditorFor(m => m.Note)
+   </div>
+</div>
+<div class="mb">
+   @Html.DevExpress().TabControl(st =>
+{
+   st.Name = "tabPermission";
+   st.Width = Unit.Percentage(100);
+   st.Tabs.Add(T("Quyền sử dụng chức năng"));
+   st.Tabs.Add(T("Quyền xem báo cáo"));
+   st.ClientSideEvents.ActiveTabChanged = "function(s,e) {$('.tabpermission-container').toggle();}";
+}).GetHtml()
+</div>
+<div class="tabpermission-container" style="height: 200px; overflow: auto;">
+   @Html.DevExpress().TreeView(st =>
+{
+   st.Name = "treePermission";
+   st.Width = Unit.Percentage(100);
+   st.AllowCheckNodes = true;
+   st.ShowTreeLines = false;
+   foreach (var tab in WebApp.Core.Menu.GetUserMenu())
+   {
+      var nTab = new MVCxTreeViewNode(T(tab.Name));
+      nTab.Expanded = true;
+      nTab.Image.IconID = IconID.BusinessobjectsBofolder32x32;
+      foreach (var group in tab.Groups)
+      {
+         var nGroup = new MVCxTreeViewNode(T(group.Name));
+         nGroup.Image.IconID = IconID.BusinessobjectsBofolder32x32;
+         foreach (var func in group.Functions)
+         {
+            var nFunc = new MVCxTreeViewNode(T(func.Name), func.Module + "/" + func.Function);
+            if (!string.IsNullOrEmpty(func.Image))
+               nFunc.Image.SpriteProperties.CssClass = "img " + func.Image;
+            else if (!string.IsNullOrEmpty(func.Icon))
+               nFunc.Image.IconID = func.Icon;
+            var s = Model.Permissions.FirstOrDefault(p => p.StartsWith(nFunc.Name));
+            var l = new List<string>();
+            if (!string.IsNullOrEmpty(s))
+            {
+               nFunc.Checked = true;
+               s = s.Replace(nFunc.Name + "/", "");
+               l = s.Split(',').ToList();
+            }
+            foreach (var logic in WebApp.Core.Menu.Functions[func.Module][func.Function].Logics)
+            {
+               var nLogic = new MVCxTreeViewNode(T(logic), logic);
+               nLogic.Checked = l.Contains(logic);
+               nFunc.Nodes.Add(nLogic);
+            }
+            nGroup.Nodes.Add(nFunc);
+         }
+         nTab.Nodes.Add(nGroup);
+      }
+      st.Nodes.Add(nTab);
+   }
+
+   st.ClientSideEvents.Init = "WebApp.function.refreshCheckState";
+   st.ClientSideEvents.CheckedChanged = "WebApp.function.Permission_Changed";
+}).GetHtml()
+</div>
+<div class="tabpermission-container" style="display: none; height: 200px; overflow: auto;">
+   @Html.DevExpress().TreeView(st =>
+{
+   st.Name = "treeReports";
+   st.Width = Unit.Percentage(100);
+   st.AllowCheckNodes = true;
+   st.ShowTreeLines = false;
+   st.CheckNodesRecursive = true;
+   st.EnableClientSideAPI = true;
+   foreach(var cat in WebApp.Core.Menu.GetUserReports())
+   {
+      var nCat = new MVCxTreeViewNode(T(cat.Key));
+      nCat.Image.IconID = IconID.BusinessobjectsBofolder32x32;
+      nCat.Expanded = true;
+      foreach(var r in cat.Value)
+      {
+         var nRpt = new MVCxTreeViewNode(T(r.Value));
+         nRpt.Name = r.Key.ToString();
+         nRpt.Checked = Model.Reports.Contains(r.Key);
+         nCat.Nodes.Add(nRpt);
+      }
+      st.Nodes.Add(nCat);
+   }
+}).GetHtml()
+</div>

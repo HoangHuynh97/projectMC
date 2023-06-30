@@ -1,0 +1,21 @@
+{
+   "images": {
+      "facebook": "images/32/facebook.png",
+      "google": "images/32/google.png",
+      "microsoft": "images/32/microsoft.png",
+      "vi": "images/32/vi.png",
+      "en": "images/32/en.png",
+      "partner": "images/32/partner.png",
+      "mcnv": "images/32/mcnv.png"
+   },
+  "orientation": "vertical",
+  "optimize": "lossless",
+  "padding": 10,
+  "output": "png",
+  "dpi": 72,
+  "stylesheet": "css",
+  "pathprefix": "",
+  "customstyles": {
+    "display": "inline-block"
+  }
+}

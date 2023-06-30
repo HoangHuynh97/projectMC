@@ -1,0 +1,92 @@
+﻿@model Program.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   if (WindowWidthType >= WebApp.Constant.WindowWidth.WidthType.Small && WindowWidthType <= WebApp.Constant.WindowWidth.WidthType.Medium)
+   {
+      st.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+      st.Settings.ColumnMinWidth = 100;
+   }
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên khóa học");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "NameEnglish";
+      col.Caption = T("Tên tiếng Anh");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Project.Name";
+      col.Caption = T("Dự án");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Specialize.Name";
+      col.Caption = T("Chuyên môn");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "ProgramType";
+      col.Caption = T("Loại khóa học");
+      col.ColumnType = MVCxGridViewColumnType.ComboBox;
+      col.EditorProperties().ComboBox(cmb =>
+      {
+         cmb.Items.Add(T("Huấn luyện"), (int)ProgramTypeEnum.Coaching);
+         cmb.Items.Add(T("Tập huấn"), (int)ProgramTypeEnum.ShortTime);
+         cmb.Items.Add(T("Đào tạo dài hạn"), (int)ProgramTypeEnum.LongTimeLongTerm);
+         cmb.Items.Add(T("Đào tạo trung hạn"), (int)ProgramTypeEnum.LongTimeMidTerm);
+         cmb.Items.Add(T("Đào tạo liên tục"), (int)ProgramTypeEnum.LongTimeContinuous);
+         cmb.Items.Add(T("Đào tạo chuyên sâu"), (int)ProgramTypeEnum.LongTimeIntensive);
+         cmb.ValueType = typeof(int);
+      });
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "TrainingTime";
+      col.Caption = T("Thời lượng");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Institution.Name";
+      col.Caption = T("Đơn vị đào tạo");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DateStart";
+      col.Caption = T("Ngày khai giảng");
+      col.Width = 150;
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DateEnd";
+      col.Caption = T("Ngày kết thúc");
+      col.Width = 120;
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DoctorsCount";
+      col.Caption = T("Số học viên");
+      col.Width = 100;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Note";
+      col.Caption = T("Ghi chú");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "DateCreate desc";
+   e.KeyExpression = "Oid";
+}).GetHtml()

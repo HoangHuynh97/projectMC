@@ -1,0 +1,13 @@
+﻿@model string
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+@Html.DevExpress().TextBoxFor(m => m, txt =>
+{
+   txt.DefaultSettings();
+   txt.Properties.Caption = caption;
+   txt.Properties.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.None;
+   txt.Properties.MaskSettings.Mask = "000-000-000-000";
+   if (ViewData.ModelMetadata.IsRequired)
+      txt.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+}).GetHtml()

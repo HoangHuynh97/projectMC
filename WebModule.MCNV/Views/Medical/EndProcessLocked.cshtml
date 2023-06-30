@@ -1,0 +1,10 @@
+﻿@model EndProcess
+
+<div class="grid">
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.CompletedDate)</div>
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.EndEvaluationToolName)</div>
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.EndEvaluationPoint)</div>
+   <div class="col-6_md-8_xs-12">@Html.LockedText(T("Kết quả về cải thiện chức năng sinh hoạt hàng ngày (ADL)"), Model.EndSuccess.Value ? T("Có") : T("Không"))</div>
+   <div class="col-12">@Html.EditorFor(m => m.Doctors, "DoctorsLocked")</div>
+   <div class="col-12" style="padding-bottom: 0;">@Html.EditorFor(m => m.Attachments, "AttachmentsLocked")</div>
+</div>

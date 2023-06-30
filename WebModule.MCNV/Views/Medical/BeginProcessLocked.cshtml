@@ -1,0 +1,20 @@
+﻿@model BeginProcess
+
+<div class="grid">
+   <div class="col-auto_md-6_xs-12">@Html.LockedText(m => m.EvaluationDate)</div>
+   <div class="col-auto_md-6_xs-12">@Html.LockedText(m => m.EvaluationToolName)</div>
+   <div class="col-auto_md-6_xs-12">@Html.LockedText(m => m.EvaluationPoint)</div>
+   <div class="col_md-6_xs-12">@Html.LockedText(m => m.Evaluation)</div>
+   <div class="col-12">@Html.LockedText(m => m.Diagnostics)</div>
+   @if (!Model.NoProcess.Value)
+   {
+      <div class="col-12">@Html.LockedText(m => m.Treatments)</div>
+      <div class="col-12">@Html.LockedText(m => m.Services)</div>
+   }
+   else
+   {
+      <div class="col-12">@Html.LockedText(m => m.ReasonCancel)</div>
+   }
+</div>
+<div>@Html.EditorFor(m => m.Doctors, "DoctorsLocked")</div>
+<div>@Html.EditorFor(m => m.Attachments, "AttachmentsLocked")</div>

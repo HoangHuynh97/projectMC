@@ -1,0 +1,14 @@
+﻿@model Diagnostic
+
+@Html.HiddenFor(m => m.Id)
+<div class="grid">
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Code)</div>
+   <div class="col-9_xs-12">@Html.EditorFor(m => m.Name)</div>
+   <div class="col-12">@Html.EditorFor(m => m.DiagnosticType)</div>
+</div>
+
+<script>
+   $(function () {
+      @(Model.Id== 0 ? "Code.Focus();": "")
+   });
+</script>

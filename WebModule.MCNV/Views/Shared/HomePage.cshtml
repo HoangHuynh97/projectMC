@@ -1,0 +1,87 @@
+﻿<style>
+   .homepage {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: url("/Styles/images/bg/login.jpeg?v=1") 50% fixed;
+      background-size: cover;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .text3, .text4 {
+      display: none;
+   }
+
+   .text1 {
+      text-align: center;
+   }
+
+      .text1 span {
+         padding: 10px 20px;
+         background-color: rgba(255,255,255,0.2);
+         line-height: 60px;
+         font-size: 32px;
+         font-weight: bold;
+         color: #fff;
+         border-radius: 24px;
+      }
+
+   .text2 {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 24px;
+      color: #555;
+   }
+
+   .text3 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      padding: 10px;
+   }
+
+   .text4 {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+   }
+
+   @@media (max-width: 600px) {
+      .text1, .text2 {
+         display: none;
+      }
+
+      .text3, .text4 {
+         display: block;
+      }
+   }
+</style>
+<div class="homepage">
+   <div class="text1">
+      <span>@H("HỆ THỐNG LƯU TRỮ DỮ LIỆU")</span>
+      <br />
+      <span>@H("CÁC THÔNG TIN CÁ NHÂN & SỨC KHỎE CỦA NGƯỜI KHUYẾT TẬT")</span>
+   </div>
+   <div class="text2">
+      <span>@H("Đơn vị quản lý:")</span>
+      <span>@H("Ủy ban Y tế Hà Lan - Việt Nam (MCNV)")</span>
+   </div>
+   <div class="text3">
+      <span>@H("HỆ THỐNG LƯU TRỮ DỮ LIỆU VỀ CÁC THÔNG TIN CÁ NHÂN VÀ SỨC KHỎE CỦA NGƯỜI KHUYẾT TẬT")</span>
+   </div>
+   <div class="text4">
+      <span>@H("Đơn vị quản lý:")</span>
+      <br />
+      <span>@H("Ủy ban Y tế Hà Lan - Việt Nam (MCNV)")</span>
+   </div>
+</div>
+<script>
+   WebApp.title = '@H(Model.Name)';
+   document.title = '@H("Trang chủ") | ' + WebApp.title;
+</script>

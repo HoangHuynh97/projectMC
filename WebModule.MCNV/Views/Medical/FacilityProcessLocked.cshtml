@@ -1,0 +1,10 @@
+﻿@model FacilityProcess
+
+<div class="grid">
+   <div class="col-auto_xs-12">@Html.LockedText(T("Ngày vào viện"), Model.DateIn.ToShortDateString())</div>
+   <div class="col-auto_xs-12">@Html.LockedText(T("Ngày ra viện"), Model.DateOut.HasValue ? Model.DateOut.Value.ToShortDateString() : "")</div>
+   <div class="col-auto_xs-12">@Html.LockedText(T("Lĩnh vực can thiệp"), Model.ServiceName)</div>
+   <div class="col-auto_xs-12">@Html.LockedText(T("Kết quả can thiệp"), Model.StatusName)</div>
+</div>
+<div>@Html.EditorFor(m => m.Doctors, "DoctorsLocked")</div>
+<div>@Html.EditorFor(m => m.Attachments, "AttachmentsLocked")</div>

@@ -1,0 +1,9 @@
+﻿@model Boolean?
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+@Html.DevExpress().CheckBoxFor(m => m, s =>
+{
+   s.Text = caption;
+   s.Properties.EnableClientSideAPI = true;
+}).GetHtml()

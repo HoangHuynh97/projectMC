@@ -1,0 +1,1579 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3A42B489-DDBF-418E-AC2A-E8CE0D57C87A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebModule.MCNV</RootNamespace>
+    <AssemblyName>WebModule.MCNV</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Mvc5.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.8\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.8\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Languages\vi.xml" />
+    <Content Include="App_Data\menu.xml" />
+    <Content Include="App_Data\reset_password.html" />
+    <Content Include="Content\agreement.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Styles\favicons\128.png" />
+    <Content Include="Styles\favicons\16.png" />
+    <Content Include="Styles\favicons\48.png" />
+    <Content Include="Styles\images\24\en.png" />
+    <Content Include="Styles\images\24\vi.png" />
+    <Content Include="Styles\images\32\alert.png" />
+    <Content Include="Styles\images\32\blockdevice.png" />
+    <Content Include="Styles\images\32\building.png" />
+    <Content Include="Styles\images\32\cabinet.png" />
+    <Content Include="Styles\images\32\cash.png" />
+    <Content Include="Styles\images\32\ccihp.png" />
+    <Content Include="Styles\images\32\checklist.png" />
+    <Content Include="Styles\images\32\company.png" />
+    <Content Include="Styles\images\32\conference.png" />
+    <Content Include="Styles\images\32\contact.png" />
+    <Content Include="Styles\images\32\contacts.png" />
+    <Content Include="Styles\images\32\customer.png" />
+    <Content Include="Styles\images\32\database.png" />
+    <Content Include="Styles\images\32\datauser.png" />
+    <Content Include="Styles\images\32\data_transfer.png" />
+    <Content Include="Styles\images\32\diagnostic.png" />
+    <Content Include="Styles\images\32\doctor.png" />
+    <Content Include="Styles\images\32\documents.png" />
+    <Content Include="Styles\images\32\documents2.png" />
+    <Content Include="Styles\images\32\documents3.png" />
+    <Content Include="Styles\images\32\en.png" />
+    <Content Include="Styles\images\32\exit.png" />
+    <Content Include="Styles\images\32\facebook.png" />
+    <Content Include="Styles\images\32\factory.png" />
+    <Content Include="Styles\images\32\folder_blue.png" />
+    <Content Include="Styles\images\32\google.png" />
+    <Content Include="Styles\images\32\groups.png" />
+    <Content Include="Styles\images\32\hospital.png" />
+    <Content Include="Styles\images\32\house.png" />
+    <Content Include="Styles\images\32\infomation.png" />
+    <Content Include="Styles\images\32\info_blue.png" />
+    <Content Include="Styles\images\32\invoice.png" />
+    <Content Include="Styles\images\32\keys.png" />
+    <Content Include="Styles\images\32\location.png" />
+    <Content Include="Styles\images\32\lorry.png" />
+    <Content Include="Styles\images\32\microsoft.png" />
+    <Content Include="Styles\images\32\money.png" />
+    <Content Include="Styles\images\32\package.png" />
+    <Content Include="Styles\images\32\partner.png" />
+    <Content Include="Styles\images\32\payment.png" />
+    <Content Include="Styles\images\32\preview.png" />
+    <Content Include="Styles\images\32\print.png" />
+    <Content Include="Styles\images\32\roles.png" />
+    <Content Include="Styles\images\32\shop.png" />
+    <Content Include="Styles\images\32\shopping_bag.png" />
+    <Content Include="Styles\images\32\table.png" />
+    <Content Include="Styles\images\32\transfer.png" />
+    <Content Include="Styles\images\32\unknown.png" />
+    <Content Include="Styles\images\32\usaid.png" />
+    <Content Include="Styles\images\32\users.png" />
+    <Content Include="Styles\images\32\vi.png" />
+    <Content Include="Styles\images\32\web.png" />
+    <Content Include="Styles\images\bg\login.jpeg" />
+    <Content Include="Styles\images\skins\Aqua.png" />
+    <Content Include="Styles\images\skins\BlackGlass.png" />
+    <Content Include="Styles\images\skins\Default.png" />
+    <Content Include="Styles\images\skins\DevEx.png" />
+    <Content Include="Styles\images\skins\Glass.png" />
+    <Content Include="Styles\images\skins\iOS.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_0091ea.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_00bfa5.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_424242.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_43a047.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_6a1b9a.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_e65100.png" />
+    <Content Include="Styles\images\skins\Metropolis.png" />
+    <Content Include="Styles\images\skins\MetropolisBlue.png" />
+    <Content Include="Styles\images\skins\Moderno.png" />
+    <Content Include="Styles\images\skins\Mulberry.png" />
+    <Content Include="Styles\images\skins\Office2003Blue.png" />
+    <Content Include="Styles\images\skins\Office2003Olive.png" />
+    <Content Include="Styles\images\skins\Office2003Silver.png" />
+    <Content Include="Styles\images\skins\Office2010Black.png" />
+    <Content Include="Styles\images\skins\Office2010Blue.png" />
+    <Content Include="Styles\images\skins\Office2010Silver.png" />
+    <Content Include="Styles\images\skins\Office365_0091ea.png" />
+    <Content Include="Styles\images\skins\Office365_00bfa5.png" />
+    <Content Include="Styles\images\skins\Office365_424242.png" />
+    <Content Include="Styles\images\skins\Office365_43a047.png" />
+    <Content Include="Styles\images\skins\Office365_6a1b9a.png" />
+    <Content Include="Styles\images\skins\Office365_e65100.png" />
+    <Content Include="Styles\images\skins\PlasticBlue.png" />
+    <Content Include="Styles\images\skins\RedWine.png" />
+    <Content Include="Styles\images\skins\SoftOrange.png" />
+    <Content Include="Styles\images\skins\Youthful.png" />
+    <Content Include="Styles\img.sprite.css">
+      <DependentUpon>img.sprite</DependentUpon>
+    </Content>
+    <Content Include="Styles\img.sprite.png">
+      <DependentUpon>img.sprite</DependentUpon>
+    </Content>
+    <Content Include="Styles\login.css" />
+    <Content Include="Styles\loginicons.sprite.css">
+      <DependentUpon>loginicons.sprite</DependentUpon>
+    </Content>
+    <Content Include="Styles\loginicons.sprite.png">
+      <DependentUpon>loginicons.sprite</DependentUpon>
+    </Content>
+    <Content Include="sw.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AttachmentController.cs" />
+    <Compile Include="Controllers\TrainingController.cs" />
+    <Compile Include="Controllers\SpecificationController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\ProgramResultController.cs" />
+    <Compile Include="Controllers\TrainingReportController.cs" />
+    <Compile Include="Controllers\ProgramController.cs" />
+    <Compile Include="Controllers\InstitutionController.cs" />
+    <Compile Include="Controllers\ProgramProjectController.cs" />
+    <Compile Include="Controllers\LockedDataController.cs" />
+    <Compile Include="Controllers\MedicalReportController.cs" />
+    <Compile Include="Controllers\SharedDataController.cs" />
+    <Compile Include="Controllers\PermissionDataeController.cs" />
+    <Compile Include="Controllers\TreatmentController.cs" />
+    <Compile Include="Controllers\FacilityTypeController.cs" />
+    <Compile Include="Controllers\DiagnosticController.cs" />
+    <Compile Include="Controllers\FacilityController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\ComboboxController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\MedicalController.cs" />
+    <Compile Include="DataModelCode\Area.cs" />
+    <Compile Include="DataModelCode\Area.Designer.cs">
+      <DependentUpon>Area.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Attachment.cs" />
+    <Compile Include="DataModelCode\Attachment.Designer.cs">
+      <DependentUpon>Attachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Classification.cs" />
+    <Compile Include="DataModelCode\Classification.Designer.cs">
+      <DependentUpon>Classification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\CompanyObject.cs" />
+    <Compile Include="DataModelCode\CompanyObject.Designer.cs">
+      <DependentUpon>CompanyObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Diagnostic.cs" />
+    <Compile Include="DataModelCode\Diagnostic.Designer.cs">
+      <DependentUpon>Diagnostic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\DiagnosticType.cs" />
+    <Compile Include="DataModelCode\DiagnosticType.Designer.cs">
+      <DependentUpon>DiagnosticType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Disability.cs" />
+    <Compile Include="DataModelCode\Disability.Designer.cs">
+      <DependentUpon>Disability.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\District.cs" />
+    <Compile Include="DataModelCode\District.Designer.cs">
+      <DependentUpon>District.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Doctor.cs" />
+    <Compile Include="DataModelCode\Doctor.Designer.cs">
+      <DependentUpon>Doctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\DoctorPosition.cs" />
+    <Compile Include="DataModelCode\DoctorPosition.Designer.cs">
+      <DependentUpon>DoctorPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\DoctorTitle.cs" />
+    <Compile Include="DataModelCode\DoctorTitle.Designer.cs">
+      <DependentUpon>DoctorTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\EvaluationTool.cs" />
+    <Compile Include="DataModelCode\EvaluationTool.Designer.cs">
+      <DependentUpon>EvaluationTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Facility.cs" />
+    <Compile Include="DataModelCode\Facility.Designer.cs">
+      <DependentUpon>Facility.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\FacilityType.cs" />
+    <Compile Include="DataModelCode\FacilityType.Designer.cs">
+      <DependentUpon>FacilityType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Folk.cs" />
+    <Compile Include="DataModelCode\Folk.Designer.cs">
+      <DependentUpon>Folk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Gender.cs" />
+    <Compile Include="DataModelCode\Gender.Designer.cs">
+      <DependentUpon>Gender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Institution.cs" />
+    <Compile Include="DataModelCode\Institution.Designer.cs">
+      <DependentUpon>Institution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\LevelDisability.cs" />
+    <Compile Include="DataModelCode\LevelDisability.Designer.cs">
+      <DependentUpon>LevelDisability.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\LockedData.cs" />
+    <Compile Include="DataModelCode\LockedData.Designer.cs">
+      <DependentUpon>LockedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Medical.cs" />
+    <Compile Include="DataModelCode\Medical.Designer.cs">
+      <DependentUpon>Medical.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\MedicalCancel.cs" />
+    <Compile Include="DataModelCode\MedicalCancel.Designer.cs">
+      <DependentUpon>MedicalCancel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\MedicalPlan.cs" />
+    <Compile Include="DataModelCode\MedicalPlan.Designer.cs">
+      <DependentUpon>MedicalPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\MedicalProcess.cs" />
+    <Compile Include="DataModelCode\MedicalProcess.Designer.cs">
+      <DependentUpon>MedicalProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\MedicalReason.cs" />
+    <Compile Include="DataModelCode\MedicalReason.Designer.cs">
+      <DependentUpon>MedicalReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\MedicalStatus.cs" />
+    <Compile Include="DataModelCode\MedicalStatus.Designer.cs">
+      <DependentUpon>MedicalStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\OrangeVictim.cs" />
+    <Compile Include="DataModelCode\OrangeVictim.Designer.cs">
+      <DependentUpon>OrangeVictim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Patient.cs" />
+    <Compile Include="DataModelCode\Patient.Designer.cs">
+      <DependentUpon>Patient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\PermissionData.cs" />
+    <Compile Include="DataModelCode\PermissionData.Designer.cs">
+      <DependentUpon>PermissionData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\ProcessStatus.cs" />
+    <Compile Include="DataModelCode\ProcessStatus.Designer.cs">
+      <DependentUpon>ProcessStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Program.cs" />
+    <Compile Include="DataModelCode\Program.Designer.cs">
+      <DependentUpon>Program.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\ProgramDoctor.cs" />
+    <Compile Include="DataModelCode\ProgramDoctor.Designer.cs">
+      <DependentUpon>ProgramDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\ProgramProject.cs" />
+    <Compile Include="DataModelCode\ProgramProject.Designer.cs">
+      <DependentUpon>ProgramProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Province.cs" />
+    <Compile Include="DataModelCode\Province.Designer.cs">
+      <DependentUpon>Province.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Qualification.cs" />
+    <Compile Include="DataModelCode\Qualification.Designer.cs">
+      <DependentUpon>Qualification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Service.cs" />
+    <Compile Include="DataModelCode\Service.Designer.cs">
+      <DependentUpon>Service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\SharedData.cs" />
+    <Compile Include="DataModelCode\SharedData.Designer.cs">
+      <DependentUpon>SharedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Specialize.cs" />
+    <Compile Include="DataModelCode\Specialize.Designer.cs">
+      <DependentUpon>Specialize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Specification.cs" />
+    <Compile Include="DataModelCode\Specification.Designer.cs">
+      <DependentUpon>Specification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\TrainingStatus.cs" />
+    <Compile Include="DataModelCode\TrainingStatus.Designer.cs">
+      <DependentUpon>TrainingStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Treatment.cs" />
+    <Compile Include="DataModelCode\Treatment.Designer.cs">
+      <DependentUpon>Treatment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Ward.cs" />
+    <Compile Include="DataModelCode\Ward.Designer.cs">
+      <DependentUpon>Ward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddressBase.cs" />
+    <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\Specification.cs" />
+    <Compile Include="Models\DiagnosticType.cs" />
+    <Compile Include="Models\FacilitiesParameter.cs" />
+    <Compile Include="Models\Training.cs" />
+    <Compile Include="Models\TrainingStatus.cs" />
+    <Compile Include="Models\MedicalReason.cs" />
+    <Compile Include="Models\DoctorPosition.cs" />
+    <Compile Include="Models\ProgramResult.cs" />
+    <Compile Include="Models\Specialize.cs" />
+    <Compile Include="Models\Program.cs" />
+    <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\Doctors.cs" />
+    <Compile Include="Models\Facility.cs" />
+    <Compile Include="Models\EvaluationTool.cs" />
+    <Compile Include="Models\Diagnostic.cs" />
+    <Compile Include="Models\Institution.cs" />
+    <Compile Include="Models\ProgramProject.cs" />
+    <Compile Include="Models\LockedData.cs" />
+    <Compile Include="Models\SharedData.cs" />
+    <Compile Include="Models\PermissionData.cs" />
+    <Compile Include="Models\FacilityType.cs" />
+    <Compile Include="Models\DoctorTitle.cs" />
+    <Compile Include="Models\Qualification.cs" />
+    <Compile Include="Models\MedicalCancel.cs" />
+    <Compile Include="Models\ProcessStatus.cs" />
+    <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\MedicalProcess.cs" />
+    <Compile Include="Models\MedicalStatus.cs" />
+    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\Treatment.cs" />
+    <Compile Include="Models\Disability.cs" />
+    <Compile Include="Models\Folk.cs" />
+    <Compile Include="Models\LevelDisability.cs" />
+    <Compile Include="Models\Ward.cs" />
+    <Compile Include="Models\District.cs" />
+    <Compile Include="Models\Province.cs" />
+    <Compile Include="Models\OrangeVictim.cs" />
+    <Compile Include="Models\Classification.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\Medical.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Attachment\Viewer.generated.cs">
+      <DependentUpon>Viewer.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\HomePage.generated.cs">
+      <DependentUpon>HomePage.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Training\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Training\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\MultilineText5.generated.cs">
+      <DependentUpon>MultilineText5.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Specification\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Specification\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Specification\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Diagnostic\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Diagnostic\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Diagnostic\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Doctor\ViewInfo.generated.cs">
+      <DependentUpon>ViewInfo.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\PlanLocked.generated.cs">
+      <DependentUpon>PlanLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\Plan.generated.cs">
+      <DependentUpon>Plan.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\FacilityProcessLocked.generated.cs">
+      <DependentUpon>FacilityProcessLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\FacilityProcess.generated.cs">
+      <DependentUpon>FacilityProcess.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\StopProcessLocked.generated.cs">
+      <DependentUpon>StopProcessLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\StopProcess.generated.cs">
+      <DependentUpon>StopProcess.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ProgramResult\Doctors.generated.cs">
+      <DependentUpon>Doctors.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ProgramResult\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ProgramResult\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\SelectDoctorsPartial.generated.cs">
+      <DependentUpon>SelectDoctorsPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\SelectDoctors.generated.cs">
+      <DependentUpon>SelectDoctors.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\ProgramDoctors.generated.cs">
+      <DependentUpon>ProgramDoctors.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\DoctorsViewInfo.generated.cs">
+      <DependentUpon>DoctorsViewInfo.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Program\ViewInfo.generated.cs">
+      <DependentUpon>ViewInfo.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Institution\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Institution\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Institution\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Institution\ViewInfo.generated.cs">
+      <DependentUpon>ViewInfo.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ProgramProject\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ProgramProject\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ProgramProject\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Facility\ViewInfo.generated.cs">
+      <DependentUpon>ViewInfo.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\LockedData\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Patient\ViewInfo.generated.cs">
+      <DependentUpon>ViewInfo.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\SharedData\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\SharedData\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\InfoProcessLocked.generated.cs">
+      <DependentUpon>InfoProcessLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\PermissionData\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\PermissionData\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\PermissionData\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\EndProcessLocked.generated.cs">
+      <DependentUpon>EndProcessLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\EndProcess.generated.cs">
+      <DependentUpon>EndProcess.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\BeginProcessLocked.generated.cs">
+      <DependentUpon>BeginProcessLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\DetailProcessLocked.generated.cs">
+      <DependentUpon>DetailProcessLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\DetailProcess.generated.cs">
+      <DependentUpon>DetailProcess.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\BeginProcess.generated.cs">
+      <DependentUpon>BeginProcess.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\BHYT.generated.cs">
+      <DependentUpon>BHYT.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\CCCD.generated.cs">
+      <DependentUpon>CCCD.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\DiagnosticType.generated.cs">
+      <DependentUpon>DiagnosticType.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\FacilitiesParameter.generated.cs">
+      <DependentUpon>FacilitiesParameter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Doctor.generated.cs">
+      <DependentUpon>Doctor.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\TrainingTime.generated.cs">
+      <DependentUpon>TrainingTime.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\TrainingStatus.generated.cs">
+      <DependentUpon>TrainingStatus.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\MedicalReason.generated.cs">
+      <DependentUpon>MedicalReason.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Position.generated.cs">
+      <DependentUpon>Position.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Specialize.generated.cs">
+      <DependentUpon>Specialize.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Institution.generated.cs">
+      <DependentUpon>Institution.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\ProgramProject.generated.cs">
+      <DependentUpon>ProgramProject.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Phone.generated.cs">
+      <DependentUpon>Phone.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\CMND.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMND.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Provinces.generated.cs">
+      <DependentUpon>Provinces.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\AttachmentsLocked.generated.cs">
+      <DependentUpon>AttachmentsLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Attachments.generated.cs">
+      <DependentUpon>Attachments.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Address.generated.cs">
+      <DependentUpon>Address.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\DoctorsLocked.generated.cs">
+      <DependentUpon>DoctorsLocked.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Doctors.generated.cs">
+      <DependentUpon>Doctors.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Service.generated.cs">
+      <DependentUpon>Service.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Qualification.generated.cs">
+      <DependentUpon>Qualification.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Title.generated.cs">
+      <DependentUpon>Title.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\ProcessStatus.generated.cs">
+      <DependentUpon>ProcessStatus.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\MedicalCancel.generated.cs">
+      <DependentUpon>MedicalCancel.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Doctor\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Doctor\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Doctor\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Treatment\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Treatment\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Treatment\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\FacilityType\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\FacilityType\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\FacilityType\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Facility\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Facility\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Facility\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\Process.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Process.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Patient\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Patient\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Patient\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Area\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Area\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Area\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Medical\InfoProcess.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoProcess.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Medical\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Medical\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Diagnostics.generated.cs">
+      <DependentUpon>Diagnostics.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Facility.generated.cs">
+      <DependentUpon>Facility.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Diagnostic.generated.cs">
+      <DependentUpon>Diagnostic.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\EvaluationTool.generated.cs">
+      <DependentUpon>EvaluationTool.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\FacilityType.generated.cs">
+      <DependentUpon>FacilityType.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\MedicalStatus.generated.cs">
+      <DependentUpon>MedicalStatus.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Services.generated.cs">
+      <DependentUpon>Services.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Treatments.generated.cs">
+      <DependentUpon>Treatments.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Disabilities.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Disabilities.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Folk.generated.cs">
+      <DependentUpon>Folk.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\LevelDisability.generated.cs">
+      <DependentUpon>LevelDisability.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Patient.generated.cs">
+      <DependentUpon>Patient.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\OrangeVictim.generated.cs">
+      <DependentUpon>OrangeVictim.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Ward.generated.cs">
+      <DependentUpon>Ward.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\District.generated.cs">
+      <DependentUpon>District.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Province.generated.cs">
+      <DependentUpon>Province.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Classification.generated.cs">
+      <DependentUpon>Classification.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Gender.generated.cs">
+      <DependentUpon>Gender.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Area.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Area.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\img.sprite" />
+    <Content Include="Styles\loginicons.sprite" />
+    <Content Include="manifest.json" />
+    <None Include="DataModel.xpo" />
+    <None Include="DataModel.xpo.diagram">
+      <DependentUpon>DataModel.xpo</DependentUpon>
+    </None>
+    <Content Include="Views\Medical\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\InfoProcess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>InfoProcess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Area\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Area\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Area\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Area.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Area.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Gender.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Gender.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Patient\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Patient\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Patient\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Classification.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Classification.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Province.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Province.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\District.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>District.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Ward.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Ward.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\OrangeVictim.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OrangeVictim.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Patient.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Patient.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Disabilities.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Disabilities.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\LevelDisability.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>LevelDisability.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Folk.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Folk.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Treatments.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Treatments.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Services.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Services.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\EvaluationTool.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EvaluationTool.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Diagnostic.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Diagnostic.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Diagnostic\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Diagnostic\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Diagnostic\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Facility\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Facility\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Facility\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Facility.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Facility.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\MedicalStatus.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MedicalStatus.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\Process.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Process.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Diagnostics.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Diagnostics.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\FacilityType.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FacilityType.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\FacilityType\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\FacilityType\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\FacilityType\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Treatment\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Treatment\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Treatment\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Address.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Address.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\BeginProcess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BeginProcess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\DetailProcess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DetailProcess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\BeginProcessLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BeginProcessLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\DetailProcessLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DetailProcessLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\EndProcess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EndProcess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\EndProcessLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EndProcessLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\MedicalCancel.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MedicalCancel.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\ProcessStatus.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ProcessStatus.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Attachments.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Attachments.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\AttachmentsLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AttachmentsLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Doctor\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Doctor\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Doctor\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Title.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Title.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Qualification.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Qualification.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Service.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Service.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Doctors.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Doctors.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\DoctorsLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DoctorsLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\PermissionData\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\PermissionData\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\PermissionData\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Provinces.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Provinces.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\CMND.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CMND.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\CCCD.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CCCD.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\BHYT.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BHYT.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Attachment\Viewer.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Viewer.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\InfoProcessLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>InfoProcessLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SharedData\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SharedData\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Patient\ViewInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\LockedData\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Phone.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Phone.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Facility\ViewInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Doctor\ViewInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ProgramProject\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ProgramProject\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ProgramProject\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Institution\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Institution\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Institution\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Institution\ViewInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\ViewInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\ProgramProject.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ProgramProject.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Institution.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Institution.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\ProgramDoctors.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ProgramDoctors.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\SelectDoctors.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SelectDoctors.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\SelectDoctorsPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SelectDoctorsPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Program\DoctorsViewInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DoctorsViewInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\DiagnosticType.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DiagnosticType.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Specialize.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Specialize.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\MedicalReason.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MedicalReason.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\FacilitiesParameter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FacilitiesParameter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Position.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Position.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ProgramResult\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ProgramResult\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ProgramResult\Doctors.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Doctors.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\TrainingStatus.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TrainingStatus.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\StopProcess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>StopProcess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\StopProcessLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>StopProcessLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Doctor.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Doctor.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\TrainingTime.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TrainingTime.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\FacilityProcess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FacilityProcess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\FacilityProcessLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FacilityProcessLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\Plan.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Plan.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Medical\PlanLocked.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PlanLocked.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Specification\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Specification\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Specification\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\MultilineText5.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MultilineText5.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Training\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Training\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\HomePage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HomePage.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WebApp\WebApp.csproj">
+      <Project>{d8a9b76a-4f6e-466a-beea-ffe8789d9cd9}</Project>
+      <Name>WebApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="..\WebApp\webapp.d.ts">
+      <Link>webapp.d.ts</Link>
+    </TypeScriptCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61198</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61198/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

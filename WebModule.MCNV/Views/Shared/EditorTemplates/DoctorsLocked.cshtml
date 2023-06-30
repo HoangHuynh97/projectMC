@@ -1,0 +1,15 @@
+﻿@model Doctors
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+   List<string> names = Model.GetNames();
+}
+@if (names.Count > 0)
+{
+   <div class="mb">@caption</div>
+   <div class="grid-3_md-2_xs-1">
+      @foreach (string name in names)
+      {
+         <div class="col">@name</div>
+      }
+   </div>
+}

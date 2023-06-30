@@ -1,0 +1,91 @@
+﻿<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr img documents"></div>
+      <div class="title">
+         @H("Báo cáo")
+      </div>
+   </div>
+   <div class="page-content">
+      <form>@Html.Partial("IndexPartial")</form>
+   </div>
+</div>
+
+<script type="text/javascript">
+   WebApp.function = {
+      title: '@H("Báo cáo")',
+      permission: {
+         add: @CheckPermission("Thêm").ToString().ToLower(),
+         edit: @CheckPermission("Sửa").ToString().ToLower(),
+         del: @CheckPermission("Xóa").ToString().ToLower(),
+         designer: @CheckPermission("Thiết kế mẫu").ToString().ToLower(),
+      },
+      add: function () {
+         if (WebApp.loading() || !WebApp.function.permission.add) return;
+         WebApp.showDialog({
+            title: '@H("Thêm báo cáo")',
+            url: '@Url.Action("Add")',
+            width: 500,
+            init: function () { Name.Focus(); }
+         }).done(function(v) {
+            grdSheet.PerformCallback();
+         });
+      },
+      edit: function () {
+         if (WebApp.loading() || !WebApp.function.permission.edit) return;
+         var idx = grdSheet.GetFocusedRowIndex();
+         var id = grdSheet.GetRowKey(idx);
+         if (!id) return;
+         WebApp.showDialog({
+            title: '@H("Cập nhật báo cáo")',
+            icon: '@IconID.EditEdit32x32',
+            url: '@Url.Action("Edit")',
+            data: { id: id },
+            width: 500,
+            init: function () { Name.Focus(); }
+         }).done(function (v) {
+            grdSheet.PerformCallback();
+         });
+      },
+      del: function () {
+         if (WebApp.loading() || !WebApp.function.permission.del) return;
+         var idx = grdSheet.GetFocusedRowIndex();
+         var id = grdSheet.GetRowKey(idx);
+         if (!id) return;
+         WebApp.showConfirm(WebApp.message.delete, WebApp.message.deleteConfirm).done(function (r) {
+            WebApp.ajax('@Url.Action("Delete")', {id: id}).done(function() {
+               grdSheet.PerformCallback();
+            });
+         });
+      },
+      designer: function () {
+         if (!WebApp.function.permission.designer) return;
+         var idx = grdSheet.GetFocusedRowIndex();
+         var id = grdSheet.GetRowKey(idx);
+         if (!id) return;
+         window.open('@Url.Action("Designer")' + '/' + id, '_blank');
+      },
+      filter: function () {
+         grdSheet._showFilter = !(grdSheet._showFilter || false);
+         grdSheet.PerformCallback();
+      },
+      hotkey: {
+         f2: function() { WebApp.function.add(); },
+         f3: function() { WebApp.function.edit(); },
+         f4: function() { WebApp.function.del(); },
+         f5: function () { grdSheet.PerformCallback(); },
+         esc: function () { WebApp.function.close(); },
+      },
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height());
+         grdSheet.SetHeight($('.page-content').innerHeight());
+      },
+      close: WebApp.closeFunction.bind(WebApp),
+      update: function() {
+         var idx = grdSheet.GetFocusedRowIndex();
+         var tool = grdSheet.GetToolbar(0);
+         WebApp.function.permission.edit && tool.GetItemByName("edit").SetEnabled(idx !== -1);
+         WebApp.function.permission.del && tool.GetItemByName("del").SetEnabled(idx !== -1);
+         WebApp.function.permission.designer && tool.GetItemByName("designer").SetEnabled(idx !== -1);
+      }
+   };
+</script>

@@ -1,0 +1,87 @@
+﻿@model UserModel
+@Html.HiddenFor(m => m.Id)
+<div class="grid">
+   <div class="col-5_sm-12 grid">
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.UserName)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.FullName)
+      </div>
+      <div class="col-12">
+         @Html.EditorFor(m => m.Address)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.Phone)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.Email)
+      </div>
+      @if (Model.IsNew())
+      {
+         <div class="col-6_xs-12">
+            @Html.EditorFor(m => m.Password)
+         </div>
+         <div class="col-6_xs-12">
+            @Html.EditorFor(m => m.Verify)
+         </div>
+      }
+      <div class="col-12">
+         @Html.DevExpress().ComboBoxFor(m => m.Permission, st =>
+    {
+       st.Width = Unit.Percentage(100);
+       st.Properties.Caption = T("Quyền sử dụng");
+       st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+       st.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+       st.Properties.IncrementalFilteringDelay = 1000;
+       st.Properties.DropDownStyle = DropDownStyle.DropDownList;
+       st.Properties.ValueField = "Key";
+       st.Properties.ValueType = typeof(int);
+       st.Properties.TextField = "Value";
+    }).BindList(Model.GetPermissions()).GetHtml()
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.System)
+      </div>
+      <div class="col-6_xs-12">
+         @Html.EditorFor(m => m.Active)
+      </div>
+   </div>
+   <div class="col-3_sm-12" style="min-height: 200px;">
+      @Html.DevExpress().BinaryImageFor(m => m.Image, st =>
+      {
+         st.Width = Unit.Percentage(100);
+         st.Height = Unit.Percentage(100);
+         st.CallbackRouteValues = new { Action = "UpdateUserImage" };
+         st.Properties.ImageWidth = 300;
+         st.Properties.ImageHeight = 300;
+         st.Properties.ImageSizeMode = ImageSizeMode.FitProportional;
+         st.Properties.EditingSettings.Enabled = true;
+         st.Properties.EditingSettings.AllowDropOnPreview = true;
+         st.Properties.EditingSettings.UploadSettings.UploadValidationSettings.MaxFileSize = 1000000;
+      }).GetHtml()
+   </div>
+   <div class="col-4_sm-12" style="min-height: 200px;">
+      @Html.DevExpress().ListBox(st =>
+ {
+    st.Name = "CompanyIds";
+    st.Width = Unit.Percentage(100);
+    st.Height = Unit.Percentage(100);
+    st.Properties.ValueField = "Key";
+    st.Properties.ValueType = typeof(int);
+    st.Properties.TextField = "Value";
+    st.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+    st.PreRender = (s, e) =>
+    {
+       var me = (MVCxListBox)s;
+       foreach (ListEditItem item in me.Items)
+       {
+          item.Selected = Model.CompanyIds.Contains((int)item.Value);
+       }
+    };
+ }).BindList(Model.GetListCompany()).GetHtml()
+   </div>
+   <div class="col-12">
+      @Html.EditorFor(m => m.Note)
+   </div>
+</div>

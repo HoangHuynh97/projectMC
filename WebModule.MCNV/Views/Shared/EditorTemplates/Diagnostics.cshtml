@@ -1,0 +1,94 @@
+﻿@model string
+
+@{
+   var name = ViewData.ModelMetadata.PropertyName;
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+   var ids = ViewData.ModelMetadata.ContainerType.GetProperty(name + "Value").GetValue(ViewData.ModelMetadata.Container) as string;
+}
+
+<script>
+   function onDiagnosticsChanged(s) {
+      const items = s.GetSelectedItems();
+      const name = '#@(name)Value';
+      $(name).val(items.map(it => it.value).join(';'));
+      const ctrl = @name;
+      ctrl.SetValue(items.map(it => it.texts[1]).join('; '));
+      ctrl.RaiseValueChanged();
+   }
+   function onDiagnosticsDropdown() {
+      DiagnosticsList.SetHeight(DiagnosticsList.GetItemHeight() * 8);
+   }
+   function onNewDiagnostic() {
+      WebApp.showDialog({
+         title: '@H("Thêm chẩn đoán")',
+         url: '@Url.Action("Add", "Diagnostic")',
+         width: 600,
+      }).done(function (r) {
+         const sel = DiagnosticsList.AddItem([r.Code, r.Name], r.Id);
+         DiagnosticsList.SetSelectedIndex(sel);
+         DiagnosticsList.RaiseSelectedIndexChanged();
+      });
+   }
+</script>
+<input type="hidden" id="@(name)Value" name="@(name)Value" value="@ids" />
+<style>
+   #DiagnosticsList td.dxeCM, #DiagnosticsList td.dxeHCC {
+      width: 20px !important;
+   }
+</style>
+@Html.DevExpress().DropDownEditFor(m => m, dp =>
+{
+   dp.Width = Unit.Percentage(100);
+   dp.Properties.Caption = T(caption);
+   dp.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   if (ViewData.ModelMetadata.IsRequired)
+   {
+      dp.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   }
+   dp.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+   dp.Properties.ValidationSettings.Display = Display.Dynamic;
+   dp.ShowModelErrors = true;
+   dp.ReadOnly = true;
+   dp.Properties.EnableClientSideAPI = true;
+   dp.Properties.SettingsAdaptivity.Mode = DropDownEditAdaptivityMode.OnWindowInnerWidth;
+   dp.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+   dp.SetDropDownWindowTemplateContent(container =>
+   {
+      Html.DevExpress().ListBox(st =>
+      {
+         st.Name = "DiagnosticsList";
+         st.Width = Unit.Percentage(100);
+         st.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+         st.ControlStyle.Border.BorderWidth = 0;
+         st.Properties.ValueField = "Oid";
+         st.Properties.ValueType = typeof(int);
+         st.Properties.Columns.Add("Code", T("Mã")).Width = 50;
+         st.Properties.Columns.Add("Name", T("Tên"));
+         st.Properties.TextField = "Name";
+         st.Properties.FilteringSettings.ShowSearchUI = true;
+         st.Properties.FilteringSettings.UseCompactView = false;
+         st.Properties.EnableClientSideAPI = true;
+         st.Properties.ClientSideEvents.SelectedIndexChanged = "onDiagnosticsChanged";
+         st.PreRender += (sender, _) =>
+         {
+            var me = sender as MVCxListBox;
+            if (!string.IsNullOrEmpty(ids))
+            {
+               var vals = ids.Split(';').Select(el => int.Parse(el)).ToList();
+               foreach (ListEditItem it in me.Items)
+               {
+                  it.Selected = vals.Contains((int)it.Value);
+               }
+            }
+         };
+      }).BindList(Diagnostic.ComboboxData()).Render();
+   });
+   dp.Properties.ClientSideEvents.DropDown = "onDiagnosticsDropdown";
+   if (CheckPermission("Chẩn đoán", "Thêm"))
+   {
+      var btn = dp.Properties.Buttons.Add();
+      btn.Image.IconID = IconID.ActionsAdd16x16;
+      btn.ToolTip = T("Thêm");
+      dp.Properties.ClientSideEvents.ButtonClick = "onNewDiagnostic";
+   }
+}).GetHtml()

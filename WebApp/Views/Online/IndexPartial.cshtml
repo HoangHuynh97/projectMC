@@ -1,0 +1,51 @@
+﻿@model List<Online>
+
+@Html.DevExpress().GridView(st =>
+{
+   st.Name = "grdSheet";
+   st.Width = Unit.Percentage(100);
+   st.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+   st.SettingsPager.PageSize = 50;
+   st.CallbackRouteValues = new { Action = "IndexPartial" };
+   st.KeyFieldName = "Id";
+   st.SettingsBehavior.AutoExpandAllGroups = true;
+   st.Settings.GroupFormat = "{1}";
+
+   st.Toolbars.Add(toolbar =>
+   {
+      toolbar.Name = "toolbarMain";
+      toolbar.Enabled = true;
+      toolbar.Position = GridToolbarPosition.Top;
+      toolbar.ItemAlign = GridToolbarItemAlign.Left;
+      toolbar.EnableAdaptivity = true;
+      toolbar.Items.Add(tool =>
+      {
+         tool.Text = T("Làm mới");
+         tool.ToolTip = T("Làm mới dữ liệu (F5)");
+         tool.Image.IconID = IconID.ActionsRefresh16x16;
+         tool.Command = GridViewToolbarCommand.Refresh;
+      });
+      toolbar.Items.Add(tool =>
+      {
+         tool.Name = "close";
+         tool.Text = T("Đóng");
+         tool.Image.IconID = IconID.ActionsClose16x16;
+         tool.ToolTip = T("Đóng chức năng này (ESC)");
+         tool.Command = GridViewToolbarCommand.Custom;
+         tool.BeginGroup = true;
+      });
+   });
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Company";
+      col.Caption = T("Công ty");
+      col.GroupIndex = 0;
+   });
+
+   st.Columns.Add("UserName", T("Tên đăng nhập"));
+   st.Columns.Add("FullName", T("Tên người dùng"));
+   st.Columns.Add("Phone", T("Điện thoại"));
+
+   st.ClientSideEvents.ToolbarItemClick = "function(s,e) {e.item.name && WebApp.function[e.item.name] && WebApp.function[e.item.name].apply(WebApp);}";
+}).Bind(Model).GetHtml()

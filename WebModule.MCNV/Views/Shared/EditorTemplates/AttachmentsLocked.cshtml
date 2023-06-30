@@ -1,0 +1,67 @@
+﻿@model Attachments
+@if (Model.Items.Count > 0)
+{
+   <script>
+   function downloadAttachment@(Model.Name)(id, saveas) {
+      window.open('@Url.Action("Viewer", "Attachment")/' + id + '?saveas=' + saveas, '_blank');
+   }
+   </script>
+   <div>
+      @Html.DevExpress().ListBox(st =>
+ {
+    st.Name = "ListAttachment" + Model.Name;
+    st.Width = Unit.Percentage(100);
+    st.Properties.Caption = T("Tài liệu, hình ảnh, video");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.ReadOnly = true;
+    st.Properties.Columns.Add(col =>
+    {
+       col.Width = 40;
+       col.SetColumnCellTemplateContent(c =>
+       {
+          var type = (AttachmentType)c.EvalDataItem("Type");
+          var icon = IconID.BusinessobjectsBofileattachment16x16;
+          if (type == AttachmentType.Image)
+          {
+             icon = IconID.ContentImage16x16;
+          }
+          else if (type == AttachmentType.Video)
+          {
+             icon = IconID.MediaVideocontent16x16;
+          }
+          else if (type == AttachmentType.Audio)
+          {
+             icon = IconID.MediaAudiocontent16x16;
+          }
+          else if (type == AttachmentType.PDF)
+          {
+             icon = IconID.ExportExporttopdfSvg16x16;
+          }
+          ViewContext.Writer.Write(String.Format("<div style='cursor: pointer;display: inline-block;' onclick=\"downloadAttachment{0}('{1}', '{2}')\">", Model.Name, c.EvalDataItem("UniqueId"), c.EvalDataItem("SaveAs")));
+          ViewContext.Writer.Write(Html.Icon(icon));
+          ViewContext.Writer.Write("</div>");
+       });
+    });
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "DateCreate";
+       col.Caption = T("Ngày tạo");
+       col.Width = 100;
+    });
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "UserCreate";
+       col.Caption = T("Người tạo");
+       col.Width = 120;
+    });
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "Name";
+       col.Caption = T("Tên tài liệu");
+       col.Width = Unit.Percentage(100);
+    });
+    //auto height by content
+    st.Properties.ClientSideEvents.Init = "function(s) {setTimeout(function() { s.SetHeight(s.GetHeightByContent()-1);});}";
+ }).BindList(Model.Items).GetHtml()
+   </div>
+}

@@ -1,0 +1,15 @@
+﻿@model int?
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+
+@Html.DevExpress().ComboBoxFor(m => m, st =>
+{
+   st.DefaultSettings();
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.Caption = caption;
+   if (ViewData.ModelMetadata.IsRequired)
+      st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   st.Properties.TextField = "Name";
+}).BindList(MedicalCancel.ComboboxData()).GetHtml()

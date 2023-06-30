@@ -1,0 +1,161 @@
+﻿@model FacilityProcess
+@{
+   var suffix = "Ind" + Model.Id;
+}
+<script id="dxss_FacilityProcess">
+   function onFacilityProcessSave@(suffix)(btn) {
+      if (!WebApp.validForm('#frmFacilityProcess@(suffix)')) return;
+      if (!AttachmentListFacilityProcess@(Model.Id).GetVisibleRowsOnPage()) {
+         WebApp.showInfo('@H("Lỗi")', '@H("Vui lòng cập nhật tài liệu, hình ảnh, video kèm theo!")');
+         return;
+      }
+      btn.SetEnabled(false);
+      WebApp.ajax('@Url.Action("FacilityProcess", "Medical")', getFacilityData@(suffix)()).done(function (r) {
+         processModel.reload();
+      }).fail(function () { btn.SetEnabled(true); });
+   }
+
+   function onFacilityProcessDelete@(suffix)() {
+      WebApp.showConfirm('@H("Xóa")', '@H("Bạn có muốn xóa dữ liệu và tài liệu của lần can thiệp này không?")').done(function () {
+         WebApp.ajax('@Url.Action("DeleteFacilityProcess", "Medical")', { id: @Model.Id}).done(function () {
+            processModel.reload();
+         });
+      });
+   }
+
+   function getFacilityData@(suffix)() {
+      var dIn = DateIn@(suffix).GetDate();
+      var dOut = DateOut@(suffix).GetDate();
+      return {
+         Id: @Model.Id,
+         DateIn: dIn && dIn.toISOString() || null,
+         DateOut: dOut && dOut.toISOString() || null,
+         Service: ProcessService@(suffix).GetValue(),
+         Status: ProcessStatus@(suffix).GetValue(),
+         Reason: ProcessReason@(suffix).GetValue(),
+         Attachments: { Items: AttachmentListFacilityProcess@(Model.Id).GetChanged(), },
+         Doctors: { Items: DoctorsFacilityProcess@(Model.Id).GetSelectedValues().map(function (id) { return { Id: id }; }), Facility: @(Model.Doctors.Facility) },
+      };
+   }
+
+   $(function () {
+      WebApp.validateForm('#frmFacilityProcess@(suffix)');
+      var oldData = JSON.stringify(getFacilityData@(suffix)());
+
+      [DateIn@(suffix), DateOut@(suffix), ProcessService@(suffix), ProcessStatus@(suffix), ProcessReason@(suffix)].forEach(function (it) {
+         it.ValueChanged.AddHandler(function () {
+            const d = JSON.stringify(getFacilityData@(suffix)());
+            FacilityProcessSave@(suffix).SetVisible(d != oldData);
+         });
+      });
+      AttachmentListFacilityProcess@(Model.Id).onDataChanged = function (data) {
+         const d = JSON.stringify(getFacilityData@(suffix)());
+         FacilityProcessSave@(suffix).SetVisible(d != oldData);
+      }
+      DoctorsFacilityProcess@(Model.Id).SelectedIndexChanged.AddHandler(function () {
+         const d = JSON.stringify(getFacilityData@(suffix)());
+         FacilityProcessSave@(suffix).SetVisible(d != oldData);
+      });
+   });
+</script>
+<form id="frmFacilityProcess@(suffix)">
+   <div class="grid">
+      <div class="col-auto_xs-12">
+         @Html.DevExpress().DateEditFor(m => m.DateIn, st =>
+    {
+       st.Name = "DateIn" + suffix;
+       st.Width = Unit.Percentage(100);
+       st.Properties.MinDate = Model.MinDate;
+       st.Properties.MaxDate = DateTime.Today;
+       st.Properties.AllowNull = false;
+       st.ShowModelErrors = true;
+       st.Properties.ValidationSettings.Display = Display.Dynamic;
+       st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+       st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+       st.Properties.Caption = T("Ngày vào viện");
+    }).GetHtml()
+      </div>
+      <div class="col-auto_xs-12">
+         @Html.DevExpress().DateEditFor(m => m.DateOut, st =>
+    {
+       st.Name = "DateOut" + suffix;
+       st.Width = Unit.Percentage(100);
+       st.Properties.MinDate = Model.MinDate;
+       st.Properties.MaxDate = DateTime.Today;
+       st.Properties.AllowNull = true;
+       st.ShowModelErrors = true;
+       st.Properties.ValidationSettings.Display = Display.Dynamic;
+       st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+       st.Properties.Caption = T("Ngày ra viện");
+       st.Properties.DateRangeSettings.StartDateEditID = "DateIn" + suffix;
+    }).GetHtml()
+      </div>
+      <div class="col-auto_xs-12">
+         @Html.DevExpress().ComboBoxFor(m => m.Service, st =>
+    {
+       st.DefaultSettings();
+       st.Name = "ProcessService" + suffix;
+       st.Width = Unit.Percentage(100);
+       st.Properties.Caption = T("Lĩnh vực can thiệp");
+       st.Properties.TextField = "Name";
+       st.Properties.ValueField = "Oid";
+       st.Properties.ValueType = typeof(int);
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+    }).BindList(Service.ComboboxData()).GetHtml()
+      </div>
+      <div class="col-auto_xs-12">
+         @Html.DevExpress().ComboBoxFor(m => m.Status, st =>
+    {
+       st.DefaultSettings();
+       st.Name = "ProcessStatus" + suffix;
+       st.Width = Unit.Percentage(100);
+       st.Properties.Caption = T("Kết quả can thiệp");
+       st.Properties.TextField = "Name";
+       st.Properties.ValueField = "Oid";
+       st.Properties.ValueType = typeof(int);
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+       st.Properties.ClientSideEvents.ValueChanged = "function() {WebApp.function.toggleProcessReason('" + suffix + "');}";
+    }).BindList(WebModule.MCNV.Models.ProcessStatus.ComboboxData()).GetHtml()
+      </div>
+      <div class="col-12" processreason-suffix="@suffix">
+         @Html.DevExpress().TextBoxFor(m => m.Reason, st =>
+    {
+       st.DefaultSettings();
+       st.Name = "ProcessReason" + suffix;
+       st.Properties.Caption = T("Lý do chưa đạt mục tiêu");
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+       st.Properties.ClientSideEvents.Init = "function() {WebApp.function.toggleProcessReason('" + suffix + "');}";
+    }).GetHtml()
+      </div>
+      <div class="col-12">@Html.EditorFor(m => m.Doctors)</div>
+   </div>
+   <div>@Html.EditorFor(m => m.Attachments)</div>
+   <div class="grid-noBottom-noGutter mt">
+      <div class="col-auto">
+         @Html.DevExpress().Button(btn =>
+    {
+       btn.Name = "FacilityProcessSave" + suffix;
+       btn.Text = T("Lưu thay đổi");
+       btn.Images.Image.IconID = IconID.SaveSave16x16;
+       btn.Styles.Style.Paddings.Padding = 0;
+       btn.RenderMode = ButtonRenderMode.Outline;
+       btn.ClientVisible = false;
+       btn.ControlStyle.CssClass = "mr";
+       btn.ClientSideEvents.Click = "onFacilityProcessSave" + suffix;
+    }).GetHtml()
+      </div>
+      <div class="col-auto">
+         @Html.DevExpress().Button(btn =>
+    {
+       btn.Name = "FacilityProcessDelete" + suffix;
+       btn.Text = T("Xóa");
+       btn.Images.Image.IconID = IconID.EditDelete16x16;
+       btn.Styles.Style.Paddings.Padding = 0;
+       btn.RenderMode = ButtonRenderMode.Outline;
+       btn.ClientSideEvents.Click = "onFacilityProcessDelete" + suffix;
+    }).GetHtml()
+      </div>
+   </div>
+</form>

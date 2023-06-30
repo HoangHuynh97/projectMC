@@ -1,0 +1,88 @@
+﻿@model StopProcess
+
+<script id="dxss_stopprocess">
+   function onStopProcessSave() {
+      if (!WebApp.validForm('#frmStopProcess')) return;
+      StopProcessSave.SetEnabled(false);
+      WebApp.ajax('@Url.Action("StopProcess", "Medical")', getStopData()).done(function (r) {
+         processModel.reload();
+      }).fail(function () { StopProcessSave.SetEnabled(true); });
+   }
+
+   function onStopProcessDelete() {
+      WebApp.showConfirm('@H("Xóa")', '@H("Bạn có muốn xóa dữ liệu dừng can thiệp?")').done(function () {
+         WebApp.ajax('@Url.Action("DeleteStopProcess", "Medical")', { id: @Model.Id}).done(function () {
+            processModel.reload();
+         });
+      });
+   }
+
+   function getStopData() {
+      var d = CompletedDate.GetDate();
+      return {
+         Id: processModel.id,
+         CompletedDate: d && d.toISOString() || null,
+         ProcessCancel: ProcessCancel.GetValue(),
+         Doctor: Doctor.GetValue(),
+      };
+   }
+
+   setTimeout(function () {
+      WebApp.validateForm('#frmStopProcess');
+      var oldData = JSON.stringify(getStopData());
+
+      [CompletedDate, ProcessCancel, Doctor].forEach(function (it) {
+         it.ValueChanged.AddHandler(function () {
+            var d = JSON.stringify(getStopData());
+            StopProcessSave.SetVisible(d != oldData);
+         });
+      });
+   });
+</script>
+<form id="frmStopProcess">
+   <div class="grid">
+      <div class="col-3_xs-12">
+         @Html.DevExpress().DateEditFor(m => m.CompletedDate, st =>
+    {
+       st.Width = Unit.Percentage(100);
+       st.Properties.MinDate = Model.MinDate;
+       st.Properties.MaxDate = DateTime.Today;
+       st.Properties.AllowNull = false;
+       st.ShowModelErrors = true;
+       st.Properties.ValidationSettings.Display = Display.Dynamic;
+       st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+       st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+       st.Properties.Caption = T("Ngày dừng can thiệp");
+    }).GetHtml()
+      </div>
+      <div class="col-3_xs-12">@Html.EditorFor(m => m.ProcessCancel)</div>
+      <div class="col-3_xs-12">@Html.EditorFor(m => m.Doctor, new { Model.Doctors })</div>
+   </div>
+   <div class="grid-noBottom-noGutter">
+      <div class="col-auto">
+         @Html.DevExpress().Button(btn =>
+    {
+       btn.Name = "StopProcessSave";
+       btn.Text = T("Lưu thay đổi");
+       btn.Images.Image.IconID = IconID.SaveSave16x16;
+       btn.Styles.Style.Paddings.Padding = 0;
+       btn.RenderMode = ButtonRenderMode.Outline;
+       btn.ClientVisible = false;
+       btn.ControlStyle.CssClass = "mr";
+       btn.ClientSideEvents.Click = "onStopProcessSave";
+    }).GetHtml()
+      </div>
+      <div class="col-auto">
+         @Html.DevExpress().Button(btn =>
+    {
+       btn.Name = "StopProcessDelete";
+       btn.Text = T("Xóa");
+       btn.Images.Image.IconID = IconID.EditDelete16x16;
+       btn.Styles.Style.Paddings.Padding = 0;
+       btn.RenderMode = ButtonRenderMode.Outline;
+       btn.ClientSideEvents.Click = "onStopProcessDelete";
+    }).GetHtml()
+      </div>
+   </div>
+</form>

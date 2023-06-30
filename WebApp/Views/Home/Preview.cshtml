@@ -1,0 +1,34 @@
+﻿@model WebApp.Core.ReportInfo
+@using DevExpress.XtraReports.Web;
+
+@Html.DevExpress().DocumentViewer(st =>
+{
+   st.Name = "documentViewer";
+   st.Width = Unit.Percentage(100);
+   st.Height = 300;
+   var it = new ReportToolbarButton();
+   it.Name = "designer";
+   it.Text = T("Thiết kế");
+   it.IconID = IconID.ReportsDesignreport16x16;
+   st.ToolbarItems.Add(it);
+   it = new ReportToolbarButton();
+   it.Name = "close";
+   it.Text = T("Đóng");
+   it.IconID = IconID.ActionsClose16x16;
+   st.ToolbarItems.Add(it);
+   st.CustomJSProperties = (s, e) =>
+   {
+      if (Model != null && Model.Id != 0)
+      {
+         e.Properties["cpReportId"] = Model.Id;
+         e.Properties["cpDesigner"] = CheckPermission("Mẫu báo cáo", "Thiết kế mẫu");
+      }
+   };
+   st.SettingsReportViewer.EnableReportMargins = true;
+   if (Model != null && Model.Report != null)
+      st.Report = Model.Report;
+   st.CallbackRouteValues = new { Action = "Preview" };
+   st.ExportRouteValues = new { Action = "Export" };
+   st.ClientSideEvents.ToolbarItemClick = "function(s,e) {if (e.item.name=='close') popupPreview.Hide(); else if (e.item.name=='designer') window.open('" + Url.Action("Designer", "Report") + "/' + s.cpReportId,'_blank');}";
+   st.ClientSideEvents.EndCallback = "function(s,e) {s.GetToolbar().menu.GetItemByName('designer').SetVisible(s.cpDesigner);}";
+}).GetHtml()

@@ -1,0 +1,26 @@
+﻿@model ProgramProject.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   st.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+   st.Settings.ShowColumnHeaders = true;
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên dự án");
+      col.MaxWidth = 400;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Note";
+      col.Caption = T("Ghi chú");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

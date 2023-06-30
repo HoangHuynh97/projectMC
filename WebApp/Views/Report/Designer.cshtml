@@ -1,0 +1,38 @@
+﻿@model  int?
+@{ 
+   Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>@H("Mẫu báo cáo")</title>
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+   <style>
+      * {
+         box-sizing: border-box;
+      }
+
+      html, body {
+         height: 100%;
+         margin: 0; 
+         padding: 0;
+      }
+   </style>
+   @Html.DevExpress().GetStyleSheets(new StyleSheet { ExtensionSuite = ExtensionSuite.Report })
+   @Html.DevExpress().GetScripts(new Script { ExtensionSuite = ExtensionSuite.Report })
+</head>
+<body>
+   @Html.DevExpress().ReportDesigner(st =>
+   {
+      st.Name = "ReportDesigner";
+      st.Width = Unit.Percentage(100);
+      st.DataSources.Clear();
+      var ds = new DevExpress.DataAccess.Sql.SqlDataSource("DefaultConnection");
+      ds.Connection.StoreConnectionNameOnly = true;
+      st.DataSources.Add("WebApp", ds);
+   }).BindToUrl(Model.ToString()).GetHtml()
+</body>
+</html>

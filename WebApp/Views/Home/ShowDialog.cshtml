@@ -1,0 +1,43 @@
+﻿@model Dialog
+<div id="dialogContainer@(Model.Name)">
+   @Html.DevExpress().PopupControl(st =>
+{
+   st.Name = Model.Name;
+   st.HeaderText = Model.Title;
+   st.Images.Header.IconID = Model.Icon;
+   st.Modal = Model.Modal;
+   st.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+   st.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+   st.ScrollBars = ScrollBars.Auto;
+   st.Maximized = Model.Maximized;
+   st.SetContent(() =>
+   {
+      ViewContext.Writer.WriteLine("<form action='" + Model.Url + "'><div class='dialogcontent'></div></form>");
+   });
+   if (Model.Buttons.Count > 0)
+   {
+      st.ShowCloseButton = false;
+      st.CloseOnEscape = false;
+      st.CloseAction = CloseAction.None;
+      st.ShowFooter = true;
+      st.SetFooterTemplateContent(c =>
+      {
+         ViewContext.Writer.WriteLine("<div class='dialogfooter'>");
+         foreach (var btn in Model.Buttons)
+         {
+            Html.DevExpress().Button(it =>
+            {
+               it.Name = "btn" + btn.Value + "_" + Model.Name;
+               it.Images.Image.IconID = btn.Icon;
+               it.Text = btn.Text;
+            }).Render();
+         }
+         ViewContext.Writer.WriteLine("</div>");
+      });
+   }
+   if (WindowWidthType <= WebApp.Constant.WindowWidth.WidthType.Small)
+   {
+      st.ClientSideEvents.Shown = "function() {$('#dialogContainer" + Model.Name + " .dxpc-content').scroll(function() {ASPxClientHint.HideAll();});}";
+   }
+}).GetHtml()
+</div>

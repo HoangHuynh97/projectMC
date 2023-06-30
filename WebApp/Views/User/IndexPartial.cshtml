@@ -1,0 +1,80 @@
+﻿@model UserModel.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   var tool = new MVCxGridViewToolbarItem();
+   tool.Name = "password";
+   tool.Text = T("Đổi mật khẩu");
+   tool.ToolTip = T("Đặt lại mật khẩu mới");
+   tool.Image.IconID = IconID.BusinessobjectsBouser16x16;
+   tool.Command = GridViewToolbarCommand.Custom;
+   tool.Visible = CheckPermission("Đổi mật khẩu");
+
+   Html.DefaultGridSheet(st, Model.ShowFilter, true, new MVCxGridViewToolbarItem[] { tool });
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "UserName";
+      col.Caption = T("Tên đăng nhập");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "FullName";
+      col.Caption = T("Họ và tên");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Address";
+      col.Caption = T("Địa chỉ");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Email";
+      col.Caption = T("Email");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Phone";
+      col.Caption = T("Điện thoại");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "System";
+      col.Caption = T("Hệ thống");
+      col.Width = 80;
+      col.ColumnType = MVCxGridViewColumnType.CheckBox;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Admin";
+      col.Caption = T("Toàn quyền");
+      col.Width = 80;
+      col.ColumnType = MVCxGridViewColumnType.CheckBox;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Permission.Name";
+      col.Caption = T("Phân quyền");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Active";
+      col.Caption = T("Sử dụng");
+      col.Width = 80;
+      col.ColumnType = MVCxGridViewColumnType.CheckBox;
+   });
+   st.PreviewFieldName = "Note";
+   st.Settings.ShowPreview = true;
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "UserName";
+   e.KeyExpression = "Oid";
+}).GetHtml()

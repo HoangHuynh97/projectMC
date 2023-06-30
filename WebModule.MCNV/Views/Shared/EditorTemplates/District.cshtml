@@ -1,0 +1,16 @@
+﻿@model int?
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+@Html.DevExpress().ComboBoxFor(m => m, st =>
+{
+   st.DefaultSettings();
+   st.CallbackRouteValues = new { Action = "District", Controller = "Combobox" };
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.TextField = "Name";
+   st.Properties.Caption = caption;
+   st.Properties.CallbackPageSize = 20;
+   if (ViewData.ModelMetadata.IsRequired)
+      st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+}).BindList(District.ComboboxForValue(Model)).GetHtml()

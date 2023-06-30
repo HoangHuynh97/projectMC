@@ -1,0 +1,46 @@
+﻿@model InfoProcess
+
+<div class="grid">
+   <div class="col-2_md-6_xs-12">@Html.LockedText(m => m.Code)</div>
+   <div class="col-2_md-6_xs-12">@Html.LockedText(m => m.PatientCode)</div>
+   <div class="col-4_md-6_xs-12">@Html.LockedText(m => m.PatientName)</div>
+   @if (Model.CanAccessPatient)
+   {
+      <div class="col-2_md-3_xs-6">@Html.LockedText(m => m.PatientGender)</div>
+      <div class="col-2_md-3_xs-6">@Html.LockedText(m => m.PatientDateBirth)</div>
+      <div class="col-4_xs-12">@Html.LockedText(m => m.PatientPhone)</div>
+      <div class="col-8_xs-12">@Html.LockedText(m => m.PatientAddress)</div>
+      <div class="col-4_xs-12">@Html.LockedText(m => m.PatientOrangeVictim)</div>
+      <div class="col-4_xs-12">@Html.LockedText(m => m.PatientClassification)</div>
+      <div class="col-4_xs-12">@Html.LockedText(m => m.PatientLevelDisability)</div>
+      <div class="col-12">@Html.LockedText(m => m.Disabilities)</div>
+   }
+   else
+   {
+      <div class="col-4_md-6_xs-12">
+         <span>@H("Thông tin NKT này được tạo bởi <b>{0}</b> và có thể đã điều trị, can thiệp tại đây. Để xem thông tin bạn cần gửi yêu cầu và chờ xác nhận.", Model.FacilityOfPatient)</span>
+         <script id="dxss_requestinfo">
+            function onRequrestInfo(btn) {
+               WebApp.ajax('@Url.Action("RequestPatientData", "Medical")', { Id: @Model.Patient}).done(function () {
+                  btn.SetText('@H("Chờ xác nhận")');
+                  btn.SetEnabled(false);
+               });
+            }
+         </script>
+         @Html.DevExpress().Button(st =>
+    {
+       st.Name = "btnRequestInfo";
+       st.Text = Model.HasRequestPatient ? T("Chờ xác nhận") : T("Gửi yêu cầu");
+       st.ClientEnabled = !Model.HasRequestPatient;
+       st.Images.Image.IconID = IconID.MailNewcontact16x16;
+       st.ClientSideEvents.Click = "onRequrestInfo";
+    }).GetHtml()
+      </div>
+   }
+</div>
+<div class="grid">
+   <div class="col-12">@Html.LockedText(m => m.FacilityName)</div>
+</div>
+<div class="grid">
+   <div class="col-12">@Html.LockedText(m => m.Note, true)</div>
+</div>

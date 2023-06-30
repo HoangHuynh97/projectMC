@@ -1,0 +1,42 @@
+﻿@model object
+@{
+   Type tModel = ViewData.ModelMetadata.ModelType;
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+   var length = 100;
+   try
+   {
+      length = ViewData.ModelMetadata.ContainerType.GetMember(ViewData.ModelMetadata.PropertyName)[0]
+          .GetCustomAttributes(typeof(WebApp.Core.LengthAttribute), true).Cast<WebApp.Core.LengthAttribute>().First().MaximumLength;
+   }
+   catch { }
+}
+@if (typeof(string).IsAssignableFrom(tModel))
+{
+
+   @Html.DevExpress().TextBoxFor(m => m, txt =>
+{
+   txt.Width = Unit.Percentage(100);
+   txt.Properties.Caption = caption;
+   txt.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   txt.ShowModelErrors = true;
+   txt.Properties.ValidationSettings.Display = Display.Dynamic;
+   txt.Properties.MaxLength = length;
+   txt.Properties.EnableClientSideAPI = true;
+   txt.AutoCompleteType = AutoCompleteType.Disabled;
+   if (ViewData.ModelMetadata.IsRequired)
+      txt.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+}).GetHtml()
+}
+else if (typeof(Enum).IsAssignableFrom(tModel))
+{
+   @Html.DevExpress().ComboBoxFor(m => m, s =>
+{
+   s.Width = Unit.Percentage(100);
+   s.Properties.Caption = caption;
+   s.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   s.Properties.Items.AddRange(Enum.GetValues(tModel));
+   s.SelectedIndex = 0;
+   s.Properties.DropDownStyle = DropDownStyle.DropDownList;
+   s.Properties.EnableClientSideAPI = true;
+}).GetHtml()
+} 

@@ -1,0 +1,14 @@
+﻿@model Facility.ViewInfo
+
+<div class="grid">
+   <div class="col-8_xs-12">@Html.LockedText(m => m.Name)</div>
+   <div class="col-4_xs-12">@Html.LockedText(m => m.FacilityType)</div>
+
+   <div class="col-4_xs-12">@Html.LockedText(m => m.Phone)</div>
+   <div class="col-4_xs-12">@Html.LockedText(m => m.Email)</div>
+   <div class="col-4_xs-12">@Html.LockedText(m => m.Website)</div>
+
+   <div class="col-12">@Html.LockedText(m => m.Address)</div>
+
+   <div class="col-12">@Html.LockedText(m => m.Note, true)</div>
+</div>

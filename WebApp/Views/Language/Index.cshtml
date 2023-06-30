@@ -1,0 +1,27 @@
+﻿<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr img web"></div>
+      <div class="title">
+         @H("Từ điển ngôn ngữ")
+      </div>
+   </div>
+   <div class="page-content">
+      @Html.Partial("IndexPartial")
+   </div>
+</div>
+
+<script type="text/javascript">
+   WebApp.function = {
+      title: '@H("Từ điển ngôn ngữ")',
+      hotkey: {
+         f8: function () { grdSheet.UpdateEdit(); },
+         f5: function () { grdSheet.PerformCallback(); },
+         esc: function () { WebApp.function.close(); },
+      },
+      resize: function () {
+         $('.page-content').height($('.page-container').height() - $('.page-header').height());
+         grdSheet.SetHeight($('.page-content').innerHeight());
+      },
+      close: WebApp.closeFunction.bind(WebApp)
+   };
+</script>

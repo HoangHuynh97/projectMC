@@ -1,0 +1,95 @@
+﻿@model PermissionData
+
+<script>
+   function onPermissionDataTypeChanged() {
+      var val = 0;
+      if (radPersonal.GetValue()) val =@((int)PermissionDataType.Owner);
+      else if (radFacility.GetValue()) val =@((int)PermissionDataType.Facility);
+      else if (radProvinces.GetValue()) val =@((int)PermissionDataType.Provinces);
+      else if (radArea.GetValue()) val =@((int)PermissionDataType.Area);
+      else if (radAdmin.GetValue()) val =@((int)PermissionDataType.Admin);
+      $('#DataType').val(val);
+
+      updateUIPermission();
+   }
+
+   function updateUIPermission() {
+      var val = +$('#DataType').val() || 0;
+      $('.data-type-provinces').toggle(val ==@((int)PermissionDataType.Provinces));
+      $('.data-type-area').toggle(val==@((int)PermissionDataType.Area));
+   }
+   $(function () {
+      //timeout to get height for list province
+      setTimeout(function () {
+         updateUIPermission();
+      });
+   });
+</script>
+@Html.HiddenFor(m => m.Id)
+@Html.Hidden("DataType", (int)Model.DataType)
+<div class="mb">@Html.EditorFor(m => m.Name)</div>
+<p>@H("Phân quyền truy cập dữ liệu thông tin của hồ sơ PHCN, bệnh nhân, đơn vị, cán bộ, đào tạo")</p>
+<div class="mb">
+   @Html.DevExpress().RadioButton(st =>
+{
+ st.Name = "radPersonal";
+ st.GroupName = "DataType";
+ st.Text = T("Chỉ được truy cập vào dữ liệu do mình tạo");
+ st.Checked = Model.DataType == PermissionDataType.Owner;
+ st.Properties.ClientSideEvents.CheckedChanged = "onPermissionDataTypeChanged";
+}).GetHtml()
+</div>
+<div class="mb">
+   @Html.DevExpress().RadioButton(st =>
+{
+ st.Name = "radFacility";
+ st.GroupName = "DataType";
+ st.Text = T("Dữ liệu được tạo bởi người dùng trong cùng đơn vị công tác");
+ st.Checked = Model.DataType == PermissionDataType.Facility;
+ st.Properties.ClientSideEvents.CheckedChanged = "onPermissionDataTypeChanged";
+}).GetHtml()
+</div>
+<div class="mb">
+   @Html.DevExpress().RadioButton(st =>
+{
+ st.Name = "radProvinces";
+ st.GroupName = "DataType";
+ st.Text = T("Dữ liệu của các tỉnh, thành phố");
+ st.Checked = Model.DataType == PermissionDataType.Provinces;
+ st.Properties.ClientSideEvents.CheckedChanged = "onPermissionDataTypeChanged";
+}).GetHtml()
+</div>
+<div class="mb data-type-provinces" style="height: 200px;margin-left: 35px;">
+   @Html.EditorFor(m => m.Provinces, new { SelectedProvinces = Model.Provinces })
+</div>
+<div class="mb">
+   @Html.DevExpress().RadioButton(st =>
+{
+ st.Name = "radArea";
+ st.GroupName = "DataType";
+ st.Text = T("Dữ liệu của vùng dự án");
+ st.Checked = Model.DataType == PermissionDataType.Area;
+ st.Properties.ClientSideEvents.CheckedChanged = "onPermissionDataTypeChanged";
+}).GetHtml()
+</div>
+<div class="mb data-type-area" style="margin-left: 35px;">
+   @Html.EditorFor(m => m.Area)
+</div>
+<div class="mb">
+   @Html.DevExpress().RadioButton(st =>
+{
+ st.Name = "radAdmin";
+ st.GroupName = "DataType";
+ st.Text = T("Truy cập tất cả dữ liệu");
+ st.Checked = Model.DataType == PermissionDataType.Admin;
+ st.Properties.ClientSideEvents.CheckedChanged = "onPermissionDataTypeChanged";
+}).GetHtml()
+</div>
+<div class="">
+   @Html.EditorFor(m => m.IgnoreLocked)
+</div>
+<script>
+   $(function () {
+      @(Model.Id== 0 ? "Name.Focus();": "")
+   });
+</script>

@@ -1,0 +1,13 @@
+﻿@model Program.SelectDoctor
+
+@Html.DevExpress().CallbackPanel(st =>
+{
+   st.Name = "PanelSelectDoctors";
+   st.CallbackRouteValues = new { Action = "SelectDoctorsPartial", DoctorsId = Model.DoctorsId };
+   st.Width = Unit.Percentage(100);
+   st.EnableClientSideAPI = true;
+   st.SetContent(() =>
+   {
+      ViewContext.Writer.Write(Html.EditorFor(m => m.Doctors));
+   });
+}).GetHtml()

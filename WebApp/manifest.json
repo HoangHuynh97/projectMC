@@ -1,0 +1,30 @@
+﻿{
+   "name": "Quản lý trực tuyến",
+   "theme_color": "#2196f3",
+   "background_color": "#ffffff",
+   "display": "standalone",
+   "scope": "/",
+   "start_url": "/",
+   "icons": [
+      {
+         "src": "/styles/favicons/144.png",
+         "type": "image/png",
+         "sizes": "144x144"
+      },
+      {
+         "src": "/styles/favicons/128.png",
+         "type": "image/png",
+         "sizes": "128x128"
+      },
+      {
+         "src": "/styles/favicons/48.png",
+         "type": "image/png",
+         "sizes": "48x48"
+      },
+      {
+         "src": "/styles/favicons/16.png",
+         "type": "image/png",
+         "sizes": "16x16"
+      }
+   ]
+}

@@ -1,0 +1,89 @@
+﻿@model List<LanguageModel>
+
+@Html.DevExpress().GridView(st =>
+{
+   st.Name = "grdSheet";
+   st.Width = Unit.Percentage(100);
+   st.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+   st.SettingsPager.PageSize = 50;
+   st.CallbackRouteValues = new { Action = "IndexPartial" };
+   st.KeyFieldName = "Keyword";
+   st.SettingsEditing.BatchUpdateRouteValues = new { Action = "Update" };
+   st.SettingsEditing.Mode = GridViewEditingMode.Batch;
+   st.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.Click;
+   st.Settings.ShowStatusBar = GridViewStatusBarMode.Hidden;
+
+   st.Toolbars.Add(toolbar =>
+   {
+      toolbar.Name = "toolbarMain";
+      toolbar.Enabled = true;
+      toolbar.Position = GridToolbarPosition.Top;
+      toolbar.ItemAlign = GridToolbarItemAlign.Left;
+      toolbar.EnableAdaptivity = true;
+      toolbar.Items.Add(tool =>
+      {
+         tool.Text = T("Lưu");
+         tool.ToolTip = T("Lưu dữ liệu (F8)");
+         tool.Image.IconID = IconID.SaveSave16x16;
+         tool.Command = GridViewToolbarCommand.Update;
+      });
+      toolbar.Items.Add(tool =>
+      {
+         tool.Text = T("Làm mới");
+         tool.ToolTip = T("Làm mới dữ liệu (F5)");
+         tool.Image.IconID = IconID.ActionsRefresh16x16;
+         tool.Command = GridViewToolbarCommand.Refresh;
+      });
+      toolbar.Items.Add(tool =>
+      {
+         tool.BeginGroup = true;
+         tool.Command = GridViewToolbarCommand.Custom;
+         tool.SetTemplateContent(c =>
+         {
+            Html.DevExpress().ButtonEdit(txt =>
+            {
+               txt.Name = "search";
+               txt.Properties.NullText = T("Tìm kiếm");
+               txt.Properties.NullTextDisplayMode = NullTextDisplayMode.UnfocusedAndFocused;
+               var btn = txt.Properties.Buttons.Add();
+               btn.Image.IconID = DevExpress.Web.ASPxThemes.IconID.FindFind16x16;
+               btn.Position = ButtonsPosition.Left;
+
+            }).Render();
+         });
+      });
+      toolbar.Items.Add(tool =>
+      {
+         tool.Name = "close";
+         tool.Text = T("Đóng");
+         tool.Image.IconID = IconID.ActionsClose16x16;
+         tool.ToolTip = T("Đóng chức năng này (ESC)");
+         tool.Command = GridViewToolbarCommand.Custom;
+         tool.BeginGroup = true;
+      });
+   });
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Keyword";
+      col.Caption = T("Keyword");
+      col.SortAscending();
+      col.ReadOnly = true;
+      col.EditFormSettings.Visible = DefaultBoolean.False;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Value";
+      col.Caption = WebApp.Core.Language.Current.Name;
+      col.EditorProperties().TextBox(txt =>
+      {
+         txt.ValidationSettings.Display = Display.Dynamic;
+      });
+   });
+
+   st.SettingsSearchPanel.CustomEditorName = "search";
+   st.ClientSideEvents.BatchEditConfirmShowing = "function(s,e) {e.cancel=true;}";
+   st.ClientSideEvents.ToolbarItemClick = "function(s,e) {e.item.name && WebApp.function[e.item.name] && WebApp.function[e.item.name].apply(WebApp);}";
+   st.ClientSideEvents.BeginCallback = "function(s,e) {s._command = e.command;}";
+   st.ClientSideEvents.EndCallback = "function(s,e) {if (s._command == 'UPDATEEDIT') WebApp.notify(WebApp.message.saved); s._command = ''; }";
+}).Bind(Model).GetHtml()

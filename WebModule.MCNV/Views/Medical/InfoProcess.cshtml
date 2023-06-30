@@ -1,0 +1,137 @@
+﻿@model InfoProcess
+<script id="dxss_infoprocess">
+   function onInfoProcessSave() {
+      if (!WebApp.validForm('#frmInfoProcess')) return;
+      InfoProcessSave.SetEnabled(false);
+      WebApp.ajax('@Url.Action("InfoProcess", "Medical")', getInfoData()).done(function (id) {
+         processModel.id = id;
+         processModel.reload();
+      }).fail(function () { InfoProcessSave.SetEnabled(true); });
+   }
+
+   function getInfoData() {
+      @if (Model.PatientFacilityEditable)
+         {
+            <text>
+      return {
+         Id: @(Model.Id),
+         Patient: Patient.GetValue(),
+         Facility: Facility.GetValue(),
+      };
+            </text>
+      }
+      else
+      {
+            <text>
+      return {
+         Id: processModel.id,
+         Code: Code.GetValue(),
+         Patient: @(Model.PatientFacilityEditable ? "Patient.GetValue()" : Model.Patient.ToString()),
+         Facility: @(Model.PatientFacilityEditable ? "Facility.GetValue()" : Model.Facility.ToString()),
+         Note: Note.GetValue(),
+      };
+            </text>
+      }
+   }
+
+   setTimeout(function () {
+      WebApp.validateForm('#frmInfoProcess');
+      var oldData = JSON.stringify(getInfoData());
+
+      const inps = [@(Model.PatientFacilityEditable ? "Patient, Facility" : "Code, Note")];
+      inps.forEach(function (it) {
+         it.ValueChanged.AddHandler(function () {
+            var d = JSON.stringify(getInfoData());
+            InfoProcessSave.SetVisible(d != oldData);
+         });
+      });
+
+      @if (Model.PatientFacilityEditable)
+      {
+         <text>
+      Patient.ValueChanged.AddHandler(function (s) {
+         const id = s.GetValue();
+         if (!id) return;
+         WebApp.ajax('@Url.Action("CheckPatientData", "Medical")', { id: id }).done(function (r) {
+            if (r) return;
+            WebApp.showInfo('@H("Chú ý")', '@H("Bệnh nhân này được quản lý ở đơn vị khác mà bạn chưa được cấp quyền truy cập thông tin")');
+         });
+      });
+         </text>
+      }
+   });
+</script>
+
+<form id="frmInfoProcess">
+   @Html.HiddenFor(m => m.Id)
+   @if (Model.PatientFacilityEditable)
+   {
+      <div class="grid">
+         <div class="col-12">@T("Lưu ý: Phải kiểm tra Bệnh nhân, nếu đã có trên hệ thống thì không cần tạo mới.")</div>
+         <div class="col-6_xs-12">@Html.EditorFor(m => m.Patient)</div>
+         <div class="col-6_xs-12">@Html.EditorFor(m => m.Facility)</div>
+      </div>
+   }
+   else
+   {
+      <div class="grid">
+         <div class="col-2_md-6_xs-12">@Html.EditorFor(m => m.Code)</div>
+         <div class="col-2_md-6_xs-12">@Html.LockedText(m => m.PatientCode)</div>
+         <div class="col-4_md-6_xs-12">@Html.LockedText(m => m.PatientName)</div>
+         @if (Model.CanAccessPatient)
+         {
+            <div class="col-2_md-3_xs-6">@Html.LockedText(m => m.PatientGender)</div>
+            <div class="col-2_md-3_xs-6">@Html.LockedText(m => m.PatientDateBirth)</div>
+            <div class="col-4_xs-12">@Html.LockedText(m => m.PatientPhone)</div>
+            <div class="col-8_xs-12">@Html.LockedText(m => m.PatientAddress)</div>
+            <div class="col-4_xs-12">@Html.LockedText(m => m.PatientOrangeVictim)</div>
+            <div class="col-4_xs-12">@Html.LockedText(m => m.PatientClassification)</div>
+            <div class="col-4_xs-12">@Html.LockedText(m => m.PatientLevelDisability)</div>
+         }
+         else
+         {
+            <div class="col-4_md-6_xs-12">
+               <span>@H("Thông tin NKT này được tạo bởi <b>{0}</b> và có thể đã điều trị, can thiệp tại đây. Để xem thông tin bạn cần gửi yêu cầu và chờ xác nhận.", Model.FacilityOfPatient)</span>
+               <script id="dxss_requestinfo">
+                  function onRequrestInfo(btn) {
+                     WebApp.ajax('@Url.Action("RequestPatientData", "Medical")', { Id: @Model.Patient}).done(function () {
+                        btn.SetText('@H("Chờ xác nhận")');
+                        btn.SetEnabled(false);
+                     });
+                  }
+               </script>
+               @Html.DevExpress().Button(st =>
+          {
+             st.Name = "btnRequestInfo";
+             st.Text = Model.HasRequestPatient ? T("Chờ xác nhận") : T("Gửi yêu cầu");
+             st.ClientEnabled = !Model.HasRequestPatient;
+             st.Images.Image.IconID = IconID.MailNewcontact16x16;
+             st.Styles.Style.Paddings.Padding = 0;
+             st.ClientSideEvents.Click = "onRequrestInfo";
+          }).GetHtml()
+            </div>
+         }
+      </div>
+      <div class="grid">
+         <div class="col-12">@Html.LockedText(m => m.Disabilities)</div>
+      </div>
+      <div class="grid">
+         <div class="col-12">@Html.LockedText(m => m.FacilityName)</div>
+      </div>
+      <div class="grid">
+         <div class="col-12">@Html.EditorFor(m => m.Note)</div>
+      </div>
+   }
+   <div>
+      @Html.DevExpress().Button(btn =>
+   {
+    btn.Name = "InfoProcessSave";
+    btn.Text = T("Lưu thay đổi");
+    btn.Images.Image.IconID = IconID.SaveSave16x16;
+    btn.Styles.Style.Paddings.Padding = 0;
+    btn.RenderMode = ButtonRenderMode.Outline;
+    btn.ClientVisible = false;
+    btn.ClientSideEvents.Click = "onInfoProcessSave";
+   }).GetHtml()
+   </div>
+</form>

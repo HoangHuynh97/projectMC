@@ -1,0 +1,18 @@
+﻿@model PermissionData.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên quyền dữ liệu");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

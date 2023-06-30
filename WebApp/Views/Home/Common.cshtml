@@ -1,0 +1,1051 @@
+﻿<script type="text/javascript">
+   //String functions
+   if (typeof String.prototype.startsWith != 'function') {
+      String.prototype.startsWith = function (str) {
+         return this.slice(0, str.length) == str;
+      };
+   }
+
+   if (typeof String.prototype.endsWith != 'function') {
+      String.prototype.endsWith = function (str) {
+         return this.slice(-str.length) == str;
+      };
+   }
+
+   if (typeof String.prototype.format != 'function') {
+      String.prototype.format = function () {
+         var args = arguments;
+         return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] != 'undefined'
+               ? args[number]
+               : match
+               ;
+         });
+      };
+   }
+
+   //Number functions
+   if (typeof Number.prototype.format != 'function') {
+      Number.prototype.format = function (str) {
+         return ASPx.NumberFormatter.Format(str || 'N0', this);
+      }
+   }
+   if (typeof Number.prototype.round != 'function') {
+      Number.prototype.round = function (decimals) {
+         return Number(Math.round(this + 'e' + decimals) + 'e-' + decimals);
+      }
+   }
+
+
+   const cssMenuActive = 'current-active-menu';
+   //MAIN OBJECT
+   var WebApp = {
+      title: '@H("Quản lý trực tuyến")',
+      //message
+      message: {
+         error: '@H("Lỗi")',
+         errData: '@H("Lỗi dữ liệu.")',
+         errServer: '@H("Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.")',
+         saved: '@H("Cập nhật dữ liệu thành công")',
+         delete: '@H("Xóa")',
+         deleteConfirm: '@H("Bạn có muốn xóa dữ liệu này không?")'
+      },
+
+      //hotkeys
+      hotkeys: {
+         data: [],
+         current: null,
+         active: function (cfg) { //active current hot key have key is keycode(string) and value is function
+            this.current = cfg;
+            this.data.push(cfg);
+         },
+         deactive: function (cfg) { //remove hotkey was register
+            this.data.splice(this.data.indexOf(cfg), 1);
+            if (cfg == this.current) {
+               if (this.data.length > 0)
+                  this.current = this.data[this.data.length - 1];
+               else
+                  this.current = null;
+            }
+         }
+      },
+
+      //loading
+      _curLoading: 0,
+      _loadingTimer: null,
+      loading: function (b) {
+         if (b === true) {
+            if (this._curLoading == 0)
+               this._loadingTimer = setTimeout(function () { panelLoading.Show(); }, 1000);
+            this._curLoading++;
+         }
+         else if (b === false) {
+            if (this._curLoading > 0)
+               this._curLoading--;
+            if (this._curLoading == 0) {
+               clearTimeout(this._loadingTimer);
+               this._loadingTimer = null;
+               panelLoading.Hide();
+            }
+         }
+         return this._curLoading;
+      },
+
+      //popup message
+      showInfo: function (title, message) {
+         var df = $.Deferred();
+         var popup = popupMessageBoxInfo;
+         popup._deffered = df;
+         popup.SetHeaderText(title);
+         $('#messageinfo').html(message);
+         popup.Show();
+         var keys = {
+            'esc': function () {
+               btnCloseMessageBoxInfo.DoClick();
+            }
+         };
+         this.hotkeys.active(keys);
+         df.then(function () {
+            WebApp.hotkeys.deactive(keys);
+         });
+         return df;
+      },
+
+      showConfirm: function (title, message) {
+         var df = $.Deferred();
+         var popup = popupMessageBoxConfirm;
+         popup._deffered = df;
+         popup.SetHeaderText(title);
+         $('#messageconfirm').html(message);
+         popup.Show();
+         var keys = {
+            'enter': function () {
+               btnOkMessageBoxConfirm.DoClick();
+            },
+            'esc': function () {
+               btnCancelMessageBoxConfirm.DoClick();
+            },
+         };
+         this.hotkeys.active(keys);
+         df.then(function () {
+            WebApp.hotkeys.deactive(keys);
+         });
+         return df;
+      },
+
+      //post ajax
+      ajax: function (url, data, method) {
+         if (!method) method = 'post';
+         var df = $.Deferred();
+         $.ajax({
+            method: method,
+            url: url,
+            data: data, //all function properties will be executed
+         }).done(function (data, status, xhr) {
+            var t = xhr.getResponseHeader('content-type');
+            if (t == null || t.indexOf('javascript') !== -1) {
+               //javascript run
+               df.reject();
+            }
+            else {
+               df.resolve(data);
+            }
+         }).fail(function () {
+            WebApp.showInfo(WebApp.message.error, WebApp.message.errServer);
+            console.log(arguments);
+            df.reject();
+         });
+
+         return df;
+      },
+
+      //open menu
+      openMenu: function (url) {
+         var old = WebApp.function;
+         WebApp.loading(true);
+         return this.ajax(url, null, 'get').done(function (r) {
+            try {
+               //set active menu
+               $('.' + cssMenuActive).removeClass(cssMenuActive);
+               const mnItem = ribbonMainMenu.GetItemByName(url);
+               if (mnItem && mnItem.element) {
+                  $(mnItem.element).addClass(cssMenuActive);
+               }
+
+               $('.main-content').html(r);
+               WebApp.resize();
+               if (window.grdSheet) //auto resize for grdSheet
+                  window.grdSheet.autoColumnWidth();
+               old && old.hotkey && WebApp.hotkeys.deactive(old.hotkey);
+               if (WebApp.function) {
+                  WebApp.function.hotkey && WebApp.hotkeys.active(WebApp.function.hotkey);
+                  document.title = WebApp.function.title + ' | ' + WebApp.title;
+                  WebApp.function.init && WebApp.function.init();
+               }
+               ASPxClientUtils.SetCookie('WebApp.CurrentMenu', url);
+            }
+            catch (ex) {
+               WebApp.showInfo(WebApp.message.error, WebApp.message.errData);
+               console.log(ex);
+            }
+         }).always(function () { WebApp.loading(false); });
+      },
+
+      //change language
+      changeLanguage: function (code) {
+         this.ajax('Home/ChangeLanguage', { code: code }).done(function () { location.reload(); });
+      },
+
+      //change skin
+      changeSkin: function (name) {
+         this.ajax('Home/ChangeSkin', { name: name }).done(function () { location.reload(); });
+      },
+
+      //change password
+      changePassword: function () {
+         this.showDialog({
+            name: 'popupChangePassword',
+            url: 'Home/ChangePassword',
+            title: '@H("Đổi mật khẩu")',
+            icon: '@IconID.BusinessobjectsBopermission32x32',
+            width: 300,
+            init: function () { OldPassword.Focus(); }
+         })
+      },
+
+      //add js validate for loaded form
+      validateForm: function (el) {
+         $.validator.unobtrusive.parse($(el));
+         updateErrorHint();
+      },
+
+      //check form valid
+      validForm: function (frm) {
+         var f = $(frm);
+         var b = f.valid();
+         if (!b) {
+            f.data('validator').focusInvalid();
+         }
+         return b;
+      },
+
+      //submit form
+      submit: function (frm) {
+         var f = $(frm);
+         WebApp.loading(true);
+         return WebApp.ajax(f.attr('action'), [{ name: "X-Requested-With", value: "XMLHttpRequest" }].concat(f.serializeArray()))
+            .always(function () { WebApp.loading(false); });
+      },
+
+      //display a popup contains url content, has some buttons in cfg config
+      _dialogs: {},
+      showDialog: function (cfg) {
+         WebApp.loading(true);
+         var id = (new Date()).getTime();
+         var config = $.extend({}, {//default config
+            name: 'dialog' + id,
+            title: '',
+            url: '',
+            data: undefined,
+            icon: '@IconID.ActionsAdditem32x32',
+            maximized: false,
+            modal: true,
+            hotkey: {},
+            width: 300,
+            buttons: [
+               { value: 'submit', text: '@H("Đồng ý")', icon: '@IconID.ActionsApply16x16', hotkey: 'f9' },
+               { value: 'close', text: '@H("Không")', icon: '@IconID.ActionsCancel16x16', hotkey: 'esc' }
+            ]
+         }, cfg);
+         WebApp._dialogs[config.name] = config;
+         $.each(config.buttons, function () {
+            if (!this.action && this.value == 'submit')
+               this.action = function () {
+                  var self = this; //'this' is main config
+                  $.when(this.beforeSubmit && this.beforeSubmit()).done(function (v) {
+                     if (v === false) return;
+                     WebApp.validForm(self.form) && WebApp.submit(self.form)
+                        .done(function (r) {
+                           if (r && typeof(r) == 'string') //invalid modelstate
+                              $('#dialogContainer' + config.name + ' .dialogcontent').html(r);
+                           else {
+                              self.popup.Hide();
+                              self.deferred.resolve(r);
+                           }
+                        });
+                  });
+               }
+            else if (!this.action && this.value == 'close')
+               this.action = function () {
+                  this.popup.Hide();//'this' is main config
+                  this.deferred.reject();
+               }
+
+            if (this.hotkey) {
+               var v = this.value;
+               config.hotkey[this.hotkey] = function () { var btn = window['btn' + v + '_' + config.name]; btn.Focus(); btn.DoClick(); }
+            }
+         });
+         var df = $.Deferred();
+         config.deferred = df;
+
+         //get content
+         this.ajax(cfg.url, cfg.data, 'get').done(function (content) {
+            //create dialog
+            var cfgDlg = { //convert to plain object data, remove functions
+               name: config.name,
+               title: config.title,
+               icon: config.icon,
+               maximized: config.maximized,
+               modal: config.modal,
+               url: config.url,
+               width: config.width,
+               buttons: config.buttons.map(function (b) { return { value: b.value, text: b.text, icon: b.icon }; })
+            };
+            WebApp.loading(true);
+            WebApp.ajax('Home/ShowDialog', cfgDlg).done(function (dlgHtml) {
+               WebApp.loading(true);
+               var container = $('#dialog');
+               if (!container.length)
+                  container = $('<div id="dialog" />').appendTo('body');
+               try {
+                  container.append(dlgHtml);
+                  var dlg = window[config.name];
+                  dlg._dialog = config;
+                  config.popup = dlg;
+                  config.form = $('#dialogContainer' + config.name + ' form');
+                  $('#dialogContainer' + config.name + ' .dialogcontent', container).html(content);
+                  for (var i = 0; i < config.buttons.length; i++) {
+                     var btn = window['btn' + config.buttons[i].value + '_' + config.name];
+                     btn._dialog = config;
+                     btn._value = config.buttons[i].value;
+                     btn._action = config.buttons[i].action;
+                     btn._deffered = df;
+                     btn.Click.AddHandler(function (s, e) {
+                        s._action && s._action.apply(s._dialog);//call 'action' with 'this' is main config
+                     });
+                  }
+                  dlg.CloseUp.AddHandler(function (s, e) {
+                     if (!config.buttons.length)
+                        df.resolve();
+                     $.each(s._dialog.buttons, function () {
+                        delete window['btn' + this.value + '_' + s._dialog.name];
+                     });
+                     delete window[s._dialog.name];
+                     delete WebApp._dialogs[s._dialog.name];
+                     $('#dialogContainer' + s._dialog.name).remove();
+                     WebApp.hotkeys.deactive(s._dialog.hotkey);
+                  });
+                  dlg.Shown.AddHandler(function (s, e) {
+                     WebApp.hotkeys.active(config.hotkey);
+                     config.init && config.init();
+                  });
+                  WebApp.validateForm('#dialogContainer' + config.name + ' form');
+                  WebApp.resizeDialog(config);
+                  dlg.Show();
+                  dlg.Focus();
+               }
+               catch (ex) {
+                  WebApp.showInfo(WebApp.message.error, WebApp.message.errData);
+                  console.log(ex);
+                  df.reject();
+               }
+               WebApp.loading(false);
+            }).fail(function () { df.reject(); }).always(function () {
+               WebApp.loading(false);
+            });
+         }).fail(function () { df.reject(); }).always(function () {
+            WebApp.loading(false);
+         });
+         return df;
+      },
+
+      notify: function(msg, type) {
+         iziToast[type || 'success']({
+            message: msg
+         });
+      },
+
+      //exit
+      exit: function () {
+         ASPxClientUtils.SetCookie('WebApp.CurrentMenu', '');
+         location.href = 'Home/LogOff';
+      },
+
+      //access deny
+      AccessDeny() {
+         WebApp.showInfo(WebApp.message.error, '@H("Bạn không có quyền truy cập chức năng này!")');
+      },
+
+      //update UI size
+      resize: function () {
+         $('.main-content').height($(window).height() - $('.main-header').height());
+         WebApp.function && WebApp.function.resize && WebApp.function.resize();
+         $.each(WebApp._dialogs, function (name, config) {
+            WebApp.resizeDialog(config);
+         });
+      },
+
+      //update position, size of dialog popup
+      resizeDialog: function (config) {
+         if (config.popup && !config.maximized) {
+            var w = config.width;
+            var mw = Math.round($(window).width() * 0.9, 0);
+            config.popup.SetWidth(w > mw ? mw : w);
+            var mh = Math.round($(window).height() * 0.95, 0) - 150;
+            $('#dialogContainer' + config.name + ' .dialogcontent').css({ 'max-height': mh + 'px' });
+            config.popup.UpdateWindowPosition();
+         }
+         config.resize && config.resize.apply(config);
+      },
+
+      //current opened function
+      function: undefined,
+
+      //close current function
+      closeFunction: function () {
+         if (!WebApp.function) return;
+         $('.' + cssMenuActive).removeClass(cssMenuActive);
+         WebApp.function.hotkey && WebApp.hotkeys.deactive(WebApp.function.hotkey);
+         ASPxClientUtils.SetCookie('WebApp.CurrentMenu', '');
+         delete WebApp.function;
+         this.homePage();
+      },
+
+      //messages event
+      events: {
+         loggedIn: function (u) {
+            iziToast.info({
+               message: '@H("{0} đăng nhập!")'.format(u),
+               icon: 'img keys iziToast-img'
+            });
+         },
+         loggedOut: function (u) {
+            iziToast.info({
+               message: '@H("{0} thoát!")'.format(u),
+               icon: 'img exit iziToast-img'
+            });
+         }
+      },
+
+      showPreview: function (url, data) {
+         return WebApp.ajax(url, data).done(function () {
+            popupPreview.Show();
+            documentViewer.SetHeight(popupPreview.GetContentHeight());
+            documentViewer.Refresh();
+         });
+      },
+
+      showPrint: function (url, data) {
+         return WebApp.ajax(url, data).done(function () {
+            documentViewer.callPrint = true;
+            documentViewer.Print();
+         });
+      },
+
+      selectCompany: function () {
+         WebApp.closeFunction();
+         WebApp.showDialog({
+            name: 'popupSelectCompany',
+            title: '@H("Chọn dữ liệu")',
+            icon: '@IconID.DataDatabase32x32',
+            url: '@Url.Action("SelectCompany")'
+         });
+      },
+
+      homePage: function () {
+         this.ajax('@Url.Action("HomePage")', {}, 'get').done(function (r) {
+            $('.main-content').html(r);
+         });
+      },
+
+      help: function () {
+         window.open('@Url.Action("Help")', '_blank');
+      }
+   };
+
+
+   //add condition validate
+   $.validator.addMethod('requiredif', function (v, e, p) {
+      if (p && p !== true && !window[p].call(e, v)) return true;
+      if (!v) return false;
+      return true;
+   });
+   $.validator.unobtrusive.adapters.add('requiredif', ['onlyif'], function (o) {
+      o.rules['requiredif'] = o.params.onlyif ? o.params.onlyif : true;
+      o.messages['requiredif'] = o.message || '';
+   });
+
+   $.validator.addMethod('equaltoif', function (v, e, p) {
+      if (p && p.onlyif && !window[p.onlyif].call(e, v)) return true;
+      if (v !== window[p.other].GetValue()) return false;
+      return true;
+   });
+   $.validator.unobtrusive.adapters.add('equaltoif', ['other', 'onlyif'], function (o) {
+      var p = { other: o.params.other };
+      if (o.params.onlyif)
+         $.extend(p, { onlyif: o.params.onlyif });
+      o.rules['equaltoif'] = p;
+      o.messages['equaltoif'] = o.message || '';
+   });
+
+   //override keydown
+   $(document).keydown(function (ev) {
+      //change enter to tab
+      if (ev.which == 13 && ev.target) {
+         var ctrl = $(ev.target);
+         var name = ctrl.prop('tagName');
+         if (name == 'INPUT') {
+            var frm = ctrl.closest('form');
+            if (frm.length != 0) {
+               var inputs = frm.find(':input:visible');
+               var index = inputs.index(ctrl);
+               if (index > -1 && (index + 1) < inputs.length) {
+                  inputs.eq(index + 1).focus();
+                  return false;
+               }
+            }
+         }
+         if (name == 'TEXTAREA') return;
+      }
+      //prevent backspace
+      if (ev.which == 8 && ev.target && $(ev.target).prop('tagName') == 'BODY') {
+         return false;
+      }
+      //hotkey
+      if (WebApp.hotkeys.current) {
+         var code = ASPxClientUtils.GetShortcutCodeByEvent(ev);
+         for (var key in WebApp.hotkeys.current) {
+            if (ASPxClientUtils.StringToShortcutCode(key) == code) {
+               WebApp.hotkeys.current[key].call();
+               return false;
+            }
+         }
+      }
+   });
+
+   $(window).resize(function () { WebApp.resize(); });
+
+   //signalR
+   $(function () {
+      $.connection.messageHub.client.notify = function (msg) {
+         WebApp.showInfo('@H("Thông báo")', msg);
+      };
+      $.connection.messageHub.client.message = function (method, data) {
+         //call by current function
+         if (WebApp.function && WebApp.function.events && WebApp.function.events[method]) {
+            WebApp.function.events[method](data);
+            return;
+         }
+         //call by app
+         if (WebApp.events[method])
+            WebApp.events[method](data);
+      };
+      $.connection.hub.start().fail(function (e) {
+         console.error('SignalR error', e);
+      });
+   });
+
+   //startup code
+   //send widow with to server side
+   $.ajaxSetup({
+      beforeSend: function (xhr) {
+         xhr.setRequestHeader('WindowWidth', $(window).width());
+      }
+   });
+
+   //detect change screen to update ui
+   function updateUIByWindowWidth(e) {
+      if (e.matches && window.grdSheet) {
+         var cur = ASPxClientUtils.GetCookie('WebApp.CurrentMenu');
+         if (cur) WebApp.openMenu(cur);
+      }
+   }
+   function tryMatchMedia(query) {
+      if (!window.matchMedia) return;
+      var m = window.matchMedia(query);
+      try {
+         //for Chrome, FireFox, Eg, Android
+         m.addEventListener('change', function (e) {
+            updateUIByWindowWidth(e);
+         });
+      }
+      catch {
+         try {
+            //for iOS
+            m.addListener(function (e) {
+               updateUIByWindowWidth(e);
+            });
+         }
+         catch { }
+      }
+   }
+
+   tryMatchMedia('screen and (max-width: @(WebApp.Constant.WindowWidth.ExtraSmall)px)');
+   tryMatchMedia('screen and (min-width: @(WebApp.Constant.WindowWidth.ExtraSmall+1)px) and (max-width: @(WebApp.Constant.WindowWidth.Small)px)');
+   tryMatchMedia('screen and (min-width: @(WebApp.Constant.WindowWidth.Small+1)px) and (max-width: @(WebApp.Constant.WindowWidth.Medium)px)');
+   tryMatchMedia('screen and (min-width: @(WebApp.Constant.WindowWidth.Medium+1)px) and (max-width: @(WebApp.Constant.WindowWidth.Large)px)');
+   tryMatchMedia('screen and (min-width: @(WebApp.Constant.WindowWidth.Large + 1)px)');
+
+   $(function () {
+      if (location.hash === '#_=_') //stupid from facebook login
+         location.hash = '';
+      WebApp.resize();
+      var cur = ASPxClientUtils.GetCookie('WebApp.CurrentMenu');
+      if (cur)
+         setTimeout(function () {
+            WebApp.openMenu(cur);
+         }, 100);
+      else
+         WebApp.homePage();
+   });
+
+   function updateErrorHint() {
+      if ($(window).width() <= @(WebApp.Constant.WindowWidth.Small)) {
+         ErrorHint.options.triggerAction = 'click';
+      }
+      else {
+         ErrorHint.options.triggerAction = 'hover';
+      }
+      ErrorHint.update();
+   }
+</script>
+
+<script type="text/javascript">
+   //setup behavour for auto new row
+   //cfg: {defaultValues:Object<fieldName:value>, requiredFields:Array<fieldName>,callbackUpdate: function(e:{visibleIndex, col, data:{field:value}}) {return promise|undefined}, callbackChange: function() }
+   ASPxClientGridView.prototype.AutoNewRow = function (cfg) {
+      var self = this;
+      var batch = self.batchEditHelper;
+      var api = self.batchEditApi;
+      var newKey;
+      var skipValidating = false;
+      var colEdit;
+      if (!batch) return;
+
+      function newRow() {
+         //get code from batchHelper.AddNewRecord.toSource()
+         var newRecordKeyInfo = batch.CreateNewRecordKeyInfo();
+         batch.AddNewRecordCore(newRecordKeyInfo);
+         batch.AddInsertedKeyInfo(newRecordKeyInfo);
+         batch.EnsureEmptyRecordVisibility();
+         newKey = newRecordKeyInfo.key;
+         //console.log('newkey', newKey);
+         $('img[alt="Delete"]:last', self.GetMainTable()).toggleClass('dxIcon_edit_delete_16x16 dxIcon_actions_add_16x16');
+      }
+
+      function updateCellValue(visibleIndex, cols, oldData, newData, callback) {
+         for (var i = 0; i < cols.length; i++) {
+            var f = batch.GetColumn(cols[i]).fieldName;
+            if (oldData[f] != newData[f]) {
+               if (batch.IsColumnEditing(cols[i]))
+                  batch.GetEditor(cols[i]).SetValue(newData[f])
+               else
+                  api.SetCellValue(visibleIndex, f, newData[f]);
+            }
+         }
+         if (callback)
+            callback.call(batch);
+      }
+
+      //do not check newKey, it will newRow and check later
+      //ASPxClientGridView.prototype.RaiseBatchEditItemValidating.toSource()
+      self.RaiseBatchEditItemValidating = function (visibleIndex, validationInfo) {
+         var args = new ASPxClientGridViewBatchEditRowValidatingEventArgs(visibleIndex, validationInfo);
+         var curCol = colEdit;
+         var editKey = parseInt(batch.GetEditingRecordKey());
+         args.column = curCol;
+         //console.log('validate ', visibleIndex, editKey, args);
+         if (editKey === newKey) {
+            //reset valid of other validate event
+            var cols = batch.GetEditColumnIndices();
+            for (var i = 0; i < cols.length; i++) {
+               if (validationInfo[cols[i]])
+                  validationInfo[cols[i]].isValid = true;
+            }
+            setTimeout(function () {
+               //check has changed
+               var changed = false;
+               for (var i = 0; i < cols.length; i++) {
+                  if (batch.IsDirtyCell(visibleIndex, cols[i])) {
+                     changed = true;
+                     break;
+                  }
+               }
+               if (!changed) return;
+               $('img[alt="Delete"]:last', self.GetMainTable()).toggleClass('dxIcon_edit_delete_16x16 dxIcon_actions_add_16x16');
+
+               //default
+               if (cfg && cfg.defaultValues && editKey === newKey) {
+                  for (var k in cfg.defaultValues) {
+                     var ind = api.GetColumnIndex(k);
+                     if (curCol != k) {
+                        if (batch.IsColumnEditing(ind)) {
+                           if (!batch.GetEditor(ind).GetValue())
+                              batch.GetEditor(ind).SetValue(cfg.defaultValues[k]);
+                        }
+                        else if (!api.GetCellValue(visibleIndex, k))
+                           api.SetCellValue(visibleIndex, k, cfg.defaultValues[k]);
+                     }
+                  }
+               }
+
+               //new row and revalidate it
+               var old = newKey;
+               var oldCol = colEdit;
+               newRow();
+               colEdit = curCol;
+               batch.UserValidateItems(old);
+               colEdit = oldCol;
+               if (batch.GetColumn(cols[cols.length - 1]).fieldName == curCol)
+                  batch.StartEdit(newKey, cols[0]);
+
+            });
+         }
+         else if (!this.BatchEditRowValidating.IsEmpty())
+            this.BatchEditRowValidating.FireEvent(this, args);
+
+         //callback function to update cell's values, after change
+         if (cfg && (cfg.callbackUpdate || cfg.callbackChange)) {
+            setTimeout(function () {
+               var cols = batch.GetEditColumnIndices();
+               //check has changed
+               var changed = false;
+               for (var i = 0; i < cols.length; i++) {
+                  if (batch.IsDirtyCell(editKey, cols[i])) {
+                     changed = true;
+                     break;
+                  }
+               }
+               if (!changed) return;
+
+               if (cfg.callbackUpdate) {
+                  var param = { visibleIndex: visibleIndex, column: curCol, data: {} };
+                  for (var i = 0; i < cols.length; i++) {
+                     param.data[batch.GetColumn(cols[i]).fieldName] = api.GetCellValue(visibleIndex, cols[i]);
+                  }
+                  param.data[self.keyName] = editKey;
+                  var oldData = $.extend({}, param.data);
+                  $.when(cfg.callbackUpdate.call(batch, param)).done(function () {
+                     //console.log('update ', param);
+                     updateCellValue(visibleIndex, cols, oldData, param.data, cfg.callbackChange);
+                  });
+               }
+               else if (cfg.callbackChange) {
+                  cfg.callbackChange.call(batch);
+               }
+            });
+         }
+
+         return args.validationInfo;
+      }
+
+      self.BatchEditStartEditing.AddHandler(function (sender, e) {
+         if (e.cancel) return;
+         //console.log('start ', e.visibleIndex);
+         colEdit = e.focusedColumn.fieldName;
+      });
+
+      //cancel delete newKey
+      self.RaiseBatchEditItemDeleting = function (visibleIndex, itemValues) {
+         //console.log('deleting ', visibleIndex, itemValues, batch.GetEditingRecordKey());
+         if (visibleIndex === newKey) return true;
+
+         if (cfg && cfg.callbackChange)
+            setTimeout(function () { cfg.callbackChange.call(batch) });
+
+         if (!self.BatchEditRowDeleting.IsEmpty()) {
+            var args = new ASPxClientGridViewBatchEditRowDeletingEventArgs(visibleIndex, itemValues);
+            self.BatchEditRowDeleting.FireEvent(self, args);
+            return args.cancel;
+         }
+         return false;
+      }
+
+      //remove newKey before update
+      self.UpdateEdit = function () {
+         batch.RemoveInsertedKeyInfo(newKey);
+         ASPxClientGridView.prototype.UpdateEdit.apply(self);
+      }
+
+      //add newRow if cancel update
+      self.CancelEdit = function () {
+         ASPxClientGridView.prototype.CancelEdit.apply(self);
+         newRow();
+      }
+
+      //newRow after request
+      self.EndCallback.AddHandler(function (sender, e) {
+         newRow();
+      });
+
+      //create new row
+      self.NewRow = function () {
+         //change del icon
+         $('img[alt="Delete"]:last', self.GetMainTable()).toggleClass('dxIcon_edit_delete_16x16 dxIcon_actions_add_16x16');
+         newRow();
+         return newKey;
+      };
+
+      //auto check required
+      if (cfg && cfg.requiredFields && cfg.requiredFields.length) {
+         self.BatchEditRowValidating.AddHandler(function (sender, e) {
+            for (var i = 0; i < cfg.requiredFields.length; i++) {
+               var col = self.GetColumnByField(cfg.requiredFields[i]);
+               if (!col) return;
+               var v = e.validationInfo[col.index];
+               if (!v.value) {
+                  v.isValid = false;
+                  v.errorText = WebApp.message.required;
+               }
+            }
+         });
+      }
+
+      //init new row
+      newRow();
+   }
+
+
+   //check data valid
+   ASPxClientGridView.prototype.IsValid = function () {
+      return this.batchEditHelper.CanUpdate();
+   }
+
+   //get number of row, exclude new row
+   ASPxClientGridView.prototype.GetCount = function () {
+      return this.GetVisibleRowsOnPage() - 1;
+   }
+
+   //get total value of column by field name
+   ASPxClientGridView.prototype.GetTotal = function (field) {
+      var batch = this.batchEditHelper;
+      var inds = batch.GetRecordKeys(true); //not include deleted
+      var total = 0;
+      var col = this.GetColumnByField(field);
+      for (var i = 0; i < inds.length - 1; i++) { //ignore newrow
+         total += parseFloat(batch.GetCellValue(inds[i], col.index)) || 0;
+      }
+      return total;
+   }
+
+   //get array of modified data
+   ASPxClientGridView.prototype.GetChanged = function () {
+      var batch = this.batchEditHelper;
+      var result = [];
+      if (!batch.EndEdit(true)) return result;
+      var edit = batch.GetEditState();
+      var key = this.keyName;
+      $.each(edit.insertedRowValues, function (k, v) {
+         if (batch.insertedValues[k] && batch.deletedItemKeys.indexOf(k) == -1) {//not new row
+            var r = {};
+            r[key] = k;
+            $.extend(r, v);
+            result.push(r);
+         }
+      });
+      $.each(edit.modifiedRowValues, function (k, v) {
+         if (batch.deletedItemKeys.indexOf(k) == -1) {
+            var r = {};
+            r[key] = k;
+            $.extend(r, v);
+            result.push(r);
+         }
+      });
+      $.each(edit.deletedRowKeys, function (_, k) {
+         var r = {};
+         r[key] = k;
+         r.Deleted = true;
+         result.push(r);
+      });
+      return result;
+   }
+
+   //reset table layout and set width of columns base on content (resize by broswer)
+   ASPxClientGridView.prototype.autoColumnWidth = function () {
+      //function autowidth() {
+      //   var tbl = this.GetMainElement();
+      //   var tds = $('[class*=dxgvTable]:lt(2) .dxgvArm td:not(".dxgvDI")', tbl).not('[style*="width"]');
+      //   if (tds.length < 4) return;
+      //   $('[class*=dxgvTable]:lt(2)', tbl).css('table-layout', 'auto');
+      //   var max = tds.length / 2;
+      //   for (var i = 0; i < max - 1; i++) {
+      //      $(tds[i]).width($(tds[i + max]).width());
+      //   }
+      //   for (var i = 0; i < max - 1; i++) {
+      //      $(tds[max + i]).width($(tds[i]).width());
+      //   }
+      //}
+      //this.EndCallback.AddHandler(function (s, e) {
+      //   autowidth.apply(s);
+      //});
+      //autowidth.apply(this);
+   };
+
+   //set custom filter
+   WebApp.CustomFilterDictionary = {
+      'a': '[aáàảãạâấầẩẫậăắằẳẵặ]',
+      'e': '[eéèẻẽẹêếềểễệ]',
+      'i': '[iíìỉĩị]',
+      'o': '[oóòỏõọôốồổỗộơớờởỡợ]',
+      'u': '[uúùủũụưứừửữự]',
+      'y': '[yýỳỷỹỵ]',
+      'd': '[dđ]'
+   };
+   WebApp.getCustomFilterRegExp = function (filter) {
+      var s = '';
+      for (var i = 0; i < filter.length; i++) {
+         s += WebApp.CustomFilterDictionary[filter[i]] || filter[i];
+      }
+      return new RegExp(s, 'gi');
+   };
+
+   ASPxClientComboBox.prototype.SetCustomFilter = function () {
+      var cols = arguments;
+      var inds = [];
+      for (var i = 0; i < cols.length; i++) {
+         var j = this.listBox.columnFieldNames.indexOf(cols[i]);
+         if (j !== -1)
+            inds.push(j);
+      }
+      this.ItemFiltering.AddHandler(function (s, e) {
+         try {
+            var reg = WebApp.getCustomFilterRegExp(e.filter);
+            if (inds.length) {
+               e.isFit = false;
+               for (var i = 0; i < cols.length; i++) {
+                  e.isFit = reg.test(e.item.texts[inds[i]]);
+                  if (e.isFit)
+                     return;
+               }
+            }
+            else
+               e.isFit = reg.test(e.item.text);
+         }
+         catch (ex) { }
+      });
+      this.CustomHighlighting.AddHandler(function (s, e) {
+         try {
+            var reg = WebApp.getCustomFilterRegExp(e.filter);
+            if (inds.length) {
+               e.highlighting = {};
+               for (var i = 0; i < cols.length; i++)
+                  e.highlighting[cols[i]] = reg;
+            }
+            else
+               e.highlighting = reg;
+         }
+         catch (ex) { };
+      });
+   }
+</script>
+
+@Html.DevExpress().PopupControl(st =>
+{
+   st.Name = "popupPreview";
+   st.Maximized = true;
+   st.HeaderText = T("Xem in");
+   st.Images.Header.IconID = IconID.PrintPreview32x32;
+   st.Styles.Content.Paddings.Padding = 0;
+   st.PopupAnimationType = AnimationType.Fade;
+   st.SetContent(() =>
+   {
+      Html.RenderPartial("Preview", new ViewDataDictionary());
+   });
+}).GetHtml()
+
+@Html.DevExpress().PopupControl(st =>
+{
+   st.Name = "popupMessageBoxInfo";
+   st.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+   st.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+   st.Width = 300;
+   st.ShowCloseButton = false;
+   st.CloseAction = CloseAction.None;
+   st.Modal = true;
+   st.ShowFooter = true;
+   st.HeaderText = T("Hệ thống");
+   st.Images.Header.IconID = IconID.SupportInfo16x16;
+   st.SetContent(() =>
+   {
+      ViewContext.Writer.WriteLine("<div class='messagebox'><div class='img infomation'></div><div id='messageinfo' class='msg'></div><div class='dx-clear'></div></div>");
+   });
+
+   st.Styles.Footer.HorizontalAlign = HorizontalAlign.Center;
+   st.SetFooterContentTemplateContent(c =>
+   {
+      Html.DevExpress().Button(btn =>
+      {
+         btn.Name = "btnCloseMessageBoxInfo";
+         btn.UseSubmitBehavior = false;
+         btn.Text = T("Đóng");
+         btn.Images.Image.IconID = IconID.ActionsClose16x16;
+         btn.CausesValidation = false;
+         btn.ClientSideEvents.Click = "function(s,e) {popupMessageBoxInfo.Hide(); popupMessageBoxInfo._deffered && popupMessageBoxInfo._deffered.resolve();}";
+      }).Render();
+   });
+
+   st.ClientSideEvents.Shown = "function(s,e) {btnCloseMessageBoxInfo.Focus();}";
+}).GetHtml()
+
+
+
+@Html.DevExpress().PopupControl(st =>
+{
+   st.Name = "popupMessageBoxConfirm";
+   st.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+   st.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+   st.Width = 400;
+   st.ShowCloseButton = false;
+   st.CloseAction = CloseAction.None;
+   st.Modal = true;
+   st.ShowFooter = true;
+   st.HeaderText = T("Hệ thống");
+   st.Images.Header.IconID = IconID.SupportQuestion16x16;
+   st.SetContent(() =>
+   {
+      ViewContext.Writer.WriteLine("<div class='messagebox'><div class='img alert'></div><div id='messageconfirm' class='msg'></div><div class='dx-clear'></div></div>");
+   });
+
+   st.Styles.Footer.HorizontalAlign = HorizontalAlign.Center;
+   st.SetFooterContentTemplateContent(c =>
+   {
+      Html.DevExpress().Button(btn =>
+      {
+         btn.Name = "btnOkMessageBoxConfirm";
+         btn.UseSubmitBehavior = false;
+         btn.Text = T("Đồng ý");
+         btn.Images.Image.IconID = IconID.ActionsApply16x16;
+         btn.CausesValidation = false;
+         btn.ClientSideEvents.Click = "function(s,e) {popupMessageBoxConfirm.Hide(); popupMessageBoxConfirm._deffered && popupMessageBoxConfirm._deffered.resolve();}";
+      }).Render();
+
+      Html.DevExpress().Button(btn =>
+      {
+         btn.Name = "btnCancelMessageBoxConfirm";
+         btn.UseSubmitBehavior = false;
+         btn.Text = T("Không");
+         btn.Images.Image.IconID = IconID.ActionsCancel16x16;
+         btn.CausesValidation = false;
+         btn.ClientSideEvents.Click = "function(s,e) {popupMessageBoxConfirm.Hide(); popupMessageBoxConfirm._deffered && popupMessageBoxConfirm._deffered.reject();}";
+      }).Render();
+   });
+
+   st.ClientSideEvents.Shown = "function(s,e) {btnOkMessageBoxConfirm.Focus();}";
+}).GetHtml()
+
+
+@Html.DevExpress().LoadingPanel(st =>
+{
+   st.Name = "panelLoading";
+   st.Modal = true;
+   st.Text = T("Đang xử lý");
+}).GetHtml()
+
+@Html.DevExpress().Hint(st =>
+{
+   st.Name = "ErrorHint";
+   st.AllowFlip = true;
+   st.TargetSelector = "img[class^=\"dxEditors_edtError_\"]";
+   st.Position = HintPosition.Bottom;
+}).GetHtml()

@@ -1,0 +1,58 @@
+﻿@model int?
+@{
+    var name = ViewData.ModelMetadata.PropertyName;
+    var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+
+<script>
+   function onNewFacility() {
+      WebApp.showDialog({
+         title: '@H("Thêm đơn vị")',
+         url: '@Url.Action("Add", "Facility")',
+         width: 1000,
+      }).done(function (r) {
+         const ctrl = @name;
+         ctrl._newValue = r;
+         ctrl.SetText(r.Name);
+         ctrl.filterStrategy.Filtering();
+      });
+   }
+   function onEndCallbackFacility(s) {
+      if (s._newValue) {
+         var r = s._newValue;
+         delete s._newValue;
+         setTimeout(function () { s.SetValue(r.Id); s.RaiseValueChanged(); });
+      }
+   }
+</script>
+@Html.DevExpress().ComboBoxFor(m => m, st =>
+{
+   st.DefaultSettings();
+   st.CallbackRouteValues = new { Action = "Facility", Controller = "Combobox" };
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.Caption = caption;
+   st.Properties.CallbackPageSize = 20;
+   if (ViewData.ModelMetadata.IsRequired)
+      st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   st.Properties.TextFormatString = "{1}";
+   st.Properties.NullText = T("Tìm theo mã, tên, tỉnh/thành phố");
+   st.Properties.Columns.Add("Oid", T("Mã")).Width = 50;
+   st.Properties.Columns.Add("Name", T("Tên")).Width = 300;
+   if (CheckPermission("Đơn vị cung cấp dịch vụ", "Thêm"))
+   {
+      var btn = st.Properties.Buttons.Add();
+      btn.Image.IconID = IconID.ActionsAdd16x16;
+      btn.ToolTip = T("Thêm");
+      st.Properties.ClientSideEvents.ButtonClick = "onNewFacility";
+      st.Properties.ClientSideEvents.EndCallback = "onEndCallbackFacility";
+   }
+   st.PreRender += (s, e) =>
+   {
+      MVCxComboBox cmb = s as MVCxComboBox;
+      if (cmb.Items.Count==1 && Model == null)
+      {
+         cmb.Value = cmb.Items[0].Value;
+      }
+   };
+}).BindList(Facility.ComboboxData()).GetHtml()

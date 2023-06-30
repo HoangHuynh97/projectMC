@@ -1,0 +1,40 @@
+﻿@model int?
+@{
+   var name = ViewData.ModelMetadata.PropertyName;
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+<script>
+   function onNewDiagnostic() {
+      WebApp.showDialog({
+         title: '@H("Thêm chẩn đoán")',
+         url: '@Url.Action("Add", "Diagnostic")',
+         width: 600,
+      }).done(function (r) {
+         const id = r.Id;
+         const ctrl = @name;
+         ctrl.PerformCallback(null, function () {
+            ctrl.SetValue(id);
+         });
+      });
+   }
+</script>
+@Html.DevExpress().ComboBoxFor(m => m, st =>
+{
+   st.DefaultSettings();
+   st.CallbackRouteValues = new { Action = "Diagnostic", Controller = "Combobox" };
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.Caption = caption;
+   st.Properties.CallbackPageSize = 20;
+   if (ViewData.ModelMetadata.IsRequired)
+      st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   st.Properties.TextFormatString = "{1}";
+   st.Properties.TextField = "Name";
+   if (CheckPermission("Chẩn đoán", "Thêm"))
+   {
+      var btn = st.Properties.Buttons.Add();
+      btn.Image.IconID = IconID.ActionsAdd16x16;
+      btn.ToolTip = T("Thêm");
+      st.Properties.ClientSideEvents.ButtonClick = "onNewDiagnostic";
+   }
+}).BindList(Diagnostic.ComboboxData()).GetHtml()

@@ -1,0 +1,159 @@
+﻿@model Attachments
+<script id="dxss_attachmentseditor">
+   var curRowEditing = null;
+   function onAttachmentUpload@(Model.Name)(s, e) {
+      if (e.isValid) {
+         var res = JSON.parse(e.callbackData);
+         var api = AttachmentList@(Model.Name).batchEditApi;
+         api.AddNewRow();//add and received index
+         if (curRowEditing === null) return;
+         api.EndEdit();
+         api.SetCellValue(curRowEditing, 'Name', res.Name, res.Name);
+         api.SetCellValue(curRowEditing, 'Url', res.Url, '');
+         curRowEditing = null;
+      }
+   }
+
+   function onEditingAttachmentList@(Model.Name)(s, e) {
+      curRowEditing = e.visibleIndex;
+   }
+
+   function downloadAttachment@(Model.Name)(id, saveas) {
+      window.open('@Url.Action("Viewer", "Attachment")/' + id + '?saveas=' + saveas, '_blank');
+   }
+
+   function onChangedAttachmentList@(Model.Name)(s) {
+      if (s.onDataChanged) {
+         setTimeout(function () {
+            s.onDataChanged(s.GetChanged());
+         }, 100);
+      }
+   }
+</script>
+<div class="attachments-container">
+   <div class="grid-middle-noBottom" style="margin-bottom: 5px;">
+      <div class="col-auto" style="">
+         @T("Tài liệu, hình ảnh, video")
+      </div>
+      <div class="col">
+         @Html.DevExpress().UploadControl(st =>
+    {
+       string name = "AttachmentUpload" + Model.Name;
+       st.Name = name;
+       st.Width = Unit.Percentage(100);
+       st.CallbackRouteValues = new { Controller = "Attachment", Action = "Upload", UploaderName = name };
+       st.ShowProgressPanel = true;
+       st.UploadMode = UploadControlUploadMode.Auto;
+       st.AutoStartUpload = true;
+       st.AdvancedModeSettings.EnableMultiSelect = false;
+       st.AdvancedModeSettings.EnableDragAndDrop = true;
+       st.AdvancedModeSettings.EnableFileList = false;
+       st.ValidationSettings.AllowedFileExtensions = Attachment.AllowedFileExtensions;
+       st.ValidationSettings.MaxFileSize = Attachment.MaxFileSize;
+       st.BrowseButton.Text = T("Thêm tài liệu");
+       st.BrowseButton.Image.IconID = IconID.ActionsUpload16x16;
+       st.Styles.BrowseButton.Paddings.Assign(new Paddings(5, 2, 5, 2));
+       st.ShowTextBox = false;
+       st.ValidationSettings.ShowErrors = false;
+       st.ClientSideEvents.FileUploadComplete = "onAttachmentUpload" + Model.Name;
+    }).GetHtml()
+      </div>
+   </div>
+   <div style="border-top: 1px solid #ccc;">
+      @Html.DevExpress().GridView(st =>
+ {
+    st.Name = "AttachmentList" + Model.Name;
+    st.Width = Unit.Percentage(100);
+    st.SettingsEditing.Mode = GridViewEditingMode.Batch;
+    st.SettingsEditing.BatchEditSettings.EditMode = GridViewBatchEditMode.Cell;
+    st.SettingsEditing.BatchEditSettings.ShowConfirmOnLosingChanges = false;
+    st.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.FocusedCellClick;
+    st.SettingsEditing.ShowModelErrorsForEditors = true;
+    st.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+    st.Settings.ShowStatusBar = GridViewStatusBarMode.Hidden;
+    st.KeyFieldName = "Id";
+    st.SettingsBehavior.AllowSort = false;
+    st.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+    st.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = WidthAdaptivity;
+    if (WindowWidthType == WebApp.Constant.WindowWidth.WidthType.ExtraSmall)
+       st.Settings.ShowColumnHeaders = false;
+
+    st.Columns.Add(col =>
+    {
+       col.FieldName = "Url";
+       col.Settings.ShowEditorInBatchEditMode = false;
+       col.ReadOnly = true;
+       col.Width = 24;
+       col.Caption = T("Loại");
+       col.SetDataItemTemplateContent(c =>
+       {
+          var id = DataBinder.Eval(c.DataItem, "Id");
+          if (id == null) return;
+          Html.DevExpress().Button(btn =>
+          {
+             btn.Name = "AttachmentAction" + Model.Name + "_" + id.ToString();
+             btn.Text = "";
+             btn.RenderMode = ButtonRenderMode.Link;
+             var type = (AttachmentType)Enum.Parse(typeof(AttachmentType), DataBinder.Eval(c.DataItem, "Type").ToString());
+             if (type == AttachmentType.Image)
+                btn.Images.Image.IconID = IconID.ContentImage16x16;
+             else if (type == AttachmentType.Video)
+                btn.Images.Image.IconID = IconID.MediaVideocontent16x16;
+             else if (type == AttachmentType.Audio)
+                btn.Images.Image.IconID = IconID.MediaAudiocontent16x16;
+             else if (type == AttachmentType.PDF)
+                btn.Images.Image.IconID = IconID.ExportExporttopdfSvg16x16;
+             else
+                btn.Images.Image.IconID = IconID.BusinessobjectsBofileattachment16x16;
+             btn.ClientSideEvents.Click = string.Format("function(s,e) {{downloadAttachment{0}('{1}', '{2}');}}", Model.Name, DataBinder.Eval(c.DataItem, "UniqueId"), DataBinder.Eval(c.DataItem, "SaveAs"));
+          }).Render();
+       });
+    });
+    st.Columns.Add(c =>
+    {
+       c.FieldName = "DateCreate";
+       c.Caption = T("Ngày tạo");
+       c.Width = 100;
+       c.ReadOnly = true;
+       c.Settings.ShowEditorInBatchEditMode = false;
+    });
+    st.Columns.Add(c =>
+    {
+       c.FieldName = "UserCreate";
+       c.Caption = T("Người tạo");
+       c.Width = 120;
+       c.ReadOnly = true;
+       c.Settings.ShowEditorInBatchEditMode = false;
+    });
+    st.Columns.Add(c =>
+    {
+       c.FieldName = "Name";
+       c.Caption = T("Tên tài liệu");
+       c.EditorProperties().TextBox(txt =>
+       {
+          txt.ValidationSettings.Display = Display.None;
+          txt.Style.Border.BorderWidth = 0;
+          txt.Width = Unit.Percentage(100);
+          txt.Height = Unit.Percentage(100);
+       });
+    });
+
+    st.CommandColumn.Visible = true;
+    st.CommandColumn.Caption = " ";
+    st.CommandColumn.ShowDeleteButton = true;
+    st.CommandColumn.Width = 24;
+    st.CommandColumn.VisibleIndex = 4;
+    st.SettingsCommandButton.RenderMode = GridCommandButtonRenderMode.Link;
+    st.SettingsCommandButton.DeleteButton.Text = " ";
+    st.SettingsCommandButton.DeleteButton.Image.IconID = IconID.ActionsTrash16x16;
+    st.SettingsCommandButton.RecoverButton.Text = " ";
+    st.SettingsCommandButton.RecoverButton.Image.IconID = IconID.ActionsReset16x16office2013;
+
+    st.ClientSideEvents.BatchEditStartEditing = "onEditingAttachmentList" + Model.Name;
+    st.ClientSideEvents.BatchEditEndEditing = "onChangedAttachmentList" + Model.Name;
+    st.ClientSideEvents.BatchEditRowRecovering = "onChangedAttachmentList" + Model.Name;
+    st.ClientSideEvents.BatchEditRowDeleting = "onChangedAttachmentList" + Model.Name;
+ }).Bind(Model.Items).GetHtml()
+   </div>
+
+</div>

@@ -1,0 +1,25 @@
+﻿@model CompanyPermission.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên quyền sử dụng");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Note";
+      col.Caption = "Ghi chú";
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "System DESC, Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

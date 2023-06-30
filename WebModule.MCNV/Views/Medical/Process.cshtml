@@ -1,0 +1,242 @@
+﻿@model MedicalProcess
+@{ 
+    var header = string.IsNullOrEmpty(Model.Name) ? T("") : "<div class='grid-noBottom'><div class='col-auto_xs-12'>" + T("Hồ sơ PHCN: ") + "</div><div class='col_xs-12'>" + Model.Name + "</div></div>";
+}
+<script>
+   $(function () {
+      function headerText(txt) {
+         var s = '';
+         if (!txt)
+            s = '@H("Thêm hồ sơ PHCN")';
+         else
+            s = "<div class='grid-noBottom'><div class='col-auto_xs-12'>@T("Hồ sơ PHCN: ")</div><div class='col_xs-12'>" + txt + "</div></div>";
+         $('#dialogContainerdlgProcess .dxpc-headerText').html(s);
+      }
+      headerText('@H(Model.Name)');
+
+      var data = @Html.Raw(Json.Encode(Model));
+      $.when(window.ko ||
+         $.ajax({
+            type: 'GET',
+            cache: true,
+            dataType: 'script',
+            url: 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js',
+         })).done(function () {
+            function ListItem(d) { //d is MedicalProcess.Process
+               this.id = d.Id;
+               this.name = ko.observable(d.Name);
+               this.url = d.Url;
+               this.expanded = ko.observable(false);
+               this.loaded = ko.observable(false);
+            }
+            ListItem.prototype.toggle = function () {
+               this.expanded(!this.expanded());
+               if (this.expanded() && !this.loaded()) {
+                  this.load();
+               }
+            };
+            ListItem.prototype.load = function () {
+               var self = this;
+               var el = $('.processes-container .process-item[data-id="' + this.id + '"] .process-content');
+               el.html('<div style="text-align: center;"><div class="process-loading"></div></div>');
+               return WebApp.ajax(this.url, null, 'get').then(function (res) {
+                  el.html(res);
+                  self.loaded(true);
+               });
+            };
+
+            var viewModel = window.processModel = {
+               id: data.Id,
+               locked: ko.observable(data.Locked),
+               canAdd: ko.observable(data.CanAdd),
+               changed: ko.observable(false),
+               items: ko.observableArray(data.Processes.map(function (it) {
+                  return new ListItem(it);
+               })),
+               add: function () {
+                  WebApp.ajax('@Url.Action("AddProcess", "Medical")', { id: this.id }).done(function (res) {
+                     viewModel.addItem(res);
+                  });
+               },
+               close: function () {
+                  WebApp.ajax('@Url.Action("AddEnd", "Medical")', { id: this.id }).done(function (res) {
+                     viewModel.addItem(res);
+                     viewModel.canAdd(false);
+                  });
+               },
+               stop: function () {
+                  WebApp.ajax('@Url.Action("AddStop", "Medical")', { id: this.id }).done(function (res) {
+                     viewModel.addItem(res);
+                     viewModel.canAdd(false);
+                  });
+               },
+               facility: function () {
+                  WebApp.ajax('@Url.Action("AddFacilityProcess", "Medical")', { id: this.id }).done(function (res) {
+                     viewModel.addItem(res);
+                  });
+               },
+               addItem: function (res) {
+                  var item = new ListItem(res);
+                  viewModel.items.push(item);
+                  setTimeout(function () {
+                     item.toggle();
+                  });
+               },
+               reload: function () {
+                  if (!viewModel.id) return;
+                  //remeber expanded
+                  var exp = viewModel.items()
+                     .filter(function (it) {
+                        return it.expanded();
+                     })
+                     .map(function (it) {
+                        return it.id;
+                     });
+                  //load data
+                  WebApp.ajax('@Url.Action("ProcessData", "Medical")', { id: this.id }).done(function (res) {
+                     headerText(res.Name);
+                     viewModel.locked(res.Locked);
+                     viewModel.canAdd(res.CanAdd);
+                     viewModel.items(res.Processes.map(function (it) {
+                        return new ListItem(it);
+                     }));
+                     viewModel.changed(true);
+                     //re expand
+                     if (exp.length) {
+                        setTimeout(function () {
+                           viewModel.items().forEach(function (it) {
+                              if (exp.indexOf(it.id) != -1) it.toggle();
+                           });
+                        })
+                     }
+                  });
+               }
+            };
+
+            ko.applyBindings(viewModel, $('.processes-container')[0]);
+            if (!viewModel.id)
+               setTimeout(function () {
+                  const info = viewModel.items()[0];
+                  info.toggle();
+               });
+      });
+   });
+</script>
+<script type="text/html" id="tmplProcesses">
+   <div class="process-items" data-bind="foreach: items">
+      <div class="process-item" data-bind="css: {expanded: expanded}, attr: {'data-id': id}">
+         <div class="header" data-bind="click: toggle">
+            <div class="title" data-bind="text: name"></div>
+            <div class="actions">
+               <!-- ko if: expanded -->
+               @Html.Icon(IconID.ArrowsMoveup16x16)
+               <!-- /ko -->
+               <!-- ko ifnot: expanded -->
+               @Html.Icon(IconID.ArrowsMovedown16x16)
+               <!-- /ko -->
+            </div>
+         </div>
+         <div class="body" data-bind="visible: expanded">
+            <div class="process-content"></div>
+         </div>
+      </div>
+   </div>
+   <div class="actions" data-bind="if: canAdd">
+      <button class="app-button" data-bind="click: add">
+         @Html.Icon(IconID.ActionsAddfile16x16)
+         <span>@H("Thêm can thiệp tại nhà")</span>
+      </button>
+      <button class="app-button" data-bind="click: facility">
+         @Html.Icon(IconID.ActionsAdditem16x16)
+         <span>@H("Thêm can thiệp tại viện")</span>
+      </button>
+      <button class="app-button" data-bind="click: close">
+         @Html.Icon(IconID.ActionsApply16x16)
+         <span>@H("Kết thúc can thiệp")</span>
+      </button>
+      <button class="app-button" data-bind="click: stop">
+         @Html.Icon(IconID.ActionsCancel16x16)
+         <span>@H("Dừng can thiệp")</span>
+      </button>
+   </div>
+</script>
+
+<style>
+   @@keyframes rotate {
+      0% {
+         transform: rotate(0);
+      }
+
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+
+
+   .processes-container {
+      min-height: 70vh;
+   }
+
+   .process-items {
+      margin-bottom: 10px;
+   }
+
+   .process-loading {
+      height: 48px;
+      width: 48px;
+      color: rgba(90, 90, 90, 0.2);
+      position: relative;
+      display: inline-block;
+      border: 5px solid;
+      border-radius: 50%;
+      border-right-color: #5a5a5a;
+      animation: rotate 1s linear infinite;
+   }
+
+
+   .process-item {
+      background-color: #fff;
+      border: 1px solid #ccc;
+   }
+
+      .process-item.expanded {
+         box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+      }
+
+      .process-item > .header {
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         padding: 10px;
+         cursor: pointer;
+      }
+
+      .process-item.expanded > .header {
+         border-bottom: 1px solid #ddd;
+         box-shadow: 0 0 4px rgba(0,0,0,0.1);
+         background-color: #eee;
+      }
+
+      .process-item > .header:hover {
+         background-color: rgba(0,0,0,0.1);
+      }
+
+      .process-item > .header .title {
+         color: #505050;
+         font-weight: bold;
+         flex: 1;
+      }
+
+      .process-item > .body {
+         padding: 10px 20px;
+      }
+
+   .processes-container .actions button {
+      padding: 5px 10px;
+      outline: none;
+      margin-right: 10px;
+      cursor: pointer;
+   }
+</style>
+
+<div class="processes-container pb" data-bind="template: 'tmplProcesses'"></div>

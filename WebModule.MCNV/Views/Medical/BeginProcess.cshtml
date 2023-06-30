@@ -1,0 +1,121 @@
+﻿@model BeginProcess
+
+<script id="dxss_beginprocess">
+   function onBeginProcessSave() {
+      if (!WebApp.validForm('#frmBeginProcess')) return;
+      if (NoProcess.GetValue() === false && !AttachmentListBeginProcess.GetVisibleRowsOnPage()) {
+         WebApp.showInfo('@H("Lỗi")', '@H("Vui lòng cập nhật tài liệu, hình ảnh, video kèm theo!")');
+         return;
+      }
+      BeginProcessSave.SetEnabled(false);
+      WebApp.ajax('@Url.Action("BeginProcess", "Medical")', getBeginData()).done(function (r) {
+         processModel.reload();
+      }).fail(function () { BeginProcessSave.SetEnabled(true); });
+   }
+
+   function getBeginData() {
+      var d = EvaluationDate.GetDate();
+      return {
+         Id: processModel.id,
+         EvaluationDate: d && d.toISOString() || null,
+         EvaluationTool: EvaluationTool.GetValue(),
+         EvaluationPoint: EvaluationPoint.GetValue(),
+         Evaluation: Evaluation.GetValue(),
+         Diagnostics: Diagnostics.GetValue(),
+         DiagnosticsValue: $('#DiagnosticsValue').val(),
+         Treatments: Treatments.GetValue(),
+         TreatmentsValue: $('#TreatmentsValue').val(),
+         Services: Services.GetValue(),
+         ServicesValue: $('#ServicesValue').val(),
+         Attachments: { Items: AttachmentListBeginProcess.GetChanged(), },
+         Doctors: { Items: DoctorsBeginProcess.GetSelectedValues().map(function (id) { return { Id: id }; }), Facility: @(Model.Doctors.Facility) },
+         NoProcess: NoProcess.GetValue(),
+         ReasonCancel: ReasonCancel.GetValue(),
+      };
+   }
+
+   function updateUI() {
+      const b = NoProcess.GetValue();
+      $('#frmBeginProcess .service').toggle(b===false);
+      $('#frmBeginProcess .treatment').toggle(b===false);
+      $('#frmBeginProcess .reasoncancel').toggle(b===true);
+   }
+
+   setTimeout(function () {
+      WebApp.validateForm('#frmBeginProcess');
+      var oldData = JSON.stringify(getBeginData());
+
+      [EvaluationDate, EvaluationTool, EvaluationPoint, Evaluation, Diagnostics, Treatments, Services, NoProcess, ReasonCancel].forEach(function (it) {
+         it.ValueChanged.AddHandler(function () {
+            var d = JSON.stringify(getBeginData());
+            BeginProcessSave.SetVisible(d != oldData);
+         });
+      });
+      AttachmentListBeginProcess.onDataChanged = function (data) {
+         var d = JSON.stringify(getBeginData());
+         BeginProcessSave.SetVisible(d != oldData);
+      };
+      DoctorsBeginProcess.SelectedIndexChanged.AddHandler(function () {
+         var d = JSON.stringify(getBeginData());
+         BeginProcessSave.SetVisible(d != oldData);
+      });
+
+      updateUI();
+      NoProcess.ValueChanged.AddHandler(function () {
+         updateUI();
+      });
+   });
+
+   window.CheckReasonCancel = function () {
+      return NoProcess.GetValue() === true;
+   }
+
+   window.CheckService = function () {
+      return NoProcess.GetValue() === false;
+   }
+</script>
+
+<form id="frmBeginProcess">
+   <div class="grid">
+      <div class="col-auto_md-6_xs-12">@Html.EditorFor(m => m.EvaluationDate)</div>
+      <div class="col-auto_md-6_xs-12">@Html.EditorFor(m => m.EvaluationTool)</div>
+      <div class="col-auto_md-6_xs-12">@Html.EditorFor(m => m.EvaluationPoint)</div>
+      <div class="col_md-6_xs-12">@Html.EditorFor(m => m.Evaluation)</div>
+      <div class="col-12">@Html.EditorFor(m => m.Diagnostics)</div>
+      <div class="col-12 grid-middle-noBottom">
+         <div class="col-auto_xs-12">@H("Đề xuất can thiệp PHCN")</div>
+         <div class="col-auto_xs-12">
+            @Html.DevExpress().RadioButtonListFor(m => m.NoProcess, st =>
+       {
+          st.Properties.RepeatColumns = 2;
+          st.Properties.Items.Add(T("Có"), false);
+          st.Properties.Items.Add(T("Không"), true);
+          st.ControlStyle.Border.BorderWidth = 0;
+          st.Properties.EnableClientSideAPI = true;
+          st.Properties.ValueType = typeof(bool?);
+          st.ShowModelErrors = true;
+          st.Properties.ValidationSettings.Display = Display.Dynamic;
+          st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+       }).GetHtml()
+         </div>
+      </div>
+      <div class="col-12 treatment">@Html.EditorFor(m => m.Treatments)</div>
+      <div class="col-12 service">@Html.EditorFor(m => m.Services)</div>
+      <div class="col-12 reasoncancel">@Html.EditorFor(m => m.ReasonCancel)</div>
+      <div class="col-12">@Html.EditorFor(m => m.Doctors)</div>
+      <div class="col-12">@Html.EditorFor(m => m.Attachments)</div>
+   </div>
+   <div>
+      @Html.DevExpress().Button(btn =>
+{
+ btn.Name = "BeginProcessSave";
+ btn.Text = T("Lưu thay đổi");
+ btn.Images.Image.IconID = IconID.SaveSave16x16;
+ btn.Styles.Style.Paddings.Padding = 0;
+ btn.RenderMode = ButtonRenderMode.Outline;
+ btn.ClientVisible = false;
+ btn.ClientSideEvents.Click = "onBeginProcessSave";
+}).GetHtml()
+   </div>
+
+</form>

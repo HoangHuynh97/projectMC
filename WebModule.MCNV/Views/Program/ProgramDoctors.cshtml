@@ -1,0 +1,31 @@
+﻿@model Program
+@Html.DevExpress().GridView(st =>
+{
+   st.Name = "grdDoctors";
+   st.CallbackRouteValues = new { Action = "ProgramDoctors", DoctorsId = Model.DoctorsId };
+   st.KeyFieldName = "Id";
+   st.Width = Unit.Percentage(100);
+   st.Settings.VerticalScrollableHeight = 250;
+   st.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+   st.Settings.ShowStatusBar = GridViewStatusBarMode.Hidden;
+   st.SettingsSearchPanel.CustomEditorName = "SearchDoctor";
+   st.SettingsBehavior.AutoExpandAllGroups = true;
+   st.SettingsPager.Mode = GridViewPagerMode.EndlessPaging;
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Facility";
+      col.Caption = T("Đơn vị");
+      col.GroupIndex = 0;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Họ và tên");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Specialize";
+      col.Caption = T("Lĩnh vực chuyên môn");
+   });
+}).Bind(Model.Doctors).GetHtml()

@@ -1,0 +1,31 @@
+﻿@model Diagnostic.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   st.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+   st.Settings.ShowColumnHeaders = true;
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Code";
+      col.Caption = T("Mã");
+      col.Width = 100;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DiagnosticType.Name";
+      col.Caption = T("Nhóm bệnh");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Code, Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

@@ -1,0 +1,11 @@
+﻿@model object
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+@Html.DevExpress().MemoFor(m => m, s =>
+{
+   s.Width = Unit.Percentage(100);
+   s.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   s.Properties.Caption = caption;
+   s.Properties.EnableClientSideAPI = true;
+}).GetHtml()

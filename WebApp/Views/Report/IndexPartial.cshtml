@@ -1,0 +1,46 @@
+﻿@model Report.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   var toolDesigner = new MVCxGridViewToolbarItem();
+   toolDesigner.Name = "designer";
+   toolDesigner.Text = T("Thiết kế");
+   toolDesigner.Image.IconID = IconID.ReportsDesignreport16x16;
+   toolDesigner.Command = GridViewToolbarCommand.Custom;
+   toolDesigner.Visible = CheckPermission("Thiết kế mẫu");
+   Html.DefaultGridSheet(st, Model.ShowFilter, true, new MVCxGridViewToolbarItem[] { toolDesigner });
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Category";
+      col.Caption = T("Nhóm báo cáo");
+      col.GroupIndex = 0;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên báo cáo");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Company.Name";
+      col.Caption = T("Áp dụng cho công ty");
+      col.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Active";
+      col.Caption = T("Sử dụng");
+      col.Width = 80;
+      col.ColumnType = MVCxGridViewColumnType.CheckBox;
+   });
+   st.PreviewFieldName = "Note";
+   st.Settings.ShowPreview = true;
+   st.SettingsBehavior.AutoExpandAllGroups = true;
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

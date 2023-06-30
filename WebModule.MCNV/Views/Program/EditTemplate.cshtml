@@ -1,0 +1,142 @@
+﻿@model Program
+
+<script id="dxss_programedit">
+   function onProgramDoctorsClick() {
+      WebApp.showDialog({
+         title: '@H("Chọn cán bộ tham gia")',
+         url: '@Url.Action("SelectDoctors")',
+         data: { DoctorsId: '@Model.DoctorsId' },
+         icon: 'people_usergroup_32x32',
+         width: 500,
+      }).done(function () {
+         grdDoctors.PerformCallback();
+      });
+   }
+   function UpdateUITraining() {
+      var b = CheckTrainingHour();
+      $('.inp-trainingtime').toggle(!b);
+      $('.inp-traininghour').toggle(b);
+   }
+
+   window.CheckTrainingHour = function () {
+      return ProgramType.GetValue() == @((int)ProgramTypeEnum.Coaching);
+   }
+
+   window.CheckTrainingTime = function () {
+      return !window.CheckTrainingHour();
+   }
+
+   $(function () {
+      ProgramName.Focus();
+      DateStart.ValueChanged.AddHandler(function (s) {
+         var d = s.GetValue();
+         if (d && DateEnd.GetValue() < d) DateEnd.SetValue(null);
+         DateEnd.SetMinDate(d);
+      });
+      UpdateUITraining();
+   });
+</script>
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.DoctorsId)
+<input id="ReasonCancelUpdated" name="ReasonCancelUpdated" type="hidden" />
+<input id="AttachmentsUpdated" name="AttachmentsUpdated" type="hidden" />
+<div class="grid">
+   <div class="col-12">
+      @Html.EditorFor(m => m.ProgramName)
+   </div>
+   <div class="col-12">
+      @Html.EditorFor(m => m.NameEnglish)
+   </div>
+   <div class="col-3_sm-6_xs-12">@Html.EditorFor(m => m.Project)</div>
+   <div class="col-3_sm-6_xs-12">@Html.EditorFor(m => m.ProgramSpecialize)</div>
+   <div class="col-3_sm-6_xs-12">
+      @Html.DevExpress().ComboBox(st =>
+ {
+    st.Name = "ProgramType";
+    st.Width = Unit.Percentage(100);
+    st.Properties.Caption = T("Loại khóa học");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.Properties.Items.Add(T("Huấn luyện"), (int)ProgramTypeEnum.Coaching);
+    st.Properties.Items.Add(T("Tập huấn"), (int)ProgramTypeEnum.ShortTime);
+    st.Properties.Items.Add(T("Đào tạo dài hạn"), (int)ProgramTypeEnum.LongTimeLongTerm);
+    st.Properties.Items.Add(T("Đào tạo trung hạn"), (int)ProgramTypeEnum.LongTimeMidTerm);
+    st.Properties.Items.Add(T("Đào tạo liên tục"), (int)ProgramTypeEnum.LongTimeContinuous);
+    st.Properties.Items.Add(T("Đào tạo chuyên sâu"), (int)ProgramTypeEnum.LongTimeIntensive);
+    st.Properties.ValueType = typeof(int);
+    st.Properties.ClientSideEvents.ValueChanged = "function() {UpdateUITraining();}";
+ }).Bind((int)Model.ProgramType).GetHtml()
+   </div>
+   <div class="col-3_sm-6_xs-12 inp-trainingtime">
+      @Html.EditorFor(m => m.TrainingTime)
+   </div>
+   <div class="col-3_sm-6_xs-12 inp-traininghour">
+      @Html.DevExpress().SpinEditFor(m => m.TrainingHour, st =>
+ {
+    st.Width = Unit.Percentage(100);
+    st.Properties.DisplayFormatString = "#,##0 'giờ'";
+    st.Properties.Caption = T("Thời lượng");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+    st.ShowModelErrors = true;
+    st.Properties.ValidationSettings.Display = Display.Dynamic;
+    st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+ }).GetHtml()
+   </div>
+
+   <div class="col-12">@Html.EditorFor(m => m.Institution)</div>
+   <div class="col-3_md-4_xs-12">
+      @Html.DevExpress().DateEditFor(m => m.DateStart, st =>
+ {
+    st.Width = Unit.Percentage(100);
+    st.Properties.Caption = T("Ngày khai giảng");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.ShowModelErrors = true;
+    st.Properties.ValidationSettings.Display = Display.Dynamic;
+    st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+ }).GetHtml()
+   </div>
+
+   <div class="col-3_md-4_xs-12">
+      @Html.DevExpress().DateEditFor(m => m.DateEnd, st =>
+ {
+    st.Width = Unit.Percentage(100);
+    st.Properties.Caption = T("Ngày kết thúc");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.ShowModelErrors = true;
+    st.Properties.ValidationSettings.Display = Display.Dynamic;
+    st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+    if (Model.DateStart.HasValue)
+       st.Properties.MinDate = Model.DateStart.Value;
+ }).GetHtml()
+   </div>
+   <div class="col-12">@Html.EditorFor(m => m.Note)</div>
+</div>
+<div class="grid-middle">
+   <div class="col-auto_xs-12">
+      @Html.DevExpress().Label(st => st.Text = T("Danh sách cán bộ tham gia đào tạo")).GetHtml()
+   </div>
+   <div class="col-auto">
+      @Html.DevExpress().Button(st =>
+ {
+    st.Name = "ProgramDoctors";
+    st.Text = T("Cập nhật");
+    st.Images.Image.IconID = IconID.PeopleUsergroup16x16;
+    st.ClientSideEvents.Click = "onProgramDoctorsClick";
+ }).GetHtml()
+   </div>
+   <div class="col">
+      @Html.DevExpress().TextBox(st =>
+ {
+    st.Name = "SearchDoctor";
+    st.Width = Unit.Percentage(100);
+    st.Properties.NullText = "Tìm kiếm cán bộ";
+ }).GetHtml()
+   </div>
+</div>
+<div class="mb">
+   @Html.Partial("ProgramDoctors")
+</div>
+<div class="">
+   @Html.EditorFor(m => m.Attachments)
+</div>

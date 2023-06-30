@@ -1,0 +1,26 @@
+﻿@model List<int>
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+@Html.DevExpress().ListBoxFor(m => m, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Height = Unit.Percentage(100);
+   st.Properties.TextField = "Name";
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+   st.Properties.EnableSelectAll = true;
+   st.Properties.FilteringSettings.ShowSearchUI = true;
+   st.Properties.Caption = caption;
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.Properties.EnableClientSideAPI = true;
+   st.PreRender = (s, e) =>
+   {
+      var lst = s as MVCxListBox;
+      foreach (ListEditItem it in lst.Items)
+      {
+         it.Selected = Model.Contains(Convert.ToInt32(it.Value));
+      }
+   };
+}).BindList(Province.ComboboxData(ViewBag.SelectedProvinces)).GetHtml()

@@ -1,0 +1,375 @@
+﻿@model WebApp.Models.Login
+@using Microsoft.Owin.Security;
+@{
+   Layout = "";
+   var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+   var hasAgreement = !string.IsNullOrEmpty(Model.Agreement);
+}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+   <meta property="og:type" content="article">
+   <meta property="og:title" content="@H("Quản lý trực tuyến")">
+   <meta property="og:description" content="@H("Hệ thống quản lý dữ liệu, báo cáo trực tuyến")">
+   <meta property="og:image" content="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("/styles/favicons/48.png"))">
+
+   <title>@T("Đăng nhập")</title>
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+   <link href="~/Styles/loginicons.sprite.css" rel="stylesheet" />
+   <link href="~/Styles/login.css" rel="stylesheet" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+</head>
+<body>
+   <div class="main-content" data-bind="if: current">
+      <!-- ko component: current -->
+      <!-- /ko -->
+   </div>
+   @if (!string.IsNullOrEmpty(Model.Copyright))
+   {
+      <div class="copyright">@Html.Raw(Model.Copyright)</div>
+   }
+   <script type="text/html" id="tmplLogin">
+      <form class="login" method="post">
+         <p class="title">@H("ĐĂNG NHẬP")</p>
+         @if (WebApp.Core.Language.List.Count > 1)
+         {
+            <div class="flags">
+               @foreach (var l in WebApp.Core.Language.List)
+               {
+                  if (l != WebApp.Core.Language.Current)
+                  {
+                     <div class="loginicons @(l.Code)" data-language="@l.Code" title="@l.Name" data-bind="click: changeLanguage"></div>
+                  }
+               }
+            </div>
+         }
+         @Html.AntiForgeryToken()
+         <div>
+            <input type="text" class="text" placeholder="@H("Tên đăng nhập")" name="UserName" autofocus required data-bind="value: user" />
+            <i class="fa fa-user"></i>
+         </div>
+         <div class="password-container">
+            <input type="password" class="text" placeholder="@H("Mật khẩu")" name="Password" required data-bind="value: password" />
+            <i class="fa fa-key"></i>
+            <div class="password-toggle" data-bind="click: pwtoggle">
+               <i class="fa" data-bind="css: {'fa-eye-slash': pwshow(), 'fa-eye': !pwshow()}"></i>
+            </div>
+         </div>
+         <div class="remember-forgot">
+            <label>
+               <input type="checkbox" name="RememberMe" data-bind="checked: remember, checkedValue: true" />
+               <span>@H("Ghi nhớ tài khoản")</span>
+            </label>
+            @if (Model.AllowForgotPassword)
+            {
+               <a href="#" data-bind="click: openForgot">@H("Quên mật khẩu?")</a>
+            }
+         </div>
+         @if (hasAgreement)
+         {
+            <div>
+               <label>
+                  <input class="agree-chk" type="checkbox" name="Agree" required data-bind="checked: agree, checkedValue: true" />
+                  <span>@H("Tôi đã đọc và đồng ý với ")</span>
+                  <a href="#" data-bind="click: openAgreement">@H("điều khoản sử dụng")</a>
+               </label>
+            </div>
+         }
+         else
+         {
+            <input type="hidden" name="Agree" value="true" />
+         }
+         @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+         {
+            <div class="error" style="margin: 10px 0 0;">@Html.Raw(ViewBag.ErrorMessage)</div>
+         }
+         <button>
+            <i class="spinner"></i>
+            <span class="state">@T("Đăng nhập")</span>
+         </button>
+      </form>
+
+      @if (Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes().Any())
+      {
+         <footer id="ExternalLogin">
+            <p>@T("Đăng nhập bằng các tài khoản")</p>
+            <div>
+               <form method="post" action="@Url.Action("ExternalLogin")">
+                  @Html.AntiForgeryToken()
+                  @Html.HiddenFor(m => m.ReturnUrl)
+                  <button type="submit" name="provider" value="Facebook" class="btnlink">
+                     <div class="loginicons facebook"></div>
+                     <div>Facebook</div>
+                  </button>
+                  <button type="submit" name="provider" value="Google" class="btnlink">
+                     <div class="loginicons google"></div>
+                     <div>Google</div>
+                  </button>
+                  <button type="submit" name="provider" value="Microsoft" class="btnlink">
+                     <div class="loginicons microsoft"></div>
+                     <div>Microsoft</div>
+                  </button>
+               </form>
+            </div>
+         </footer>
+      }
+   </script>
+
+   <script type="text/html" id="tmplForgot">
+      <form class="forgot-password">
+         <p class="title">@H("Khôi phục mật khẩu")</p>
+         <!-- ko ifnot: success -->
+         <p class="description">@H("Vui lòng nhập email mà bạn đã đăng ký, chúng tôi sẽ gửi cho bạn hướng dẫn để khôi phục lại mật khẩu qua emai này")</p>
+         <div class="email">
+            <input type="email" name="Email" id="Email" required email data-bind="value: email" />
+         </div>
+         <!-- ko if: error -->
+         <div class="error-msg" data-bind="text: error"></div>
+         <!-- /ko -->
+         <!-- /ko -->
+         <!-- ko if: success -->
+         <p class="description" data-bind="text: success"></p>
+         <!-- /ko -->
+         <div class="actions">
+            <!-- ko ifnot: success -->
+            <button type="submit" data-bind="disable: disable, text: text"></button>
+            <!-- /ko -->
+            <a href="#" data-bind="click: goBack">@H("Trở về đăng nhập")</a>
+         </div>
+      </form>
+   </script>
+
+   @if (hasAgreement)
+   {
+      <script type="text/html" id="tmplAgreement">
+         <div class="agreement-container">
+            <div class="agreement-content">
+               <iframe src="@H(Model.Agreement)"></iframe>
+            </div>
+            <div class="agreement-actions">
+               <button class="agreement-ok" data-bind="click: agree">@H("Đồng ý")</button>
+               <button class="agreement-cancel" data-bind="click: close">@H("Không")</button>
+            </div>
+         </div>
+      </script>
+   }
+
+   @if (!string.IsNullOrEmpty(Model.ResetId))
+   {
+      <script type="text/html" id="tmplReset">
+         <form class="reset-password forgot-password ">
+            <p class="title">@H("Khôi phục mật khẩu")</p>
+            @if (Model.ValidateResetId())
+            {
+               <p class="description">@H("Bạn đang thực hiện cài đặt lại mật khẩu đăng nhập theo yêu cầu. Vui lòng nhập mật khẩu mới vào ô bên dưới và nhập lại lần nữa vào ô kiểm tra")</p>
+               <div>
+                  <input type="password" data-bind="value: password" id="newPassword" name="newPassword" required rangelength="[6,20]" placeholder="@H("Mật khẩu mới")" />
+               </div>
+               <div>
+                  <input type="password" id="newPasswordConfirm" name="newPasswordConfirm" required equalTo="#newPassword" placeholder="@H("Kiểm tra mật khẩu")" />
+               </div>
+               <!-- ko if: error -->
+               <p class="error-msg" data-bind="text: error"></p>
+               <!-- /ko -->
+               <div class="actions">
+                  <button type="submit" data-bind="disable: disable, text: text"></button>
+                  <a href="#" data-bind="click: goBack">@H("Trở về đăng nhập")</a>
+               </div>
+            }
+            else
+            {
+               <p class="description">@H("Yêu cầu khôi phục mật khẩu không tồn tại hoặc đã quá hạn")</p>
+               <a href="#" data-bind="click: goBack">@H("Trở về đăng nhập")</a>
+            }
+         </form>
+      </script>
+   }
+
+   <script type="text/javascript">
+      const vmLogin = {
+         user: ko.observable("@Model.UserName"),
+         password: ko.observable(''),
+         remember: ko.observable(@(Model.RememberMe ? "true": "false")),
+         agree: ko.observable(@(Model.Agree ? "true": "false")),
+         pwshow: ko.observable(false),
+         changeLanguage: function (_, evt) {
+            $.post('@Url.Action("ChangeLanguage")', { code: $(evt.target).attr('data-language') }, function () { location.reload(); });
+         },
+         openAgreement: function () {
+            vmApp.current('agreement');
+         },
+         openForgot: function () {
+            vmApp.current('forgot');
+         },
+         pwtoggle: function () {
+            this.pwshow(!this.pwshow());
+            var el = $('.password-container input')[0];
+            if (this.pwshow())
+               el.type = 'text';
+            else
+               el.type = 'password';
+         }
+      };
+      ko.components.register('login', {
+         viewModel: { instance: vmLogin },
+         template: { element: 'tmplLogin' }
+      });
+
+      const vmAgreement = {
+         agree: function () {
+            vmLogin.agree(true);
+            vmApp.current('login');
+         },
+         close: function () {
+            vmLogin.agree(false);
+            vmApp.current('login');
+         }
+      };
+      ko.components.register('agreement', {
+         viewModel: { instance: vmAgreement },
+         template: { element: 'tmplAgreement' }
+      });
+
+      const vmForgot = {
+         email: ko.observable(''),
+         error: ko.observable(''),
+         success: ko.observable(''),
+         disable: ko.observable(false),
+         text: ko.pureComputed(function () {
+            if (vmForgot.disable())
+               return "@H("Đang xử lý")";
+            return "@H("Đồng ý")";
+         }),
+         submit: function () {
+            this.disable(true);
+            $.post('@Url.Action("ForgotPassword")', { email: this.email() }).done(function (r) {
+               vmForgot.disable(false);
+               vmForgot.error(!r.success && r.message || '');
+               vmForgot.success(r.success && r.message || '');
+            });
+         },
+         goBack: function () {
+            vmApp.current('login');
+         },
+      };
+      ko.components.register('forgot', {
+         viewModel: { instance: vmForgot },
+         template: { element: 'tmplForgot' }
+      });
+
+      @if (!string.IsNullOrEmpty(Model.ResetId)) {
+      <text>
+      const vmReset = {
+         disable: ko.observable(false),
+         text: ko.pureComputed(function () {
+            if (vmReset.disable())
+               return "@H("Đang xử lý")";
+            return "@H("Đồng ý")";
+         }),
+         error: ko.observable(''),
+         password: ko.observable(''),
+         submit: function () {
+            this.disable(true);
+            $.post('@Url.Action("ResetPassword")', { id: "@Model.ResetId", password: this.password() }).done(function (r) {
+               if (r.success)
+                  location.href = "/";
+               else {
+                  vmReset.error(r.message);
+                  vmReset.disable(false);
+               }
+            });
+         },
+         goBack: function () {
+            vmApp.current('login');
+         },
+      }
+      ko.components.register('reset', {
+         viewModel: { instance: vmReset },
+         template: { element: 'tmplReset' }
+      });
+      </text>
+      }
+
+      const vmApp = {
+         current: ko.observable(''),
+      };
+
+      vmApp.current.subscribe(function (name) {
+         setTimeout(function () {
+            if (name == 'login') {
+               document.title = "@H("Đăng nhập")";
+               $('.main-content .login').validate({
+                  errorElement: 'div',
+                  errorPlacement: function (err, el) {
+                     el.parent().append(err);
+                  },
+                  submitHandler: function (form) {
+                     if ($(form).hasClass('loading')) return;
+                     $('#ExternalLogin').css({ visibility: 'hidden' });
+                     $(form).addClass('loading')
+                        .find('button > .state').html('Đang kiểm tra...');
+                     setTimeout(function () { form.submit(); }, 300);
+                  },
+                  messages: {
+                     UserName: "@H("Tên đăng nhập không được để trống")",
+                     Password: "@H("Mật khẩu không được để trống")",
+                     Agree: "@H("Vui lòng đọc và đồng ý điều khoản sử dụng")"
+                  }
+               });
+            }
+            else if (name == 'forgot') {
+               document.title = "@H("Khôi phục mật khẩu")";
+               $('.main-content .forgot-password').validate({
+                  errorElement: 'div',
+                  errorPlacement: function (err, el) {
+                     el.parent().append(err);
+                  },
+                  messages: {
+                     Email: {
+                        required: "@H("Email không được để trống")",
+                        email: "@H("Email không hợp lệ")",
+                     }
+                  },
+                  submitHandler: function () {
+                     if (vmForgot.disable()) return;
+                     vmForgot.submit();
+                  }
+               });
+            }
+            else if (name == 'reset') {
+               document.title = "@H("Khôi phục mật khẩu")";
+               $('.main-content .reset-password').validate({
+                  errorElement: 'div',
+                  errorPlacement: function (err, el) {
+                     el.parent().append(err);
+                  },
+                  messages: {
+                     newPassword: {
+                        required: '@H("Mật khẩu không được để trống")',
+                        rangelength: '@H("Mật khẩu phải ít nhất 6 ký tự, tối đa 20 ký tự")'
+                     },
+                     newPasswordConfirm: {
+                        required: '@H("Nhập lại mật khẩu mới một lần nữa")',
+                        equalTo: '@H("Không giống với mật khẩu mới")'
+                     }
+                  },
+                  submitHandler: function () {
+                     if (vmReset.disable()) return;
+                     vmReset.submit();
+                  }
+               });
+            }
+         });
+      });
+
+      ko.applyBindings(vmApp);
+      vmApp.current('@(string.IsNullOrEmpty(Model.ResetId) ? "login" : "reset")');
+   </script>
+</body>
+</html>

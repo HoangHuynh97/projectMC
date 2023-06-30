@@ -1,0 +1,46 @@
+﻿@model Patient
+
+@Html.HiddenFor(m => m.Id)
+<div class="grid">
+   <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.Name)</div>
+   <div class="col-3_md-4_xs-12 grid">
+      <div class="col-6">@Html.EditorFor(m => m.Gender)</div>
+      <div class="col-6">@Html.EditorFor(m => m.Folk)</div>
+   </div>
+   <div class="col-2_md-3_xs-12">@Html.EditorFor(m => m.DateBirth)</div>
+
+   <div class="col-12 grid">
+      <div class="col-3_md-6_xs-12">@Html.EditorFor(m => m.CMND)</div>
+      <div class="col-3_md-6_xs-12">@Html.EditorFor(m => m.CCCD)</div>
+      <div class="col-3_md-6_xs-12">@Html.EditorFor(m => m.BHYT)</div>
+      <div class="col-3_md-6_xs-12">@Html.EditorFor(m => m.Phone)</div>
+   </div>
+
+   @Html.EditorFor(m => m, "Address")
+
+   <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.Classification)</div>
+   <div class="col-3_md-4_xs-12 levelDisability">@Html.EditorFor(m => m.LevelDisability)</div>
+   <div class="col-6_md-4_xs-12">@Html.EditorFor(m => m.OrangeVictim)</div>
+   <div class="col-12">@Html.EditorFor(m => m.Disabilities)</div>
+   <div class="col-12">@Html.EditorFor(m => m.Note)</div>
+</div>
+
+<script>
+   $(function () {
+      @(Model.Id== 0 ? "Name.Focus();": "")
+      Classification.ValueChanged.AddHandler(function () {
+         ToggleLevelDisability();
+      });
+
+      ToggleLevelDisability();
+   });
+
+   function CheckLevelDisability() {
+      return Classification.GetValue() != 3;
+   }
+
+   function ToggleLevelDisability() {
+      const v = Classification.GetValue();
+      $('.levelDisability').toggle(v != 3);
+   }
+</script>

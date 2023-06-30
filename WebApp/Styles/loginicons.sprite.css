@@ -1,0 +1,33 @@
+/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.loginicons {
+	background-image: url('loginicons.sprite.png');
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+.loginicons.facebook {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -10px;
+}
+.loginicons.google {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -52px;
+}
+.loginicons.microsoft {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -94px;
+}
+.loginicons.vi {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -136px;
+}
+.loginicons.en {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -178px;
+}

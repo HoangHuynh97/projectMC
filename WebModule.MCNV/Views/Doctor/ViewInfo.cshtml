@@ -1,0 +1,15 @@
+﻿@model Doctor.ViewInfo
+
+<div class="grid">
+   <div class="col-6_xs-12">@Html.LockedText(m => m.Name)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Gender)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.DateBirth)</div>
+   <div class="col-6_xs-12">@Html.LockedText(m => m.Facility)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Phone)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Email)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Title)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Position)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Qualification)</div>
+   <div class="col-3_xs-12">@Html.LockedText(m => m.Specialize)</div>
+   <div class="col-12">@Html.LockedText(m => m.Note, true)</div>
+</div>

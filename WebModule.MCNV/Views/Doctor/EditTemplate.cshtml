@@ -1,0 +1,35 @@
+﻿@model Doctor
+
+@Html.HiddenFor(m => m.Id)
+@Html.Hidden("DateBirthText", Model.DateBirth != null ? Model.DateBirth.Value.ToShortDateString() : "")
+<div class="grid">
+   <div class="col-6_xs-12">@Html.EditorFor(m => m.Name)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Gender)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.DateBirth)</div>
+   @if (string.IsNullOrEmpty(Model.FacilityNameLocked))
+   {
+      <div class="col-6_xs-12">@Html.EditorFor(m => m.Facility)</div>
+   }
+   else
+   {
+      @Html.HiddenFor(m => m.Facility)
+      @Html.HiddenFor(m => m.FacilityNameLocked)
+      <div class="col-6_xs-12">@Html.LockedText(T("Đơn vị công tác"), Model.FacilityNameLocked)</div>
+   }
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Phone)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Email)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Title)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Position)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Qualification)</div>
+   <div class="col-3_xs-12">@Html.EditorFor(m => m.Specialize)</div>
+   <div class="col-12">@Html.EditorFor(m => m.Note)</div>
+</div>
+
+<script>
+   $(function () {
+      @(Model.Id== 0 ? "Name.Focus();": "")
+      DateBirth.ValueChanged.AddHandler(function (s) {
+         $('#DateBirthText').val(s.GetText());
+      });
+   });
+</script>

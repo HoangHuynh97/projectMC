@@ -1,0 +1,13 @@
+﻿@model SelectCompany
+<div>
+   @Html.DevExpress().ListBoxFor(m => m.Company, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Height = 200;
+   st.Properties.SelectionMode = ListEditSelectionMode.Single;
+   st.Properties.TextField = "Value";
+   st.Properties.ValueField = "Key";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.ClientSideEvents.ItemDoubleClick = "function(s,e) {btnsubmit_popupSelectCompany.DoClick();}";
+}).BindList(Model.GetData()).GetHtml()
+</div>

@@ -1,0 +1,16 @@
+﻿@model Program.SelectDoctor
+
+@Html.HiddenFor(m => m.DoctorsId)
+<div>
+   <div class="mb">@Html.EditorFor(m => m.FacilityId, "Facility")</div>
+   <div class="">
+      @Html.Partial("SelectDoctorsPartial")
+   </div>
+</div>
+<script id="dxss_selectdoctors">
+   $(function () {
+      FacilityId.ValueChanged.AddHandler(function (s) {
+         PanelSelectDoctors.PerformCallback({ FacilityId: s.GetValue() });
+      });
+   });
+</script>

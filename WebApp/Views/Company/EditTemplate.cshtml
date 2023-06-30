@@ -1,0 +1,35 @@
+﻿@model Company
+@Html.HiddenFor(m => m.Id)
+<div class="grid">
+   <div class="col-6_xs-12 grid">
+      <div class="col-12">@Html.EditorFor(m => m.Name)</div>
+      <div class="col-12">@Html.EditorFor(m => m.FullName)</div>
+      <div class="col-12">@Html.EditorFor(m => m.Address)</div>
+      <div class="col-6_xs-12">@Html.EditorFor(m => m.Phone)</div>
+      <div class="col-6_xs-12">@Html.EditorFor(m => m.Fax)</div>
+      <div class="col-6_xs-12">@Html.EditorFor(m => m.Email)</div>
+      <div class="col-6_xs-12">@Html.EditorFor(m => m.Website)</div>
+   </div>
+   <div class="col-6_xs-12">
+      <div class="grid">
+         <div class="col-12">@Html.EditorFor(m => m.Director)</div>
+         <div class="col-12">@Html.EditorFor(m => m.DirectorPhone)</div>
+         <div class="col-6_xs-12">@Html.EditorFor(m => m.RegiserDate)</div>
+         <div class="col-6_xs-12">@Html.EditorFor(m => m.ExpireDate)</div>
+         <div class="col-6_xs-12">
+            @Html.DevExpress().SpinEditFor(m => m.MaxUser, st =>
+       {
+          st.Width = Unit.Percentage(100);
+          st.Properties.Caption = T("Số người dùng tối đa");
+          st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+          st.Properties.MinValue = 1;
+          st.Properties.MaxValue = 99;
+       }).GetHtml()
+         </div>
+         <div class="col-6_xs-12-middle" style="padding-bottom: 0;">@Html.EditorFor(m => m.Active)</div>
+      </div>
+   </div>
+   <div class="col-12">
+      @Html.EditorFor(m => m.Note)
+   </div>
+</div>

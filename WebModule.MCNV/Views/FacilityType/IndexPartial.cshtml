@@ -1,0 +1,22 @@
+﻿@model FacilityType.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   st.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+   st.Settings.ShowColumnHeaders = true;
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên loại đơn vị");
+      col.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+      col.MinWidth = 200;
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "Name";
+   e.KeyExpression = "Oid";
+}).GetHtml()

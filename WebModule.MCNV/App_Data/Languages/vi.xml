@@ -1,0 +1,1605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language>
+  <Code>vi</Code>
+  <Name>Tiếng Việt</Name>
+  <Dictionary>
+    <Key>Vùng dự án</Key>
+    <Value>Vùng dự án</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Previous year</Key>
+    <Value>Previous year</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Previous month</Key>
+    <Value>Previous month</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next month</Key>
+    <Value>Tháng sau</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next year</Key>
+    <Value>Năm sau</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Back</Key>
+    <Value>Trở về</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Forward</Key>
+    <Value>Forward</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Show filter</Key>
+    <Value>Show filter</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hide filter</Key>
+    <Value>Hide filter</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Close</Key>
+    <Value>Close</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Apply</Key>
+    <Value>Áp dụng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã</Key>
+    <Value>Mã</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên</Key>
+    <Value>Tên</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Invalid value</Key>
+    <Value>Invalid value</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>*</Key>
+    <Value>*</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Regular expression validation failed</Key>
+    <Value>Regular expression validation failed</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Select All</Key>
+    <Value>Chọn tất cả</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Enter text to filter...</Key>
+    <Value>Tìm kiếm...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Loading&amp;hellip;</Key>
+    <Value>Loading&amp;hellip;</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No data to display.</Key>
+    <Value>Không có dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không được để trống</Key>
+    <Value>Không được để trống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã bệnh án</Key>
+    <Value>Mã bệnh án</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bệnh nhân</Key>
+    <Value>Bệnh nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm bệnh nhân</Key>
+    <Value>Thêm bệnh nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Địa chỉ</Key>
+    <Value>Địa chỉ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Điện thoại</Key>
+    <Value>Điện thoại</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm</Key>
+    <Value>Thêm</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Chẩn đoán</Key>
+    <Value>Chẩn đoán</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm chẩn đoán</Key>
+    <Value>Thêm chẩn đoán</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Dạng khuyết tật</Key>
+    <Value>Dạng khuyết tật</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn vị cung cấp dịch vụ</Key>
+    <Value>Đơn vị cung cấp dịch vụ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm đơn vị</Key>
+    <Value>Thêm đơn vị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Gói can thiệp</Key>
+    <Value>Gói can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Dịch vụ PHCN</Key>
+    <Value>Dịch vụ PHCN</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày đánh giá</Key>
+    <Value>Ngày đánh giá</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear</Key>
+    <Value>Clear</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Today</Key>
+    <Value>Hôm nay</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>OK</Key>
+    <Value>Đồng ý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cancel</Key>
+    <Value>Không</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date range must be greater than or equal to {0} {1}</Key>
+    <Value>Khoảng thời gian chọn phải trong phạm vi {0} {1}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date range must be from {0} to {1} {2}</Key>
+    <Value>The date range must be from {0} to {1} {2}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>days</Key>
+    <Value>days</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>months</Key>
+    <Value>months</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>years</Key>
+    <Value>years</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>decades</Key>
+    <Value>decades</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date must be in the range {0}...{1}</Key>
+    <Value>The date must be in the range {0}...{1}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date must be greater than or equal to {0}</Key>
+    <Value>Ngày phải lớn hơn hoặc bằng {0}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The date must be less than or equal to {0}</Key>
+    <Value>Ngày phải nhỏ hơn hoặc bằng {0}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Back To Days</Key>
+    <Value>Back To Days</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Back To Months</Key>
+    <Value>Back To Months</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Back To Years</Key>
+    <Value>Back To Years</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Công cụ đánh giá</Key>
+    <Value>Công cụ đánh giá</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lượng giá nhu cầu</Key>
+    <Value>Lượng giá nhu cầu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trạng thái</Key>
+    <Value>Trạng thái</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày kết thúc</Key>
+    <Value>Ngày kết thúc</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lý do hủy</Key>
+    <Value>Lý do hủy</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ghi chú</Key>
+    <Value>Ghi chú</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trang chủ</Key>
+    <Value>Trang chủ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Chức năng</Key>
+    <Value>Chức năng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hồ sơ PHCN</Key>
+    <Value>Hồ sơ PHCN</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin NKT</Key>
+    <Value>Thông tin NKT</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Danh mục</Key>
+    <Value>Danh mục</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cấu hình</Key>
+    <Value>Cấu hình</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quản lý</Key>
+    <Value>Quản lý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin doanh nghiệp</Key>
+    <Value>Thông tin doanh nghiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người sử dụng</Key>
+    <Value>Người sử dụng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Phân quyền sử dụng</Key>
+    <Value>Phân quyền sử dụng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Nhật ký dữ liệu</Key>
+    <Value>Nhật ký dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người dùng</Key>
+    <Value>Người dùng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin</Key>
+    <Value>Thông tin</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đổi mật khẩu</Key>
+    <Value>Đổi mật khẩu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Giao diện</Key>
+    <Value>Giao diện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn giản</Key>
+    <Value>Đơn giản</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Google</Key>
+    <Value>Google</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 365</Key>
+    <Value>Office 365</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 2010</Key>
+    <Value>Office 2010</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Office 2003</Key>
+    <Value>Office 2003</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Màu sắc</Key>
+    <Value>Màu sắc</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thoát</Key>
+    <Value>Thoát</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>File</Key>
+    <Value>File</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Resize</Key>
+    <Value>Resize</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quản lý trực tuyến</Key>
+    <Value>Quản lý trực tuyến</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lỗi</Key>
+    <Value>Lỗi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lỗi dữ liệu.</Key>
+    <Value>Lỗi dữ liệu.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.</Key>
+    <Value>Có lỗi trong quá trình xử lý, vui lòng làm mới lại trang.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật dữ liệu thành công</Key>
+    <Value>Cập nhật dữ liệu thành công</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xóa</Key>
+    <Value>Xóa</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn có muốn xóa dữ liệu này không?</Key>
+    <Value>Bạn có muốn xóa dữ liệu này không?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đồng ý</Key>
+    <Value>Đồng ý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không</Key>
+    <Value>Không</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn không có quyền truy cập chức năng này!</Key>
+    <Value>Bạn không có quyền truy cập chức năng này!</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>{0} đăng nhập!</Key>
+    <Value>{0} đăng nhập!</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>{0} thoát!</Key>
+    <Value>{0} thoát!</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Chọn dữ liệu</Key>
+    <Value>Chọn dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông báo</Key>
+    <Value>Thông báo</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xem in</Key>
+    <Value>Xem in</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thiết kế</Key>
+    <Value>Thiết kế</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng</Key>
+    <Value>Đóng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Display the search window</Key>
+    <Value>Display the search window</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Print the report</Key>
+    <Value>Print the report</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Print the current page</Key>
+    <Value>Print the current page</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>First Page</Key>
+    <Value>First Page</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Previous Page</Key>
+    <Value>Previous Page</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Page</Key>
+    <Value>Page</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>of</Key>
+    <Value>of</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next Page</Key>
+    <Value>Next Page</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Last Page</Key>
+    <Value>Last Page</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Export a report and save it to the disk</Key>
+    <Value>Export a report and save it to the disk</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Export a report and show it in a new window</Key>
+    <Value>Export a report and show it in a new window</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>PDF</Key>
+    <Value>PDF</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>XLS</Key>
+    <Value>XLS</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>XLSX</Key>
+    <Value>XLSX</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>RTF</Key>
+    <Value>RTF</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>DOCX</Key>
+    <Value>DOCX</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>MHT</Key>
+    <Value>MHT</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>HTML</Key>
+    <Value>HTML</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Text</Key>
+    <Value>Text</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>CSV</Key>
+    <Value>CSV</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Image</Key>
+    <Value>Image</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Choose Value</Key>
+    <Value>Choose Value</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Reset</Key>
+    <Value>Reset</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Submit</Key>
+    <Value>Submit</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Collapse</Key>
+    <Value>Collapse</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Expand</Key>
+    <Value>Expand</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Loading</Key>
+    <Value>Loading</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hệ thống</Key>
+    <Value>Hệ thống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đang xử lý</Key>
+    <Value>Đang xử lý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Begins with</Key>
+    <Value>Begins with</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Contains</Key>
+    <Value>Contains</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Doesn't contain</Key>
+    <Value>Doesn't contain</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ends with</Key>
+    <Value>Ends with</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Equals</Key>
+    <Value>Bằng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Doesn't equal</Key>
+    <Value>Khác</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is less than</Key>
+    <Value>Is less than</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is less than or equal to</Key>
+    <Value>Nhỏ hơn hoặc bằng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is greater than</Key>
+    <Value>Is greater than</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Is greater than or equal to</Key>
+    <Value>Lớn hơn hoặc bằng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Like ('%', '_')</Key>
+    <Value>Like ('%', '_')</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Two wildcard symbols are supported:
+ '%' substitutes zero or more characters;
+ '_' substitutes a single character.</Key>
+    <Value>Two wildcard symbols are supported:
+ '%' substitutes zero or more characters;
+ '_' substitutes a single character.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Down Arrow</Key>
+    <Value>Down Arrow</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Up Arrow</Key>
+    <Value>Up Arrow</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Left Arrow</Key>
+    <Value>Left Arrow</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Right Arrow</Key>
+    <Value>Right Arrow</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hide</Key>
+    <Value>Hide</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Inserted values</Key>
+    <Value>Inserted values</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Updated values</Key>
+    <Value>Updated values</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Deleted values</Key>
+    <Value>Deleted values</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No data to display</Key>
+    <Value>Không có dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Page size:</Key>
+    <Value>Page size:</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>All</Key>
+    <Value>Tất cả</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Pages: {0} - {1} ({2} items)</Key>
+    <Value>Trang: {0} - {1} ({2} hồ sơ)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No data to paginate</Key>
+    <Value>Không có dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Page {0} of {1} ({2} items)</Key>
+    <Value>Trang {0}/{1} ({2} hồ sơ)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Prev</Key>
+    <Value>Prev</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next</Key>
+    <Value>Next</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Last</Key>
+    <Value>Last</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>First</Key>
+    <Value>First</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Preview changes</Key>
+    <Value>Preview changes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hide preview</Key>
+    <Value>Hide preview</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Save changes</Key>
+    <Value>Save changes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cancel changes</Key>
+    <Value>Cancel changes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drag a column here...</Key>
+    <Value>Drag a column here...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Show another code</Key>
+    <Value>Show another code</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Choose Color</Key>
+    <Value>Choose Color</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Decrement</Key>
+    <Value>Decrement</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Increment</Key>
+    <Value>Increment</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drag</Key>
+    <Value>Drag</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Choose Date</Key>
+    <Value>Choose Date</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Choose Tokens</Key>
+    <Value>Choose Tokens</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Add</Key>
+    <Value>Thêm</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Browse...</Key>
+    <Value>Browse...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Remove</Key>
+    <Value>Xóa</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Upload</Key>
+    <Value>Upload</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear selection</Key>
+    <Value>Clear selection</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No user content</Key>
+    <Value>No user content</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm mới (F2)</Key>
+    <Value>Thêm mới (F2)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Sửa</Key>
+    <Value>Sửa</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Sửa dữ liệu (F3)</Key>
+    <Value>Sửa dữ liệu (F3)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xóa dữ liệu (F4)</Key>
+    <Value>Xóa dữ liệu (F4)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Điều trị</Key>
+    <Value>Điều trị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quá trình điều trị (F6)</Key>
+    <Value>Quá trình điều trị (F6)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới (F5)</Key>
+    <Value>Làm mới (F5)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Xuất sang Excel</Key>
+    <Value>Xuất sang Excel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lọc dữ liệu</Key>
+    <Value>Lọc dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đóng chức năng này (ESC)</Key>
+    <Value>Đóng chức năng này (ESC)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã bệnh nhân</Key>
+    <Value>Mã bệnh nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Họ và tên</Key>
+    <Value>Họ và tên</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn vị điều trị</Key>
+    <Value>Đơn vị điều trị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Expand All</Key>
+    <Value>Expand All</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Collapse All</Key>
+    <Value>Collapse All</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear Sorting</Key>
+    <Value>Clear Sorting</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear Filter</Key>
+    <Value>Clear Filter</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Builder...</Key>
+    <Value>Tìm kiếm nâng cao</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Row</Key>
+    <Value>Filter Row</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Row Menu</Key>
+    <Value>Filter Row Menu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Clear Grouping</Key>
+    <Value>Clear Grouping</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Group Panel</Key>
+    <Value>Group Panel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Search Panel</Key>
+    <Value>Search Panel</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Column Chooser</Key>
+    <Value>Column Chooser</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Footer</Key>
+    <Value>Footer</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Show Customization Dialog</Key>
+    <Value>Show Customization Dialog</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>New</Key>
+    <Value>New</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Update</Key>
+    <Value>Update</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Update summaries</Key>
+    <Value>Update summaries</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Refresh</Key>
+    <Value>Refresh</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Edit</Key>
+    <Value>Edit</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Delete</Key>
+    <Value>Delete</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Expand Detail</Key>
+    <Value>Expand Detail</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Collapse Detail</Key>
+    <Value>Collapse Detail</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Export to {0}</Key>
+    <Value>Export to {0}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tìm kiếm</Key>
+    <Value>Tìm kiếm</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm hồ sơ</Key>
+    <Value>Thêm hồ sơ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật hồ sơ</Key>
+    <Value>Cập nhật hồ sơ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quá trình điều trị</Key>
+    <Value>Quá trình điều trị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã vùng</Key>
+    <Value>Mã vùng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên vùng</Key>
+    <Value>Tên vùng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Chọn tỉnh, thành phố thuộc vùng dự án</Key>
+    <Value>Chọn tỉnh, thành phố thuộc vùng dự án</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hệ thống quản lý dữ liệu, báo cáo trực tuyến</Key>
+    <Value>Hệ thống quản lý dữ liệu, báo cáo trực tuyến</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đăng nhập</Key>
+    <Value>Đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>ĐĂNG NHẬP</Key>
+    <Value>ĐĂNG NHẬP</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đăng nhập</Key>
+    <Value>Tên đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu</Key>
+    <Value>Mật khẩu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ghi nhớ tài khoản</Key>
+    <Value>Ghi nhớ tài khoản</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đăng nhập không được để trống</Key>
+    <Value>Tên đăng nhập không được để trống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu không được để trống</Key>
+    <Value>Mật khẩu không được để trống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Công ty</Key>
+    <Value>Công ty</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người dùng trực tuyến</Key>
+    <Value>Người dùng trực tuyến</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Dữ liệu</Key>
+    <Value>Dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mẫu báo cáo</Key>
+    <Value>Mẫu báo cáo</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Từ điển ngôn ngữ</Key>
+    <Value>Từ điển ngôn ngữ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật dữ liệu</Key>
+    <Value>Cập nhật dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu</Key>
+    <Value>Lưu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu dữ liệu (F8)</Key>
+    <Value>Lưu dữ liệu (F8)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới</Key>
+    <Value>Làm mới</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Làm mới dữ liệu (F5)</Key>
+    <Value>Làm mới dữ liệu (F5)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Keyword</Key>
+    <Value>Keyword</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Are you sure you want to perform the action? All unsaved grid data will be lost.</Key>
+    <Value>Are you sure you want to perform the action? All unsaved grid data will be lost.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ascending</Key>
+    <Value>Tăng dần</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>MCNV</Key>
+    <Value>MCNV</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cán bộ PHCN</Key>
+    <Value>Cán bộ PHCN</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Two wildcard symbols are supported:
+ '%' substitutes zero or more characters;
+ '_' substitutes a single character.</Key>
+    <Value>Two wildcard symbols are supported:
+ '%' substitutes zero or more characters;
+ '_' substitutes a single character.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tìm kiếm nâng cao</Key>
+    <Value>Tìm kiếm nâng cao</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã định danh</Key>
+    <Value>Mã định danh</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đối tượng khuyết tật</Key>
+    <Value>Đối tượng khuyết tật</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mức độ khuyết tật</Key>
+    <Value>Mức độ khuyết tật</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Nạn nhân da cam</Key>
+    <Value>Nạn nhân da cam</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Loại hình đơn vị</Key>
+    <Value>Loại hình đơn vị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lý do dừng can thiệp</Key>
+    <Value>Lý do dừng can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày dừng can thiệp</Key>
+    <Value>Ngày dừng can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin cá nhân</Key>
+    <Value>Thông tin cá nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Email</Key>
+    <Value>Email</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Email đã có đăng ký</Key>
+    <Value>Email đã có đăng ký</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Email không hợp lệ</Key>
+    <Value>Email không hợp lệ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drop image file here</Key>
+    <Value>Drop image file here</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>No image</Key>
+    <Value>No image</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This content type isn't allowed</Key>
+    <Value>This content type isn't allowed</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This file extension isn't allowed</Key>
+    <Value>This file extension isn't allowed</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>File size exceeds the maximum allowed size, which is {0} bytes</Key>
+    <Value>File size exceeds the maximum allowed size, which is {0} bytes</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>{0} file(s) have been removed from the selection because they exceed the limit of files to be uploaded at once (which is set to {1}).</Key>
+    <Value>{0} file(s) have been removed from the selection because they exceed the limit of files to be uploaded at once (which is set to {1}).</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Attention! 
+
+{0} files are invalid and will not be uploaded. Possible reasons are: they exceed the allowed file size ({1}), their extensions are not allowed, or their filenames contain invalid characters. These files have been removed from the selection: 
+
+{2}</Key>
+    <Value>Attention! {0} files are invalid and will not be uploaded. Possible reasons are: they exceed the allowed file size ({1}), their extensions are not allowed, or their filenames contain invalid characters. These files have been removed from the selection: {2}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>File upload failed due to an external error</Key>
+    <Value>File upload failed due to an external error</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Upload File...</Key>
+    <Value>Upload File...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Uploading...</Key>
+    <Value>Uploading...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Drop file(s) here</Key>
+    <Value>Drop file(s) here</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The web server returned unexpected response.</Key>
+    <Value>The web server returned unexpected response.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>File upload was canceled.</Key>
+    <Value>File upload was canceled.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>{0} files are selected for upload</Key>
+    <Value>{0} files are selected for upload</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>The file name contains invalid characters.</Key>
+    <Value>The file name contains invalid characters.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>You dragged more than one file, whereas multiple file selection is not allowed. Please drag a single file only.</Key>
+    <Value>You dragged more than one file, whereas multiple file selection is not allowed. Please drag a single file only.</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hủy đăng nhập</Key>
+    <Value>Hủy đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn có muốn hủy bỏ đăng nhập từ {0} không?</Key>
+    <Value>Bạn có muốn hủy bỏ đăng nhập từ {0} không?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đã hủy bỏ đăng nhập {0}</Key>
+    <Value>Đã hủy bỏ đăng nhập {0}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đã cập nhật thông tin cá nhân</Key>
+    <Value>Đã cập nhật thông tin cá nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm hồ sơ PHCN</Key>
+    <Value>Thêm hồ sơ PHCN</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm can thiệp điều trị</Key>
+    <Value>Thêm can thiệp điều trị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Kết thúc can thiệp</Key>
+    <Value>Kết thúc can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Chú ý</Key>
+    <Value>Chú ý</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bệnh nhân này được quản lý ở đơn vị khác mà bạn chưa được cấp quyền truy cập thông tin</Key>
+    <Value>Bệnh nhân này được quản lý ở đơn vị khác mà bạn chưa được cấp quyền truy cập thông tin</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tìm theo mã, tên, CMND, CCCD, BHYT, điện thoại</Key>
+    <Value>Tìm theo mã, tên, CMND, CCCD, BHYT, điện thoại</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tìm theo mã, tên, tỉnh/thành phố</Key>
+    <Value>Tìm theo mã, tên, tỉnh/thành phố</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã bệnh án này đã nhập rồi</Key>
+    <Value>Mã bệnh án này đã nhập rồi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm gói điều trị</Key>
+    <Value>Thêm gói điều trị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lưu thay đổi</Key>
+    <Value>Lưu thay đổi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Giới tính</Key>
+    <Value>Giới tính</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Dân tộc</Key>
+    <Value>Dân tộc</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên gọi khác</Key>
+    <Value>Tên gọi khác</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày sinh</Key>
+    <Value>Ngày sinh</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số CMND</Key>
+    <Value>Số CMND</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số CMND này đã nhập rồi</Key>
+    <Value>Số CMND này đã nhập rồi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không hợp lệ</Key>
+    <Value>Không hợp lệ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số CCCD</Key>
+    <Value>Số CCCD</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số CCCD này đã nhập rồi</Key>
+    <Value>Số CCCD này đã nhập rồi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số thẻ BHYT</Key>
+    <Value>Số thẻ BHYT</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số thẻ BHYT này đã nhập rồi</Key>
+    <Value>Số thẻ BHYT này đã nhập rồi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tỉnh/Thành phố</Key>
+    <Value>Tỉnh/Thành phố</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quận/Huyện</Key>
+    <Value>Quận/Huyện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Phường/Xã</Key>
+    <Value>Phường/Xã</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số nhà, tên đường...</Key>
+    <Value>Số nhà, tên đường...</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày lượng giá nhu cầu</Key>
+    <Value>Ngày lượng giá nhu cầu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tổng điểm</Key>
+    <Value>Tổng điểm</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Kết quả lượng giá</Key>
+    <Value>Kết quả lượng giá</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cán bộ lượng giá</Key>
+    <Value>Cán bộ lượng giá</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm cán bộ PHCN</Key>
+    <Value>Thêm cán bộ PHCN</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm cán bộ</Key>
+    <Value>Thêm cán bộ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lĩnh vực chuyên môn</Key>
+    <Value>Lĩnh vực chuyên môn</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tài liệu, hình ảnh, video</Key>
+    <Value>Tài liệu, hình ảnh, video</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thêm tài liệu</Key>
+    <Value>Thêm tài liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Loại</Key>
+    <Value>Loại</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên tài liệu</Key>
+    <Value>Tên tài liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không thực hiện can thiệp, điều trị</Key>
+    <Value>Không thực hiện can thiệp, điều trị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Checked</Key>
+    <Value>Checked</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Unchecked</Key>
+    <Value>Unchecked</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>?</Key>
+    <Value>?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Hồ sơ PHCN: </Key>
+    <Value>Hồ sơ PHCN: </Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quên mật khẩu?</Key>
+    <Value>Quên mật khẩu?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tôi đã đọc và đồng ý với </Key>
+    <Value>Tôi đã đọc và đồng ý với </Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>điều khoản sử dụng</Key>
+    <Value>điều khoản sử dụng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Khôi phục mật khẩu</Key>
+    <Value>Khôi phục mật khẩu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Vui lòng nhập email mà bạn đã đăng ký, chúng tôi sẽ gửi cho bạn hướng dẫn để khôi phục lại mật khẩu qua emai này</Key>
+    <Value>Vui lòng nhập email mà bạn đã đăng ký, chúng tôi sẽ gửi cho bạn hướng dẫn để khôi phục lại mật khẩu qua emai này</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trở về đăng nhập</Key>
+    <Value>Trở về đăng nhập</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>/Content/agreement.html</Key>
+    <Value>/Content/agreement.html</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Vui lòng đọc và đồng ý điều khoản sử dụng</Key>
+    <Value>Vui lòng đọc và đồng ý điều khoản sử dụng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Email không được để trống</Key>
+    <Value>Email không được để trống</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu phải ít nhất 6 ký tự, tối đa 20 ký tự</Key>
+    <Value>Mật khẩu phải ít nhất 6 ký tự, tối đa 20 ký tự</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Nhập lại mật khẩu mới một lần nữa</Key>
+    <Value>Nhập lại mật khẩu mới một lần nữa</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không giống với mật khẩu mới</Key>
+    <Value>Không giống với mật khẩu mới</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu cũ</Key>
+    <Value>Mật khẩu cũ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Yêu cầu từ {0} đến {1} ký tự</Key>
+    <Value>Yêu cầu từ {0} đến {1} ký tự</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mật khẩu mới</Key>
+    <Value>Mật khẩu mới</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Nhập lại mật khẩu mới</Key>
+    <Value>Nhập lại mật khẩu mới</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Không khớp với mật khẩu mới</Key>
+    <Value>Không khớp với mật khẩu mới</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn vị công tác</Key>
+    <Value>Đơn vị công tác</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Chức danh</Key>
+    <Value>Chức danh</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trình độ</Key>
+    <Value>Trình độ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật cán bộ</Key>
+    <Value>Cập nhật cán bộ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin cán bộ</Key>
+    <Value>Thông tin cán bộ</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tỉnh, thành phố</Key>
+    <Value>Tỉnh, thành phố</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Quận, huyện</Key>
+    <Value>Quận, huyện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Phường, xã</Key>
+    <Value>Phường, xã</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật bệnh nhân</Key>
+    <Value>Cập nhật bệnh nhân</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Duyệt hồ sơ chuyển vùng</Key>
+    <Value>Duyệt hồ sơ chuyển vùng</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Phân quyền dữ liệu</Key>
+    <Value>Phân quyền dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Khóa dữ liệu</Key>
+    <Value>Khóa dữ liệu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày yêu cầu</Key>
+    <Value>Ngày yêu cầu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người yêu cầu</Key>
+    <Value>Người yêu cầu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn vị yêu cầu</Key>
+    <Value>Đơn vị yêu cầu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Đơn vị nhận yêu cầu</Key>
+    <Value>Đơn vị nhận yêu cầu</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>MCNV TEST</Key>
+    <Value>MCNV TEST</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>MCNV Việt Nam</Key>
+    <Value>MCNV Việt Nam</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Not filtered</Key>
+    <Value>Not filtered</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>(All)</Key>
+    <Value>(Tất cả)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>(Blanks)</Key>
+    <Value>(Trống)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>(Non blanks)</Key>
+    <Value>(Có dữ liệu)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Mã đơn vị</Key>
+    <Value>Mã đơn vị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tên đơn vị</Key>
+    <Value>Tên đơn vị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Phường xã</Key>
+    <Value>Phường xã</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Website</Key>
+    <Value>Website</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cập nhật đơn vị</Key>
+    <Value>Cập nhật đơn vị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Thông tin đơn vị</Key>
+    <Value>Thông tin đơn vị</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter Builder</Key>
+    <Value>Tìm kiếm nâng cao</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Số tuổi</Key>
+    <Value>Số tuổi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Nhóm tuổi</Key>
+    <Value>Nhóm tuổi</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Trẻ em</Key>
+    <Value>Trẻ em</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Người lớn</Key>
+    <Value>Người lớn</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Date and time operators</Key>
+    <Value>Date and time operators</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Equals,Does not equal,Is greater than,Is greater than or equal to,Is less than,Is less than or equal to,Is between,Is not between,Contains,Does not contain,Begins with,Ends with,Is like,Is not like,Is blank,Is not blank,Is any of,Is none of,Is blank,Is not blank,Is beyond this year,Is later this year,Is later this month,Is next week,Is later this week,Is tomorrow,Is today,Is yesterday,Is earlier this week,Is last week,Is earlier this month,Is earlier this year,Is prior this year</Key>
+    <Value>Bằng,Khác,Lớn hơn,Lớn hơn hoặc bằng,Nhỏ hơn,Nhỏ hơn hoặc bằng,Thuộc khoảng,Không thuộc khoảng,Có chứa từ,Không chứa từ,Bắt đầu với từ,Kết thúc với từ,Gần giống,Không giống,Trống,Có dữ liệu,Thuộc một trong nhóm,Không thuộc trong nhóm,Trống,Có dữ liệu,Sau năm hiện tại,Trước năm hiện tại,Sau tháng hiện tại,Tuần tới,Sau tuần hiện tại,Ngày mai,Hôm nay,Hôm qua,Trước tuần hiện tại,Tuần hiện tại,Trước tháng hiện tại,Đầu năm nay,Trước năm nay</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>And,Or,Not And,Not Or</Key>
+    <Value>Thỏa các điều kiện sau:,Thỏa bất kỳ điều kiện sau:,Không thỏa các điều kiện sau:,Không thỏa bất kỳ các điều kiện sau:</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Add Group</Key>
+    <Value>Thêm nhóm điều kiện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Add Condition</Key>
+    <Value>Thêm điều kiện</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Exists,Count,Max,Min,Avg,Sum</Key>
+    <Value>Exists,Count,Max,Min,Avg,Sum</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Adds a new condition to this group</Key>
+    <Value>Thêm điều kiện vào nhóm này</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>&amp;lt;enter a value&amp;gt;</Key>
+    <Value>&amp;lt;điều kiện tìm kiếm&amp;gt;</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Removes this condition</Key>
+    <Value>Xóa điều kiện này</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>(Select All)</Key>
+    <Value>(Select All)</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Filter applied</Key>
+    <Value>Filter applied</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>From</Key>
+    <Value>Từ ngày</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>To</Key>
+    <Value>Đến ngày</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Yesterday</Key>
+    <Value>Hôm qua</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Tomorrow</Key>
+    <Value>Ngày mai</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Last Week</Key>
+    <Value>Tuần trước</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This Week</Key>
+    <Value>Tuần này</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next Week</Key>
+    <Value>Tuần sau</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Last Month</Key>
+    <Value>Tháng trước</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This Month</Key>
+    <Value>Tháng hiện tại</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next Month</Key>
+    <Value>Tháng sau</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Last Year</Key>
+    <Value>Năm trước</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>This Year</Key>
+    <Value>Năm nay</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Next Year</Key>
+    <Value>Năm sau</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>And</Key>
+    <Value>và</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Adds a new item to the list</Key>
+    <Value>Adds a new item to the list</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>&amp;lt;empty&amp;gt;</Key>
+    <Value>&amp;lt;empty&amp;gt;</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Can thiệp ngày {0}</Key>
+    <Value>Can thiệp ngày {0}</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Bạn có muốn xóa dữ liệu và tài liệu của lần can thiệp này không?</Key>
+    <Value>Bạn có muốn xóa dữ liệu và tài liệu của lần can thiệp này không?</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Ngày can thiệp</Key>
+    <Value>Ngày can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Lĩnh vực can thiệp</Key>
+    <Value>Lĩnh vực can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Kết quả can thiệp</Key>
+    <Value>Kết quả can thiệp</Value>
+  </Dictionary>
+  <Dictionary>
+    <Key>Cán bộ điều trị</Key>
+    <Value>Cán bộ điều trị</Value>
+  </Dictionary>
+</Language>

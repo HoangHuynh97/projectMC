@@ -1,0 +1,145 @@
+﻿@model UserProfile
+<style>
+   .btnlink {
+      background: transparent;
+      border: none;
+      padding: 5px;
+      margin-right: 5px;
+      cursor: pointer;
+      width: 70px;
+   }
+
+      .btnlink.disable {
+         opacity: 0.3;
+      }
+
+      .btnlink:hover {
+         background: #f0f0f0;
+         opacity: 1;
+      }
+</style>
+<div class="page-container">
+   <div class="page-header grid-middle">
+      <div class="mr">
+         @Html.Icon(IconID.ViewCard32x32devav)
+      </div>
+      <div class="title">
+         @T("Thông tin cá nhân")
+      </div>
+   </div>
+   <div class="page-content">
+      <div class="grid">
+
+         <div class="col-6_xs-12_sm-12_md-8">
+            <form class="mb" id="frmUpdateProfile" action="@Url.Action("UpdateProfile")">
+               <div class="box grid">
+                  <div class="col-8_xs-12">
+                     <div class="mb">
+                        @Html.EditorFor(m => m.FullName)
+                     </div>
+                     <div class="mb">
+                        @Html.EditorFor(m => m.Address)
+                     </div>
+                     <div class="mb">
+                        @Html.EditorFor(m => m.Phone)
+                     </div>
+                     <div>
+                        @Html.EditorFor(m => m.Email)
+                     </div>
+                  </div>
+                  <div class="col-4_xs-12" style="min-height: 200px;">
+                     @Html.DevExpress().BinaryImageFor(m => m.Image, st =>
+                {
+                   st.Width = Unit.Percentage(100);
+                   st.Height = Unit.Percentage(100);
+                   st.CallbackRouteValues = new { Controller = "Home", Action = "UpdateUserImage" };
+                   st.Properties.ImageWidth = 300;
+                   st.Properties.ImageHeight = 300;
+                   st.Properties.ImageSizeMode = ImageSizeMode.FitProportional;
+                   st.Properties.EditingSettings.Enabled = true;
+                   st.Properties.EditingSettings.AllowDropOnPreview = true;
+                   st.Properties.EditingSettings.UploadSettings.UploadValidationSettings.MaxFileSize = 1000000;
+                }).GetHtml()
+                  </div>
+                  <div class="col-12">
+                     @Html.DevExpress().Button(b =>
+                   {
+                      b.Name = "btnSaveProfile";
+                      b.Text = T("Lưu");
+                      b.Images.Image.IconID = IconID.SaveSave16x16;
+                      b.ClientSideEvents.Click = "WebApp.function.save";
+                   }).GetHtml()
+                  </div>
+               </div>
+            </form>
+            @if (Model.Logins.Count > 0)
+            {
+               <form id="frmLinkLogin" method="post" action="@Url.Action("LinkLogin")">
+                  @Html.AntiForgeryToken()
+                  <div class="box grid">
+                     <div class="col-12">
+                        @Html.DevExpress().Label(st =>
+                   {
+                      st.Text = T("Click để thêm hoặc hủy đăng nhập từ các tài khoản");
+                   }).GetHtml()
+                     </div>
+                     <div>
+                        @if (Model.Logins.ContainsKey("Facebook"))
+                        {
+                           <button type="submit" name="provider" value="Facebook" class="btnlink @(Model.Logins["Facebook"] ? "enable" : "disable")">
+                              <div class="img facebook"></div>
+                              <div>Facebook</div>
+                           </button>
+                        }
+                        @if (Model.Logins.ContainsKey("Google"))
+                        {
+                           <button type="submit" name="provider" value="Google" class="btnlink @(Model.Logins["Google"] ? "enable" : "disable")">
+                              <div class="img google"></div>
+                              <div>Google</div>
+                           </button>
+                        }
+                        @if (Model.Logins.ContainsKey("Microsoft"))
+                        {
+                           <button type="submit" name="provider" value="Microsoft" class="btnlink @(Model.Logins["Microsoft"] ? "enable" : "disable")">
+                              <div class="img microsoft"></div>
+                              <div>Microsoft</div>
+                           </button>
+                        }
+                     </div>
+                  </div>
+               </form>
+            }
+         </div>
+         <div class="col-6_xs-0_sm-0_md-4"></div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+   $(function () {
+      WebApp.validateForm('#frmUpdateProfile');
+
+      $('#frmLinkLogin .btnlink').click(function () {
+         var btn = $(this);
+         var v = btn.val();
+         if (btn.hasClass('enable')) {
+            WebApp.showConfirm('@H("Hủy đăng nhập")', '@H("Bạn có muốn hủy bỏ đăng nhập từ {0} không?")'.format(v)).done(function () {
+               WebApp.ajax('@Url.Action("RemoveLogin")', { provider: v }).done(function () {
+                  btn.toggleClass('enable disable');
+                  WebApp.notify('@H("Đã hủy bỏ đăng nhập {0}")'.format(v));
+               });
+            });
+            return false;
+         }
+      });
+   });
+
+   WebApp.function = {
+      title: '@H("Thông tin cá nhân")',
+      save: function (s, e) {
+         WebApp.validForm('#frmUpdateProfile') && WebApp.submit('#frmUpdateProfile').done(function () {
+            WebApp.notify('@H("Đã cập nhật thông tin cá nhân")');
+         });
+      }
+   };
+</script>

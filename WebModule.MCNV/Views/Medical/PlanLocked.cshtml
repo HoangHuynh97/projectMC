@@ -1,0 +1,41 @@
+﻿@model MedicalPlan
+
+<div class="grid">
+   <div class="col-12">@Html.LockedText(m => m.PlanGoal)</div>
+   <div class="col-12">
+      @Html.DevExpress().ListBox(st =>
+ {
+    st.Name = "MedicalPlanLocked";
+    st.Width = Unit.Percentage(100);
+    st.Properties.Caption = T("Kế hoạch can thiệp");
+    st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    st.ReadOnly = true;
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "PlanDateStr";
+       col.Caption = T("Ngày bắt đầu");
+       col.Width = 120;
+    });
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "EndDateStr";
+       col.Caption = T("Ngày kết thúc");
+       col.Width = 120;
+    });
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "DoctorName";
+       col.Caption = T("Cán bộ thực hiện");
+       col.Width = 200;
+    });
+    st.Properties.Columns.Add(col =>
+    {
+       col.FieldName = "Specifications";
+       col.Caption = T("Chỉ định kỹ thuật");
+    });
+    //auto height by content
+    st.Properties.ClientSideEvents.Init = "function(s) {setTimeout(function() { s.SetHeight(s.GetHeightByContent());});}";
+ }).BindList(Model.Details).GetHtml()
+   </div>
+</div>
+<div class="">@Html.EditorFor(m => m.Attachments, "AttachmentsLocked")</div>

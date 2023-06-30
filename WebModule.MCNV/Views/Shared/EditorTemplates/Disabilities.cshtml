@@ -1,0 +1,68 @@
+﻿@model string
+
+@{
+   var name = ViewData.ModelMetadata.PropertyName;
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+   var ids = ViewData.ModelMetadata.ContainerType.GetProperty(name + "Value").GetValue(ViewData.ModelMetadata.Container) as string;
+}
+
+<script>
+   function onDisabilitiesChanged(s) {
+      const items = s.GetSelectedItems();
+      const name = '#@(name)Value';
+      $(name).val(items.map(it => it.value).join(';'));
+      const ctrl = @name;
+      ctrl.SetValue(items.map(it => it.text).join('; '));
+      ctrl.RaiseValueChanged();
+   }
+   function onDisabilitiesDropdown() {
+      const ctrl = @name;
+      DisabilitiesList.SetHeight(DisabilitiesList.GetHeightByContent() + 10);
+   }
+</script>
+<input type="hidden" id="@(name)Value" name="@(name)Value" value="@ids" />
+@Html.DevExpress().DropDownEditFor(m => m, dp =>
+{
+   dp.Width = Unit.Percentage(100);
+   dp.Properties.Caption = T(caption);
+   dp.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   if (ViewData.ModelMetadata.IsRequired)
+   {
+      dp.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   }
+   dp.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+   dp.Properties.ValidationSettings.Display = Display.Dynamic;
+   dp.ShowModelErrors = true;
+   dp.ReadOnly = true;
+   dp.Properties.EnableClientSideAPI = true;
+   dp.Properties.SettingsAdaptivity.Mode = DropDownEditAdaptivityMode.OnWindowInnerWidth;
+   dp.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+   dp.SetDropDownWindowTemplateContent(container =>
+   {
+      Html.DevExpress().ListBox(st =>
+      {
+         st.Name = "DisabilitiesList";
+         st.Width = Unit.Percentage(100);
+         st.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+         st.Properties.ValueField = "Oid";
+         st.Properties.ValueType = typeof(int);
+         st.Properties.TextField = "Name";
+         st.ControlStyle.Border.BorderWidth = 0;
+         st.Properties.EnableClientSideAPI = true;
+         st.Properties.ClientSideEvents.SelectedIndexChanged = "onDisabilitiesChanged";
+         st.PreRender += (sender, _) =>
+         {
+            var me = sender as MVCxListBox;
+            if (!string.IsNullOrEmpty(ids))
+            {
+               var vals = ids.Split(';').Select(el => int.Parse(el)).ToList();
+               foreach (ListEditItem it in me.Items)
+               {
+                  it.Selected = vals.Contains((int)it.Value);
+               }
+            }
+         };
+      }).BindList(Disability.ComboboxData()).Render();
+   });
+   dp.Properties.ClientSideEvents.DropDown = "onDisabilitiesDropdown";
+}).GetHtml()

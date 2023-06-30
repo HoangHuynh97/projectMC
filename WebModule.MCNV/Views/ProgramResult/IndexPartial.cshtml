@@ -1,0 +1,41 @@
+﻿@model ProgramResult
+@Html.DevExpress().CallbackPanel(st =>
+{
+   st.Name = "panelProgramResult";
+   st.Height = Unit.Percentage(100);
+   st.Width = Unit.Percentage(100);
+   st.CallbackRouteValues = new { Action = "IndexPartial" };
+   st.SetContent(() =>
+   {
+      if (Model == null) return;
+      Html.DevExpress().PageControl(pc =>
+      {
+         pc.Name = "pcProgramResult";
+         pc.Height = Unit.Percentage(100);
+         pc.Width = Unit.Percentage(100);
+         pc.TabPages.Add(t =>
+         {
+            t.Text = T("Kết quả đào tạo");
+            t.SetContent(() =>
+            {
+               ViewContext.Writer.Write("<form class='frmProgramResult' style='display:block; height: 100%;'>");
+               Html.RenderPartial("Doctors");
+               ViewContext.Writer.Write("</form>");
+            });
+         });
+         pc.TabPages.Add(t =>
+         {
+            t.Text = T("Nội dung đào tạo");
+            t.SetContent(() =>
+            {
+               ViewContext.Writer.Write("<form class='frmProgramResultAttachment' style='display:block; height: 100%;'>");
+               ViewContext.Writer.Write(Html.EditorFor(m => m.Attachments));
+               ViewContext.Writer.Write("</form>");
+            });
+         });
+      }).Render();
+
+   });
+   st.ClientSideEvents.BeginCallback = "function(s,e) {e.customArgs.program = cmbProgram.GetValue();}";
+   st.ClientSideEvents.EndCallback = "function() {WebApp.function.afterReload();}";
+}).GetHtml()

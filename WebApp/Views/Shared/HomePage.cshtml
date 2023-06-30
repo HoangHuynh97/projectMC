@@ -1,0 +1,12 @@
+﻿@model CompanyInfo
+<div class="grid-middle-center" style="height: 100%;">
+   <div class="box" style="text-align: center; padding: 50px;">
+      <div class="companyName">@Model.FullName</div>
+      <div class="companyAddress">@Model.Address</div>
+   </div>
+</div>
+
+<script>
+   WebApp.title = '@H(Model.Name)';
+   document.title = '@H("Trang chủ") | ' + WebApp.title;
+</script>

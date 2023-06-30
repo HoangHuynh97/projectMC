@@ -1,0 +1,8 @@
+﻿@model DenNgayParameter
+@Html.DevExpress().DateEditFor(m => m.DenNgay, st =>
+{
+   st.Width = WidthDate;
+   st.Properties.AllowNull = false;
+   st.Properties.Caption = T("Đến ngày");
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+}).GetHtml()

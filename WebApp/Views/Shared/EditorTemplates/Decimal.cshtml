@@ -1,0 +1,18 @@
+﻿@model object
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+
+@Html.DevExpress().TextBoxFor(m => m, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = caption;
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.Properties.DisplayFormatString = "N0";
+   st.Properties.MaskSettings.Mask = "<0..999999999999g>";
+   st.Properties.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.None;
+   st.ShowModelErrors = true;
+   st.Properties.ValidationSettings.Display = Display.Dynamic;
+   st.Properties.MaskSettings.AllowMouseWheel = false;
+   st.Properties.EnableClientSideAPI = true;
+}).Bind(Math.Round(Convert.ToDecimal(Model), 0)).GetHtml()

@@ -1,0 +1,67 @@
+﻿@model Doctors
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+   List<Doctors.Doctor> items = Model.GetList();
+}
+<script id="dxss_newdoctors">
+   function onAddDoctors@(Model.Name)() {
+      WebApp.showDialog({
+         title: '@H("Thêm cán bộ PHCN")',
+         url: '@Url.Action("Add", "Doctor")',
+         data: {Facility: @Model.Facility},
+         width: 800,
+      }).done(function (r) {
+         var ctrl = Doctors@(Model.Name);
+         ctrl.AddItem([r.Name, r.Specialize], r.Id);
+         ctrl.SetHeight(Math.min(ctrl.GetHeightByContent(), ctrl.GetItemHeight() * 8));
+         var sel = ctrl.GetSelectedValues();
+         sel.push(r.Id);
+         ctrl.SelectValues(sel);
+         ctrl.RaiseSelectedIndexChanged();
+      });
+   }
+</script>
+<div class="grid-noBottom-middle mb">
+   <div class="col-auto">@caption</div>
+   @if (Model.Facility != 0 && CheckPermission("Cán bộ PHCN", "Thêm"))
+   {
+      <div class="col-auto">
+         @Html.DevExpress().Button(st =>
+    {
+       st.Name = Model.Name + "Add";
+       st.Text = T("Thêm cán bộ");
+       st.Images.Image.IconID = IconID.ActionsAdd16x16;
+       st.Styles.Style.Paddings.Padding = 0;
+       st.ClientSideEvents.Click = "onAddDoctors" + Model.Name;
+    }).GetHtml()
+      </div>
+   }
+</div>
+@Html.DevExpress().ListBox(st =>
+{
+   st.Name = "Doctors" + Model.Name;
+   st.Width = Unit.Percentage(100);
+   st.Properties.TextField = "Name";
+   st.Properties.ValueField = "Id";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+   st.Properties.EnableSelectAll = true;
+   st.ShowModelErrors = true;
+   st.Properties.ValidationSettings.Display = Display.Dynamic;
+   st.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+   st.Properties.FilteringSettings.ShowSearchUI = items.Count > 20;
+   st.Properties.Columns.Add("Name", T("Họ và tên"));
+   st.Properties.Columns.Add("Specialize", T("Lĩnh vực chuyên môn")).Width = 100;
+   st.PreRender = (s, e) =>
+   {
+      var lst = s as MVCxListBox;
+      foreach (ListEditItem it in lst.Items)
+      {
+         it.Selected = Model.Items.Any(d => d.Id == Convert.ToInt32(it.Value));
+      }
+   };
+   if (Model.Height != 0)
+      st.Height = Model.Height;
+   else
+      st.Properties.ClientSideEvents.Init = "function(s) {s.SetHeight(Math.min(s.GetHeightByContent(), s.GetItemHeight()*8));}";
+}).BindList(items).GetHtml()

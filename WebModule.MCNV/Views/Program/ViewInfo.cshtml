@@ -1,0 +1,32 @@
+﻿@model Program.ViewInfo
+
+<div class="grid">
+   <div class="col-12">@Html.LockedText(m => m.Name)</div>
+   <div class="col-12">@Html.LockedText(m => m.NameEnglish)</div>
+   <div class="col-3_sm-6_xs-12">@Html.LockedText(m => m.Project)</div>
+   <div class="col-3_sm-6_xs-12">@Html.LockedText(m => m.Specialize)</div>
+   <div class="col-3_sm-6_xs-12">@Html.LockedText(m => m.ProgramType)</div>
+   <div class="col-3_sm-6_xs-12">@Html.LockedText(m => m.TrainingTime)</div>
+   <div class="col-12">@Html.LockedText(m => m.Institution)</div>
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.DateStart)</div>
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.DateEnd)</div>
+
+   <div class="col-12">@Html.LockedText(m => m.Note, true)</div>
+</div>
+<div class="grid-middle">
+   <div class="col-auto_xs-12">
+      @Html.DevExpress().Label(st => st.Text = T("Danh sách cán bộ tham gia đào tạo")).GetHtml()
+   </div>
+   <div class="col">
+      @Html.DevExpress().TextBox(st =>
+ {
+    st.Name = "SearchDoctor";
+    st.Width = Unit.Percentage(100);
+    st.Properties.NullText = "Tìm kiếm cán bộ";
+ }).GetHtml()
+   </div>
+</div>
+<div class="mb">
+   @Html.Partial("DoctorsViewInfo")
+</div>
+<div>@Html.EditorFor(m => m.Attachments, "AttachmentsLocked")</div>

@@ -1,0 +1,37 @@
+﻿@model int?
+@{
+   var name = ViewData.ModelMetadata.PropertyName;
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+
+<script>
+   function onNewInstitution() {
+      WebApp.showDialog({
+         title: '@H("Thêm đơn vị")',
+         url: '@Url.Action("Add", "Institution")',
+         width: 800,
+      }).done(function (r) {
+         const ctrl = @name;
+         const sel = ctrl.AddItem([r.Name], r.Id);
+         ctrl.SetValue(r.Id);
+         ctrl.RaiseSelectedIndexChanged();
+      });
+   }
+</script>
+@Html.DevExpress().ComboBoxFor(m => m, st =>
+{
+   st.DefaultSettings();
+   st.Properties.ValueField = "Oid";
+   st.Properties.ValueType = typeof(int);
+   st.Properties.TextField = "Name";
+   st.Properties.Caption = caption;
+   if (ViewData.ModelMetadata.IsRequired)
+      st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   if (CheckPermission("Đơn vị đào tạo", "Thêm"))
+   {
+      var btn = st.Properties.Buttons.Add();
+      btn.Image.IconID = IconID.ActionsAdd16x16;
+      btn.ToolTip = T("Thêm");
+      st.Properties.ClientSideEvents.ButtonClick = "onNewInstitution";
+   }
+}).BindList(Institution.ComboboxData()).GetHtml()

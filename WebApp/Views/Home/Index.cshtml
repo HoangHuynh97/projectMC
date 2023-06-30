@@ -1,0 +1,177 @@
+﻿@model Home
+@{
+   ViewBag.Title = T("Trang chủ");
+}
+@section style {
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.7.1/gridlex.min.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/css/iziToast.min.css" />
+   <style>
+      * {
+         box-sizing: border-box;
+      }
+
+      html, body {
+         margin: 0;
+         padding: 0;
+         height: 100%;
+         overflow: hidden;
+      }
+
+      .main-container {
+         height: 100%;
+      }
+
+      .main-content {
+         background-color: #ecf0f5;
+         overflow: auto;
+         padding: 0 20px;
+      }
+
+      .page-container {
+         height: 100%;
+      }
+
+      .page-header {
+         min-height: 50px;
+      }
+
+         .page-header .title {
+            color: #1b6969;
+            text-shadow: rgba(0, 0, 30, 0.08) 0px 3px 2px;
+            text-transform: uppercase;
+            font-size: 22px;
+            font-weight: bold;
+         }
+
+      @@media screen and (max-width: 35.5em) {
+         .page-header .title {
+            font-size: 14px;
+         }
+      }
+
+      .box {
+         min-height: 90px;
+         background: #fff;
+         box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+         border-radius: 2px;
+         padding: 1em;
+      }
+
+      .messagebox .img {
+         float: left;
+         margin: 0 10px 10px 0;
+      }
+
+      .messagebox .msg {
+         margin-top: 5px;
+      }
+
+      .dialogfooter {
+         padding: 5px;
+         text-align: center;
+      }
+
+      .mt {
+         margin-top: 0.5rem !important;
+      }
+
+      .mb {
+         margin-bottom: 0.5rem !important;
+      }
+
+      .ml {
+         margin-left: 0.5rem !important;
+      }
+
+      .mr {
+         margin-right: 0.5rem !important;
+      }
+
+      .pt {
+         padding-top: 0.5rem !important;
+      }
+
+      .pb {
+         padding-bottom: 0.5rem !important;
+      }
+
+      .pl {
+         padding-left: 0.5rem !important;
+      }
+
+      .pr {
+         padding-right: 0.5rem !important;
+      }
+
+      .dialogfooter .dxbButtonSys {
+         margin: 0 5px;
+      }
+
+      .hidden {
+         display: none;
+      }
+
+      .companyName {
+         font-family: Garamond, serif;
+         line-height: 1em;
+         color: #42d9ff;
+         font-weight: bold;
+         font-size: 60px;
+         text-shadow: 0px 0px 0 rgb(42,193,231),1px 1px 0 rgb(29,180,218),2px 2px 0 rgb(15,166,204),3px 3px 0 rgb(1,152,190), 4px 4px 0 rgb(-13,138,176),5px 5px 4px rgba(0,0,0,0.6),5px 5px 1px rgba(0,0,0,0.5),0px 0px 4px rgba(0,0,0,.2);
+         margin-bottom: 30px;
+      }
+
+      .companyAddress {
+         font-size: 20px;
+         color: #18a49a;
+         font-weight: bold;
+      }
+
+      .iziToast-img {
+         width: 32px !important;
+         height: 32px !important;
+         margin-top: -17px !important;
+         left: -5px !important;
+      }
+
+      .current-active-menu {
+         background-color: #f2ca58 !important;
+      }
+
+      #grdSheet .dxm-side-menu-mode {
+         float: left;
+         margin: 5px;
+      }
+
+         #grdSheet .dxm-side-menu-mode ~ .dxgvSearchPanel_Moderno,
+         #grdSheet .dxm-side-menu-mode ~ .dxgvSearchPanel_Office365,
+         #grdSheet .dxm-side-menu-mode ~ .dxgvSearchPanel_iOS,
+         #grdSheet .dxm-side-menu-mode ~ .dxgvSearchPanel_MaterialCompact {
+            margin-left: 50px;
+            padding-top: 5px;
+         }
+
+      .dxmodalSys.dxdd-root .dxpc-mainDiv.dxdd-list table[class^="dxeListBox"] {
+         color: inherit!important;
+      }
+
+      .dxfc-nd img[class^="dxEditors_fcremove_"] {
+         margin-left: 40px!important;
+      }
+   </style>
+
+}
+@section script {
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/js/iziToast.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.0/jquery.signalR.min.js"></script>
+   <script src="/signalr/js"></script>
+}
+<div class="main-container">
+   <div class="main-header">
+      @Html.Partial("MainMenu")
+   </div>
+   <div class="main-content">
+
+   </div>
+</div>
+@Html.Partial("Common")

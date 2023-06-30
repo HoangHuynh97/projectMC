@@ -1,0 +1,124 @@
+﻿@model FacilitiesParameter
+@Html.HiddenFor(m => m.FacilitiesType)
+@if (!Model.HasMulti)
+{
+   @Html.DevExpress().TextBoxFor(m => m.FacilitiesName, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = T("Đơn vị cung cấp dịch vụ");
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.ReadOnly = true;
+}).GetHtml()
+}
+else
+{
+   @Html.DevExpress().DropDownEditFor(m => m.FacilitiesName, st =>
+{
+   st.Width = Unit.Percentage(100);
+   st.Properties.Caption = T("Đơn vị cung cấp dịch vụ");
+   st.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+   st.ReadOnly = true;
+   st.Properties.ClientSideEvents.GotFocus = "function(s,e) {s.ShowDropDown();}";
+   st.SetDropDownWindowTemplateContent(c =>
+   {
+      //all
+      ViewContext.Writer.Write("<div style='padding: 10px;'><div class='mb'>");
+         Html.DevExpress().RadioButton(rad =>
+         {
+            rad.Name = "radTypeAll";
+            rad.Text = T("Tất cả");
+            rad.GroupName = "FacilitiesType";
+            rad.Checked = Model.FacilitiesType == 0;
+            rad.Properties.ClientSideEvents.CheckedChanged = "function() {$('#FacilitiesType').val(0);UpdateFacilitiesName();}";
+         }).Render();
+      ViewContext.Writer.Write("</div>");
+
+      //facility
+      ViewContext.Writer.Write("<div class='mb'>");
+      Html.DevExpress().RadioButton(rad =>
+      {
+         rad.Name = "radTypeFacility";
+         rad.Text = T("Đơn vị");
+         rad.GroupName = "FacilitiesType";
+         rad.Checked = Model.FacilitiesType == 1;
+         rad.Properties.ClientSideEvents.CheckedChanged = "function() {$('#FacilitiesType').val(1);UpdateFacilitiesName();}";
+      }).Render();
+      ViewContext.Writer.Write("</div>");
+      ViewContext.Writer.Write("<div>");
+      Html.DevExpress().ComboBoxFor(m => m.Facility, cmb =>
+      {
+         cmb.DefaultSettings();
+         cmb.Properties.ValueField = "Oid";
+         cmb.Properties.ValueType = typeof(int);
+         cmb.Properties.TextFormatString = "{1}";
+         cmb.Properties.NullText = T("Tìm theo mã, tên, tỉnh/thành phố");
+         cmb.Properties.Columns.Add("Oid", T("Mã")).Width = 50;
+         cmb.Properties.Columns.Add("Name", T("Tên")).Width = 300;
+         cmb.Properties.Columns.Add("FullAddress", T("Địa chỉ")).Width = 300;
+         cmb.Properties.ClientSideEvents.Init = "function(s) {s.SetCustomFilter('Oid', 'Name', 'FullAddress');}";
+         cmb.Properties.ClientSideEvents.ValueChanged = "UpdateFacilitiesName";
+      }).BindList(Model.ListFacility()).Render();
+      ViewContext.Writer.Write("</div>");
+
+      //province
+      ViewContext.Writer.Write("<div class='mb'>");
+      Html.DevExpress().RadioButton(rad =>
+      {
+         rad.Name = "radTypeProvince";
+         rad.Text = T("Tỉnh, thành phố");
+         rad.GroupName = "FacilitiesType";
+         rad.Checked = Model.FacilitiesType == 2;
+         rad.Properties.ClientSideEvents.CheckedChanged = "function() {$('#FacilitiesType').val(2);UpdateFacilitiesName();}";
+      }).Render();
+      ViewContext.Writer.Write("</div>");
+      ViewContext.Writer.Write("<div>");
+      Html.DevExpress().ComboBoxFor(m => m.Province, cmb =>
+      {
+         cmb.DefaultSettings();
+         cmb.Properties.ValueField = "Oid";
+         cmb.Properties.ValueType = typeof(int);
+         cmb.Properties.TextField = "Name";
+         cmb.Properties.TextFormatString = "{1}";
+         cmb.Properties.Columns.Add("Code", T("Mã")).Width = 50;
+         cmb.Properties.Columns.Add("Name", T("Tên"));
+         cmb.Properties.ClientSideEvents.Init = "function(s) {s.SetCustomFilter('Code', 'Name');}";
+         cmb.Properties.ClientSideEvents.ValueChanged = "UpdateFacilitiesName";
+      }).BindList(Model.ListProvince()).Render();
+      ViewContext.Writer.Write("</div>");
+
+      //area
+      ViewContext.Writer.Write("<div class='mb'>");
+      Html.DevExpress().RadioButton(rad =>
+      {
+         rad.Name = "radTypeArea";
+         rad.Text = T("Vùng dự án");
+         rad.GroupName = "FacilitiesType";
+         rad.Checked = Model.FacilitiesType == 3;
+         rad.Properties.ClientSideEvents.CheckedChanged = "function() {$('#FacilitiesType').val(3);UpdateFacilitiesName();}";
+      }).Render();
+      ViewContext.Writer.Write("</div>");
+      ViewContext.Writer.Write("<div>");
+      Html.DevExpress().ComboBoxFor(m => m.Area, cmb =>
+      {
+         cmb.DefaultSettings();
+         cmb.Properties.ValueField = "Oid";
+         cmb.Properties.ValueType = typeof(int);
+         cmb.Properties.TextFormatString = "{1}";
+         cmb.Properties.Columns.Add("Code", T("Mã")).Width = WidthNumber;
+         cmb.Properties.Columns.Add("Name", T("Tên")).Width = 200;
+         cmb.Properties.ClientSideEvents.Init = "function(s,e) {s.SetCustomFilter('Code', 'Name');}";
+         cmb.Properties.ClientSideEvents.ValueChanged = "UpdateFacilitiesName";
+      }).BindList(Model.ListArea()).Render();
+      ViewContext.Writer.Write("</div></div>");
+   });
+}).GetHtml()
+   <script>
+      function UpdateFacilitiesName() {
+         var v = +$('#FacilitiesType').val() || 0;
+         if (v == 0) FacilitiesName.SetValue('@H("Tất cả")');
+         else if (v == 1) FacilitiesName.SetValue(Facility.GetText());
+         else if (v == 2) FacilitiesName.SetValue(Province.GetText());
+         else if (v == 3) FacilitiesName.SetValue(Area.GetText());
+      }
+   </script>
+}

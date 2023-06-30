@@ -1,0 +1,15 @@
+﻿@model string
+@{
+   var caption = T(ViewData.ModelMetadata.DisplayName);
+}
+
+@Html.DevExpress().ComboBoxFor(m => m, st =>
+{
+   st.DefaultSettings();
+   st.Properties.Caption = caption;
+   if (ViewData.ModelMetadata.IsRequired)
+      st.Properties.CaptionSettings.RequiredMarkDisplayMode = EditorRequiredMarkMode.Required;
+   st.Properties.ValueType = typeof(string);
+   st.Properties.DropDownStyle = DropDownStyle.DropDown;
+   st.Properties.DropDownButton.Image.IconID = IconID.FormatListbullets16x16;
+}).BindList(Program.ListTrainingTime()).GetHtml()

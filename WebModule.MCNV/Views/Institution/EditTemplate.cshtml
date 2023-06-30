@@ -1,0 +1,40 @@
+﻿@model Institution
+
+@Html.HiddenFor(m => m.Id)
+<div class="grid">
+   <div class="col-12">@Html.EditorFor(m => m.Name)</div>
+
+   <div class="col-4_xs-12">@Html.EditorFor(m => m.Phone)</div>
+   <div class="col-4_xs-12">@Html.EditorFor(m => m.Email)</div>
+   <div class="col-4_xs-12">@Html.EditorFor(m => m.Website)</div>
+
+   <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.Province)</div>
+   <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.District)</div>
+   <div class="col-3_md-4_xs-12">@Html.EditorFor(m => m.Ward)</div>
+   <div class="col-3_md-12_xs-12">@Html.EditorFor(m => m.Address)</div>
+
+   <div class="col-12">@Html.EditorFor(m => m.Note)</div>
+
+</div>
+
+<script>
+   $(function () {
+      Name.Focus();
+      Province.ValueChanged.AddHandler(function () {
+         District.SetValue(null);
+         Ward.SetValue(null);
+         District.PerformCallback();
+         Ward.PerformCallback();
+      });
+      District.BeginCallback.AddHandler(function (_, e) {
+         e.customArgs.province = Province.GetValue();
+      });
+      District.ValueChanged.AddHandler(function () {
+         Ward.SetValue(null);
+         Ward.PerformCallback();
+      });
+      Ward.BeginCallback.AddHandler(function (_, e) {
+         e.customArgs.district = District.GetValue();
+      });
+   });
+</script>

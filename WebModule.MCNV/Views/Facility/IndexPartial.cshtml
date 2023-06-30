@@ -1,0 +1,71 @@
+﻿@model Facility.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   Html.DefaultGridSheet(st, Model.ShowFilter);
+   if (WindowWidthType >= WebApp.Constant.WindowWidth.WidthType.Small && WindowWidthType <= WebApp.Constant.WindowWidth.WidthType.Medium)
+   {
+      st.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+      st.Settings.ColumnMinWidth = 150;
+   }
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Oid";
+      col.Caption = T("Mã đơn vị");
+      col.MinWidth = 80;
+      col.MaxWidth = 120;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Name";
+      col.Caption = T("Tên đơn vị");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "FacilityType.Name";
+      col.Caption = T("Loại hình đơn vị");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Province.Name";
+      col.Caption = T("Tỉnh, thành phố");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "District.Name";
+      col.Caption = T("Quận, huyện");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Ward.Name";
+      col.Caption = T("Phường xã");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Phone";
+      col.Caption = T("Điện thoại");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Email";
+      col.Caption = T("Email");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Website";
+      col.Caption = T("Website");
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Note";
+      col.Caption = T("Ghi chú");
+   });
+
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "DateCreate desc";
+   e.KeyExpression = "Oid";
+}).GetHtml()

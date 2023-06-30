@@ -1,0 +1,284 @@
+﻿@model Medical.ListInfo
+
+@Html.DevExpress().GridView(st =>
+{
+   var tool = new MVCxGridViewToolbarItem();
+   tool.Name = "filterControl";
+   tool.Text = T("Tìm kiếm nâng cao");
+   tool.Image.IconID = IconID.FilterCrossdatasourcefiltering16x16;
+   tool.Command = GridViewToolbarCommand.ShowFilterEditor;
+
+   Html.DefaultGridSheet(st, Model.ShowFilter, true, null, new MVCxGridViewToolbarItem[] { tool });
+
+   st.BeforeGetCallbackResult = (s, e) =>
+   {
+      var grd = s as MVCxGridView;
+      grd.FilterEnabled = Model.ShowFilter || Model.AdvancedFilter;
+      if (!grd.FilterEnabled)
+      {
+         grd.FilterExpression = String.Empty;
+      }
+   };
+
+   if (WindowWidthType > WebApp.Constant.WindowWidth.WidthType.ExtraSmall)
+      st.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Oid";
+      col.Caption = T("Mã hồ sơ");
+      col.MinWidth = 60;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "LastDate";
+      col.Caption = T("Ngày cập nhật");
+      col.MinWidth = WidthDateTime;
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+      col.PropertiesEdit.DisplayFormatString = "g";
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "LastUser.FullName";
+      col.Caption = T("Người cập nhật");
+      col.Width = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Status.Name";
+      col.Caption = T("Trạng thái");
+      col.MinWidth = 140;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Explanation";
+      col.Caption = T("Diễn giải chi tiết");
+      col.Width = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Code";
+      col.Caption = T("Mã bệnh án");
+      col.MinWidth = 120;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Patient.Code";
+      col.Caption = T("Mã định danh NKT");
+      col.MinWidth = 150;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Patient.Name";
+      col.Caption = T("Họ và tên");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Patient.Classification.Name";
+      col.Caption = T("Đối tượng khuyết tật");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Patient.LevelDisability.Name";
+      col.Caption = T("Mức độ khuyết tật");
+      col.MinWidth = 140;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Patient.OrangeVictim.Name";
+      col.Caption = T("Nạn nhân da cam");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Patient.DisabilitiesStr";
+      col.Caption = T("Dạng khuyết tật");
+      col.MinWidth = 200;
+      col.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList;
+   });
+
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "EvaluationDate";
+      col.Caption = T("Ngày chẩn đoán");
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+      col.MinWidth = 140;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "DiagnosticsStr";
+      col.Caption = T("Chẩn đoán");
+      col.MinWidth = 200;
+      col.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "ServicesStr";
+      col.Caption = T("Lĩnh vực can thiệp");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "TreatmentsStr";
+      col.Caption = T("Gói can thiệp");
+      col.MinWidth = 200;
+      col.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "Facility.Name";
+      col.Caption = T("Đơn vị cung cấp dịch vụ");
+      col.MinWidth = 200;
+   });
+   st.Columns.Add(col =>
+   {
+      col.FieldName = "CompletedDate";
+      col.Caption = T("Ngày dừng can thiệp");
+      col.ColumnType = MVCxGridViewColumnType.DateEdit;
+      col.MinWidth = 150;
+   });
+
+   st.BeforeHeaderFilterFillItems = (s, e) =>
+   {
+      if (e.Column.FieldName == "Patient.DisabilitiesStr")
+      {
+         e.Handled = true;
+         e.AddValue(T("(Trống)"), "", "IsNull(Patient.DisabilitiesStr,'') == ''");
+         foreach (var it in Disability.ComboboxData())
+         {
+            var name = DataBinder.GetPropertyValue(it, "Name").ToString();
+            e.AddValue(name, "", String.Format("Contains([Patient.DisabilitiesStr], '{0}')", name));
+         }
+
+      }
+      else if (e.Column.FieldName == "TreatmentsStr")
+      {
+         e.Handled = true;
+         e.AddValue(T("(Trống)"), "", "IsNull(TreatmentsStr,'') == ''");
+         foreach (var it in Treatment.ComboboxData())
+         {
+            var name = DataBinder.GetPropertyValue(it, "Name").ToString();
+            e.AddValue(name, "", String.Format("Contains([TreatmentsStr], '{0}')", name));
+         }
+
+      }
+      else if (e.Column.FieldName == "DiagnosticsStr")
+      {
+         e.Handled = true;
+         e.AddValue(T("(Trống)"), "", "IsNull(DiagnosticsStr,'') == ''");
+         foreach (var it in Diagnostic.ComboboxData())
+         {
+            var name = DataBinder.GetPropertyValue(it, "Name").ToString();
+            e.AddValue(name, "", String.Format("Contains([DiagnosticsStr], '{0}')", name));
+         }
+
+      }
+   };
+
+   st.FormatConditions.AddHighlight(c =>
+   {
+      c.ApplyToRow = false;
+      c.FieldName = "Patient.Name";
+      c.Format = GridConditionHighlightFormat.Custom;
+      c.CellStyle.ForeColor = System.Drawing.Color.DarkOrange;
+      c.Expression = "Patient.OrangeVictim.Oid == 1 || Patient.OrangeVictim.Oid == 2";
+   });
+
+   st.SettingsFilterControl.ViewMode = FilterControlViewMode.Visual;
+   st.FilterControlColumnsCreated = (s, e) =>
+   {
+      e.Columns.Clear();
+      e.Columns.AddColumn(() =>
+      {
+         var cmb = new FilterControlComboBoxColumn();
+         cmb.PropertyName = "Area.Name";
+         cmb.DisplayName = T("Vùng dự án");
+         cmb.PropertiesComboBox.TextField = "Name";
+         cmb.PropertiesComboBox.ValueField = "Name";
+         cmb.PropertiesComboBox.ValueType = typeof(string);
+         cmb.PropertiesComboBox.DataSource = Area.ComboboxData();
+         return cmb;
+      });
+      e.Columns.AddColumn("Code", T("Mã bệnh án"));
+      e.Columns.AddComplexColumn("Patient", T("Bệnh nhân"))
+         .AddColumn("Code", T("Mã định danh"))
+         .AddColumn("Name", T("Họ và tên"))
+         .AddColumn("CMND", T("Số CMND"))
+         .AddColumn("CCCD", T("Số CCCD"))
+         .AddColumn("BHYT", T("Số thẻ BHYT"))
+         .AddColumn("Phone", T("Điện thoại"))
+         .AddColumn("Classification.Name", T("Đối tượng khuyết tật"))
+         .AddColumn("LevelDisability.Name", T("Mức độ khuyết tật"))
+         .AddColumn("OrangeVictim.Name", T("Nạn nhân da cam"))
+         .AddColumn("Age", T("Số tuổi"), FilterControlColumnType.Integer)
+         .AddColumn(() =>
+         {
+            var cmb = new FilterControlComboBoxColumn();
+            cmb.PropertyName = "AgeGroup";
+            cmb.DisplayName = T("Nhóm tuổi");
+            cmb.PropertiesComboBox.Items.Add(T("Trẻ em"), 1);
+            cmb.PropertiesComboBox.Items.Add(T("Người lớn"), 2);
+            return cmb;
+         })
+         .AddColumn("Province.Name", T("Tỉnh, thành phố"))
+         .AddColumn("District.Name", T("Quận, huyện"))
+         .AddColumn("Ward.Name", T("Phường, xã"))
+         .AddColumn(() =>
+         {
+            var cmb = new FilterControlComboBoxColumn();
+            cmb.PropertyName = "Gender.Name";
+            cmb.DisplayName = T("Giới tính");
+            cmb.PropertiesComboBox.TextField = "Name";
+            cmb.PropertiesComboBox.ValueField = "Name";
+            cmb.PropertiesComboBox.ValueType = typeof(string);
+            cmb.PropertiesComboBox.DataSource = Gender.ComboboxData();
+            return cmb;
+         })
+         .AddColumn(() =>
+         {
+            var cmb = new FilterControlComboBoxColumn();
+            cmb.PropertyName = "Folk.Name";
+            cmb.DisplayName = T("Dân tộc");
+            cmb.PropertiesComboBox.TextField = "Name";
+            cmb.PropertiesComboBox.ValueField = "Name";
+            cmb.PropertiesComboBox.ValueType = typeof(string);
+            cmb.PropertiesComboBox.DataSource = Folk.ComboboxData();
+            return cmb;
+         })
+         ;
+      e.Columns.AddColumn("DisabilitiesStr", T("Dạng khuyết tật"))
+        .AddColumn("TreatmentsStr", T("Gói can thiệp"))
+        .AddColumn("Service.Name", T("Dịch vụ PHCN"))
+        ;
+      e.Columns.AddComplexColumn("Facility", T("Đơn vị cung cấp dịch vụ"))
+        .AddColumn("Name", T("Tên đơn vị"))
+        .AddColumn(() =>
+        {
+           var cmb = new FilterControlComboBoxColumn();
+           cmb.PropertyName = "FacilityType.Name";
+           cmb.DisplayName = T("Loại hình đơn vị");
+           cmb.PropertiesComboBox.TextField = "Name";
+           cmb.PropertiesComboBox.ValueField = "Name";
+           cmb.PropertiesComboBox.ValueType = typeof(string);
+           cmb.PropertiesComboBox.DataSource = FacilityType.ComboboxData();
+           return cmb;
+        })
+         .AddColumn("Province.Name", T("Tỉnh, thành phố"))
+         .AddColumn("District.Name", T("Quận, huyện"))
+         .AddColumn("Ward.Name", T("Phường, xã"))
+        ;
+      e.Columns.AddColumn("DiagnosticsStr", T("Chẩn đoán"))
+        .AddColumn("Status.Name", T("Trạng thái"))
+        .AddColumn("Cancel.Name", T("Lý do dừng can thiệp"))
+        .AddColumn("CompletedDate", T("Ngày dừng can thiệp"), FilterControlColumnType.DateTime)
+        .AddColumn("Note", T("Ghi chú"))
+        ;
+   };
+}).BindToLINQ("", "", (s, e) =>
+{
+   e.QueryableSource = Model.GetData();
+   e.DefaultSorting = "DateCreate desc";
+   e.KeyExpression = "Oid";
+}).GetHtml()

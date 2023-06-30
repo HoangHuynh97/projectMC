@@ -1,0 +1,26 @@
+﻿@model Patient.ViewInfo
+
+<div class="grid">
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.Name)</div>
+   <div class="col-3_md-4_xs-12 grid">
+      <div class="col-6">@Html.LockedText(m => m.Gender)</div>
+      <div class="col-6">@Html.LockedText(m => m.Folk)</div>
+   </div>
+   <div class="col-2_md-3_xs-12">@Html.LockedText(m => m.DateBirth)</div>
+
+   <div class="col-12 grid">
+      <div class="col-3_md-6_xs-12">@Html.LockedText(m => m.CMND)</div>
+      <div class="col-3_md-6_xs-12">@Html.LockedText(m => m.CCCD)</div>
+      <div class="col-3_md-6_xs-12">@Html.LockedText(m => m.BHYT)</div>
+      <div class="col-3_md-6_xs-12">@Html.LockedText(m => m.Phone)</div>
+   </div>
+   <div class="col-12">@Html.LockedText(m => m.Address)</div>
+   <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.Classification)</div>
+   @if (Model.ShowLevel)
+   {
+      <div class="col-3_md-4_xs-12">@Html.LockedText(m => m.LevelDisability)</div>
+   }
+   <div class="col-6_md-4_xs-12">@Html.LockedText(m => m.OrangeVictim)</div>
+   <div class="col-12">@Html.LockedText(m => m.Disabilities)</div>
+   <div class="col-12">@Html.LockedText(m => m.Note, true)</div>
+</div>

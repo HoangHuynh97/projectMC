@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8A9B76A-4F6E-466A-BEEA-FFE8789D9CD9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApp</RootNamespace>
+    <AssemblyName>WebApp</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <UpgradeBackupLocation />
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v21.2.Extensions, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v21.2.Web, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v21.2.Web.WebForms, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.2.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.2.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.2.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.8\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.8\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v21.2.Export, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.Mvc5.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.8\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Languages\en.xml" />
+    <Content Include="App_Data\Languages\vi.xml" />
+    <Content Include="App_Data\menu.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Compile Include="App_Start\Localizer.cs" />
+    <Compile Include="App_Start\ReportStorage.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <None Include="DataModel.xpo" />
+    <None Include="DataModel.xpo.diagram">
+      <DependentUpon>DataModel.xpo</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="Styles\favicons\128.png" />
+    <Content Include="Styles\favicons\16.png" />
+    <Content Include="Styles\favicons\48.png" />
+    <Content Include="Styles\images\24\en.png" />
+    <Content Include="Styles\images\24\vi.png" />
+    <Content Include="Styles\images\32\alert.png" />
+    <Content Include="Styles\images\32\blockdevice.png" />
+    <Content Include="Styles\images\32\building.png" />
+    <Content Include="Styles\images\32\cabinet.png" />
+    <Content Include="Styles\images\32\cash.png" />
+    <Content Include="Styles\images\32\checklist.png" />
+    <Content Include="Styles\images\32\company.png" />
+    <Content Include="Styles\images\32\conference.png" />
+    <Content Include="Styles\images\32\contact.png" />
+    <Content Include="Styles\images\32\contacts.png" />
+    <Content Include="Styles\images\32\customer.png" />
+    <Content Include="Styles\images\32\database.png" />
+    <Content Include="Styles\images\32\datauser.png" />
+    <Content Include="Styles\images\32\data_transfer.png" />
+    <Content Include="Styles\images\32\documents.png" />
+    <Content Include="Styles\images\32\documents2.png" />
+    <Content Include="Styles\images\32\documents3.png" />
+    <Content Include="Styles\images\32\en.png" />
+    <Content Include="Styles\images\32\exit.png" />
+    <Content Include="Styles\images\32\facebook.png" />
+    <Content Include="Styles\images\32\factory.png" />
+    <Content Include="Styles\images\32\folder_blue.png" />
+    <Content Include="Styles\images\32\google.png" />
+    <Content Include="Styles\images\32\groups.png" />
+    <Content Include="Styles\images\32\house.png" />
+    <Content Include="Styles\images\32\infomation.png" />
+    <Content Include="Styles\images\32\info_blue.png" />
+    <Content Include="Styles\images\32\invoice.png" />
+    <Content Include="Styles\images\32\keys.png" />
+    <Content Include="Styles\images\32\location.png" />
+    <Content Include="Styles\images\32\lorry.png" />
+    <Content Include="Styles\images\32\microsoft.png" />
+    <Content Include="Styles\images\32\money.png" />
+    <Content Include="Styles\images\32\package.png" />
+    <Content Include="Styles\images\32\payment.png" />
+    <Content Include="Styles\images\32\preview.png" />
+    <Content Include="Styles\images\32\print.png" />
+    <Content Include="Styles\images\32\roles.png" />
+    <Content Include="Styles\images\32\shop.png" />
+    <Content Include="Styles\images\32\shopping_bag.png" />
+    <Content Include="Styles\images\32\table.png" />
+    <Content Include="Styles\images\32\transfer.png" />
+    <Content Include="Styles\images\32\unknown.png" />
+    <Content Include="Styles\images\32\users.png" />
+    <Content Include="Styles\images\32\vi.png" />
+    <Content Include="Styles\images\32\web.png" />
+    <Content Include="Styles\images\skins\Aqua.png" />
+    <Content Include="Styles\images\skins\BlackGlass.png" />
+    <Content Include="Styles\images\skins\Default.png" />
+    <Content Include="Styles\images\skins\DevEx.png" />
+    <Content Include="Styles\images\skins\Glass.png" />
+    <Content Include="Styles\images\skins\iOS.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_0091ea.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_00bfa5.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_424242.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_43a047.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_6a1b9a.png" />
+    <Content Include="Styles\images\skins\MaterialCompact_e65100.png" />
+    <Content Include="Styles\images\skins\Metropolis.png" />
+    <Content Include="Styles\images\skins\MetropolisBlue.png" />
+    <Content Include="Styles\images\skins\Moderno.png" />
+    <Content Include="Styles\images\skins\Mulberry.png" />
+    <Content Include="Styles\images\skins\Office2003Blue.png" />
+    <Content Include="Styles\images\skins\Office2003Olive.png" />
+    <Content Include="Styles\images\skins\Office2003Silver.png" />
+    <Content Include="Styles\images\skins\Office2010Black.png" />
+    <Content Include="Styles\images\skins\Office2010Blue.png" />
+    <Content Include="Styles\images\skins\Office2010Silver.png" />
+    <Content Include="Styles\images\skins\Office365_0091ea.png" />
+    <Content Include="Styles\images\skins\Office365_00bfa5.png" />
+    <Content Include="Styles\images\skins\Office365_424242.png" />
+    <Content Include="Styles\images\skins\Office365_43a047.png" />
+    <Content Include="Styles\images\skins\Office365_6a1b9a.png" />
+    <Content Include="Styles\images\skins\Office365_e65100.png" />
+    <Content Include="Styles\images\skins\PlasticBlue.png" />
+    <Content Include="Styles\images\skins\RedWine.png" />
+    <Content Include="Styles\images\skins\SoftOrange.png" />
+    <Content Include="Styles\images\skins\Youthful.png" />
+    <Content Include="Styles\img.sprite.css">
+      <DependentUpon>img.sprite</DependentUpon>
+    </Content>
+    <Content Include="Styles\img.sprite.png">
+      <DependentUpon>img.sprite</DependentUpon>
+    </Content>
+    <Content Include="Styles\login.css" />
+    <Content Include="Styles\loginicons.sprite.css">
+      <DependentUpon>loginicons.sprite</DependentUpon>
+    </Content>
+    <Content Include="Styles\loginicons.sprite.png">
+      <DependentUpon>loginicons.sprite</DependentUpon>
+    </Content>
+    <Content Include="sw.js" />
+    <Content Include="Views\CompanyUser\ChangePassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePassword.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CompanyUser\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CompanyUser\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CompanyUser\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="manifest.json" />
+    <None Include="Views\AuditLog\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\AuditLog\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\CompanyInfo\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Company\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Company\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Styles\img.sprite" />
+    <None Include="Styles\loginicons.sprite" />
+    <None Include="Views\Company\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\ChangePassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePassword.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Home\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Help.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Help.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Home\Login.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Login.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\MainMenu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MainMenu.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\Common.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Common.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\Preview.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Preview.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\SelectCompany.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SelectCompany.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\ShowDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ShowDialog.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Home\UpdateProfile.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>UpdateProfile.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Shared\HomePage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HomePage.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Online\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Online\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Language\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Language\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\CompanyPermission\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CompanyPermission\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CompanyPermission\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Permission\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Permission\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Permission\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Shared\EditorTemplates\PeriodParameter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PeriodParameter.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Shared\Report.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Report.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\Preview.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Preview.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\ShowParameter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ShowParameter.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Report\Designer.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Designer.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Report\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Report\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Report\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\DenNgayParameter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DenNgayParameter.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\ThoiGianParameter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ThoiGianParameter.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Shared\EditorTemplates\UserIdParameter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>UserIdParameter.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\User\ChangePassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePassword.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\User\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\User\IndexPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IndexPartial.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\User\EditTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditTemplate.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Web.config" />
+    <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Boolean.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\Boolean.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Boolean.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\DateTime.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DateTime.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\Decimal.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Decimal.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\MultilineText.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MultilineText.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\Password.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Password.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\EditorTemplates\String.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>String.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\images\bg\login.jpeg" />
+    <Content Include="Web.config" />
+    <None Include="Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\_ViewStart.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ViewStart.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\DefaultViewPageActivator.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\PrecompiledMvcView.cs" />
+    <Compile Include="App_Start\PrecompileViewEngine.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuditLogController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CompanyInfoController.cs" />
+    <Compile Include="Controllers\CompanyUserController.cs" />
+    <Compile Include="Controllers\DatabaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OnlineController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
+    <Compile Include="Controllers\CompanyPermissionController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ReportViewerController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Core\Attributes.cs" />
+    <Compile Include="Core\Audit.cs" />
+    <Compile Include="Core\BaseController.cs" />
+    <Compile Include="Core\DateTimeOffsetConverter.cs" />
+    <Compile Include="Core\EmailProvider.cs" />
+    <Compile Include="Core\Menu.cs" />
+    <Compile Include="Core\Constants.cs" />
+    <Compile Include="Core\Helpers.cs" />
+    <Compile Include="Core\IdentityConfig.cs" />
+    <Compile Include="Core\Language.cs" />
+    <Compile Include="Core\Logger.cs" />
+    <Compile Include="Core\BaseWebViewPage.cs" />
+    <Compile Include="Core\MessageHub.cs" />
+    <Compile Include="Core\ReportInfo.cs" />
+    <Compile Include="Core\Skin.cs" />
+    <Compile Include="DataModelCode\AuditChange.cs" />
+    <Compile Include="DataModelCode\AuditChange.Designer.cs">
+      <DependentUpon>AuditChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\AuditData.cs" />
+    <Compile Include="DataModelCode\AuditData.Designer.cs">
+      <DependentUpon>AuditData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\BaseObject.cs" />
+    <Compile Include="DataModelCode\BaseObject.Designer.cs">
+      <DependentUpon>BaseObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Company.cs" />
+    <Compile Include="DataModelCode\Company.Designer.cs">
+      <DependentUpon>Company.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\PermisionDetail.cs" />
+    <Compile Include="DataModelCode\PermisionDetail.Designer.cs">
+      <DependentUpon>PermisionDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\Permission.cs" />
+    <Compile Include="DataModelCode\Permission.Designer.cs">
+      <DependentUpon>Permission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\ReportLayout.cs" />
+    <Compile Include="DataModelCode\ReportLayout.Designer.cs">
+      <DependentUpon>ReportLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\User.cs" />
+    <Compile Include="DataModelCode\User.Designer.cs">
+      <DependentUpon>User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\UserClaim.cs" />
+    <Compile Include="DataModelCode\UserClaim.Designer.cs">
+      <DependentUpon>UserClaim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\UserLogin.cs" />
+    <Compile Include="DataModelCode\UserLogin.Designer.cs">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelCode\UserRole.cs" />
+    <Compile Include="DataModelCode\UserRole.Designer.cs">
+      <DependentUpon>UserRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuditLog.cs" />
+    <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\CompanyInfo.cs" />
+    <Compile Include="Models\DenNgayParameter.cs" />
+    <Compile Include="Models\Dialog.cs" />
+    <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\LanguageModel.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\CompanyPermission.cs" />
+    <Compile Include="Models\Online.cs" />
+    <Compile Include="Models\PeriodParameter.cs" />
+    <Compile Include="Models\PermissionModel.cs" />
+    <Compile Include="Models\CompanyUser.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\ReportViewer.cs" />
+    <Compile Include="Models\SelectCompany.cs" />
+    <Compile Include="Models\ThoiGianParameter.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserIdParameter.cs" />
+    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Views\AuditLog\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuditLog\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanyInfo\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanyUser\ChangePassword.generated.cs">
+      <DependentUpon>ChangePassword.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CompanyUser\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CompanyUser\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CompanyUser\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Company\EditTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\ChangePassword.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Common.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Help.generated.cs">
+      <DependentUpon>Help.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Home\Login.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\MainMenu.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainMenu.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Preview.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Preview.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\SelectCompany.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectCompany.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\ShowDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShowDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\UpdateProfile.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateProfile.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\HomePage.generated.cs">
+      <DependentUpon>HomePage.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Online\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Online\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Language\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Language\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanyPermission\EditTemplate.generated.cs">
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CompanyPermission\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CompanyPermission\IndexPartial.generated.cs">
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Permission\EditTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\PeriodParameter.generated.cs">
+      <DependentUpon>PeriodParameter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Report.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Report.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Preview.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Preview.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\ShowParameter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShowParameter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Designer.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Designer.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\EditTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\Boolean.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Boolean.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Boolean.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Boolean.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\DateTime.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateTime.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Decimal.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Decimal.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\DenNgayParameter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DenNgayParameter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\MultilineText.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultilineText.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Password.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Password.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\String.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>String.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\ThoiGianParameter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThoiGianParameter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\UserIdParameter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserIdParameter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\ChangePassword.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\EditTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\IndexPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\_ViewStart.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ViewStart.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="webapp.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64362</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64362/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
